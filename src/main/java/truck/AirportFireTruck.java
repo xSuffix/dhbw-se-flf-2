@@ -1,5 +1,9 @@
 package truck;
 
+import lights.BrakeLight;
+import lights.HeadLight;
+import lights.TurnSignalLight;
+
 public class AirportFireTruck implements IAirportFireTruck{
     private TurnSignalLight turnSignalLightLeft;
     private TurnSignalLight turnSignalLightRight;

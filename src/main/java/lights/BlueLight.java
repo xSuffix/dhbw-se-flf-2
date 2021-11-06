@@ -1,4 +1,4 @@
-package truck;
+package lights;
 
 import enums.LightColor;
 

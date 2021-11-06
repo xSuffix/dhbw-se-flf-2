@@ -1,7 +1,10 @@
-package truck;
+package lights;
+
+import enums.LightColor;
 
 public abstract class Light {
     private boolean on;
+    protected LightColor color;
 
     public Light(){
         this.on = false;

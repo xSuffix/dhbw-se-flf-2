@@ -1,4 +1,4 @@
-package truck;
+package lights;
 
 public class LED extends Light{
 
