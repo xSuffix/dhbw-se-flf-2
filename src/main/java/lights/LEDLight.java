@@ -12,23 +12,5 @@ public abstract class LEDLight extends Light{
         }
         this.color = color;
     }
-    @Override
-    public void turnOn(){
-        for(LED led : LEDs){
-            led.turnOn();
-        }
-    }
-    @Override
-    public void turnOff(){
-        for(LED led : LEDs){
-            led.turnOff();
-        }
-    }
-    @Override
-    public void switchState(){
-        for(LED led : LEDs){
-            led.switchState();
-        }
-    }
 
 }
