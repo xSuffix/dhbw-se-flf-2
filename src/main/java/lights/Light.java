@@ -21,4 +21,8 @@ public abstract class Light {
     public void turnOff(){
         this.on = false;
     }
+
+    public void switchState(){
+        this.on = !this.on;
+    }
 }

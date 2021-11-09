@@ -24,5 +24,11 @@ public abstract class LEDLight extends Light{
             led.turnOff();
         }
     }
+    @Override
+    public void switchState(){
+        for(LED led : LEDs){
+            led.switchState();
+        }
+    }
 
 }
