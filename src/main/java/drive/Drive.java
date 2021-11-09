@@ -8,8 +8,8 @@ public class Drive {
 
     public Drive(){
         this.electricMotors = new ElectricMotor[2];
-        for(ElectricMotor motor : electricMotors){
-            motor = new ElectricMotor();
+        for(int i = 0;i<electricMotors.length;i++){
+            electricMotors[i] = new ElectricMotor();
         }
         this.batteryBox = new BatteryBox();
     }

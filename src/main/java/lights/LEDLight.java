@@ -2,25 +2,27 @@ package lights;
 
 import enums.LightColor;
 
-public abstract class LEDLight {
+public abstract class LEDLight extends Light{
     private final LED[] LEDs;
-    private boolean isOn;
-    private LightColor color;
 
     public LEDLight(int ledCount,LightColor color){
         this.LEDs = new LED[ledCount];
+        for(int i = 0;i<LEDs.length;i++){
+            LEDs[i] = new LED();
+        }
         this.color = color;
     }
-
+    @Override
     public void turnOn(){
         for(LED led : LEDs){
             led.turnOn();
         }
     }
-
+    @Override
     public void turnOff(){
         for(LED led : LEDs){
             led.turnOff();
         }
     }
+
 }

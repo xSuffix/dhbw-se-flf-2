@@ -6,9 +6,9 @@ public class BatteryBox {
 
     public BatteryBox(){
         batteries = new Battery[2][2];
-        for(Battery[] row : batteries){
-            for(Battery b : row){
-                b = new Battery(100,10,100);
+        for(int i = 0;i<2;i++){
+            for(int j = 0;j<2;j++){
+                batteries[i][j] = new Battery(100,10,100);
             }
         }
     }

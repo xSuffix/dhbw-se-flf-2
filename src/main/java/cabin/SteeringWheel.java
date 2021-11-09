@@ -1,7 +1,10 @@
 package cabin;
 
+import truck.CentralUnit;
+
 public class SteeringWheel {
     private int rotation;
+    private CentralUnit centralUnit;
 
     public SteeringWheel(){
         rotation = 0;

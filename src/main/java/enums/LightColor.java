@@ -4,5 +4,5 @@ public enum LightColor {
     ORANGE,
     BLUE,
     RED,
-    YELLOW,
+    WHITE,
 }

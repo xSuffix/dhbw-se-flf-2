@@ -1,8 +1,7 @@
 package cabin;
 
 import enums.SeatPositions;
-
-
+import truck.CentralUnit;
 
 
 public class Cabin {
@@ -18,7 +17,7 @@ public class Cabin {
     private SpeedDisplay speedDisplay;
     private BatteryDisplay batteryDisplay;
 
-    public Cabin(){
+    public Cabin(CentralUnit centralUnit){
         this.seats = new Seat[SeatPositions.values().length];
         int i = 0;
         for(SeatPositions pos : SeatPositions.values()) {
@@ -28,6 +27,13 @@ public class Cabin {
         this.batteryDisplay = new BatteryDisplay();
         this.speedDisplay = new SpeedDisplay();
         this.steeringWheel = new SteeringWheel();
+        this.breakPedal = new BreakPedal();
+        this.gasPedal = new GasPedal();
+        this.controlPanel = new ControlPanel(centralUnit);
+        this.leftJoyStick = new JoyStick();
+        this.rightJoyStick = new JoyStick();
+        this.leftDoor = new BusDoor();
+        this.rightDoor = new BusDoor();
     }
 
     public Seat getSeat(int pos){

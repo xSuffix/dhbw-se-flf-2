@@ -25,12 +25,12 @@ public class Axle {
 
     public Axle(){
         this.breakDiscsLeft = new BreakDisc[3];
-        for(BreakDisc disc : breakDiscsLeft){
-            disc = new BreakDisc();
+        for(int i = 0;i<breakDiscsLeft.length;i++){
+            breakDiscsLeft[i] = new BreakDisc();
         }
         this.breakDiscsRight = new BreakDisc[3];
-        for(BreakDisc disc : breakDiscsRight){
-            disc = new BreakDisc();
+        for(int i = 0;i<breakDiscsRight.length;i++){
+            breakDiscsRight[i] = new BreakDisc();
         }
         this.leftWheel = new Wheel();
         this.rightWheel = new Wheel();

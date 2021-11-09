@@ -5,6 +5,6 @@ import enums.LightColor;
 public class HeadLight extends Light{
 
     public HeadLight(){
-        this.color = LightColor.YELLOW;
+        this.color = LightColor.WHITE;
     }
 }
