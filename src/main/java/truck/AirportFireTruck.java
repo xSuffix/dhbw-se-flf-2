@@ -1,5 +1,6 @@
 package truck;
 
+import drive.Drive;
 import lights.BrakeLight;
 import lights.HeadLight;
 import lights.TurnSignalLight;
@@ -12,4 +13,5 @@ public class AirportFireTruck implements IAirportFireTruck{
     private HeadLight[] headLightsFrontLeft;
     private HeadLight[] headLightsFrontRight;
     private HeadLight[] headLightsRoof;
+    private Drive drive;
 }

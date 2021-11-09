@@ -15,4 +15,8 @@ public enum BatteryManagement {
     public int getCharge(BatteryBox batteryBox){
         return batteryBox.getCurrentCharge();
     }
+
+    public float getChargePercentage(BatteryBox batteryBox){
+        return batteryBox.getCurrentChargePercentage();
+    }
 }

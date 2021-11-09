@@ -23,6 +23,20 @@ public class BatteryBox {
         return charge;
     }
 
+    public int getMaxCharge(){
+        int charge = 0;
+        for(Battery[] row : batteries){
+            for(Battery b : row){
+                charge += b.getTotalCapacity();
+            }
+        }
+        return charge;
+    }
+
+    public float getCurrentChargePercentage(){
+        return (float)getCurrentCharge()/getMaxCharge();
+    }
+
     public void charge(int amount){
         for(Battery[] row : batteries){
             for(Battery b : row){
