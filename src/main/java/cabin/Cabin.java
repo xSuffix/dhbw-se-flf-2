@@ -8,14 +8,14 @@ public class Cabin {
     private BusDoor leftDoor;
     private BusDoor rightDoor;
     private final Seat[] seats;
-    private JoyStick leftJoyStick;
-    private JoyStick rightJoyStick;
-    private ControlPanel controlPanel;
-    private SteeringWheel steeringWheel;
-    private GasPedal gasPedal;
-    private BreakPedal breakPedal;
-    private SpeedDisplay speedDisplay;
-    private BatteryDisplay batteryDisplay;
+    private final JoyStick leftJoyStick;
+    private final JoyStick rightJoyStick;
+    private final ControlPanel controlPanel;
+    private final SteeringWheel steeringWheel;
+    private final GasPedal gasPedal;
+    private final BreakPedal breakPedal;
+    private final SpeedDisplay speedDisplay;
+    private final BatteryDisplay batteryDisplay;
 
     public Cabin(CentralUnit centralUnit){
         this.seats = new Seat[SeatPositions.values().length];
@@ -26,9 +26,9 @@ public class Cabin {
         }
         this.batteryDisplay = new BatteryDisplay();
         this.speedDisplay = new SpeedDisplay();
-        this.steeringWheel = new SteeringWheel();
-        this.breakPedal = new BreakPedal();
-        this.gasPedal = new GasPedal();
+        this.steeringWheel = new SteeringWheel(centralUnit);
+        this.breakPedal = new BreakPedal(centralUnit);
+        this.gasPedal = new GasPedal(centralUnit);
         this.controlPanel = new ControlPanel(centralUnit);
         this.leftJoyStick = new JoyStick();
         this.rightJoyStick = new JoyStick();
@@ -38,5 +38,37 @@ public class Cabin {
 
     public Seat getSeat(int pos){
         return seats[pos];
+    }
+
+    public JoyStick getLeftJoyStick() {
+        return leftJoyStick;
+    }
+
+    public JoyStick getRightJoyStick() {
+        return rightJoyStick;
+    }
+
+    public ControlPanel getControlPanel() {
+        return controlPanel;
+    }
+
+    public SteeringWheel getSteeringWheel() {
+        return steeringWheel;
+    }
+
+    public GasPedal getGasPedal() {
+        return gasPedal;
+    }
+
+    public BreakPedal getBreakPedal() {
+        return breakPedal;
+    }
+
+    public SpeedDisplay getSpeedDisplay() {
+        return speedDisplay;
+    }
+
+    public BatteryDisplay getBatteryDisplay() {
+        return batteryDisplay;
     }
 }

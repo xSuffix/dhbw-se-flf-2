@@ -6,7 +6,8 @@ public class SteeringWheel {
     private int rotation;
     private CentralUnit centralUnit;
 
-    public SteeringWheel(){
+    public SteeringWheel(CentralUnit centralUnit){
+        this.centralUnit = centralUnit;
         rotation = 0;
     }
 
@@ -17,6 +18,7 @@ public class SteeringWheel {
         } else if(this.rotation > 90){
             this.rotation = 90;
         }
+        centralUnit.turnSteeringWheel(this.rotation);
     }
 
     public int getRotation(){
