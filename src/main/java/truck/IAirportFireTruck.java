@@ -7,6 +7,9 @@ import lights.HeadLight;
 import lights.WarningLight;
 
 public interface IAirportFireTruck {
+
+    void chargeTruck(int amount);
+
     Drive getDrive();
 
     Cabin getCabin();

@@ -38,6 +38,10 @@ public class Drive {
         }
     }
 
+    public void charge(int amount){
+        batteryManagement.charge(batteryBox,amount);
+    }
+
     public void drive(int vel){
         if(batteryManagement.getCharge(batteryBox) >= vel*4){
             for(ElectricMotor motor : electricMotors){

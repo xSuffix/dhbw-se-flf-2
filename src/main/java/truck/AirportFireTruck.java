@@ -1,7 +1,6 @@
 package truck;
 
 import cabin.Cabin;
-import cabin.ControlPanel;
 import drive.Drive;
 import lights.*;
 
@@ -18,6 +17,11 @@ public class AirportFireTruck implements IAirportFireTruck{
     private Drive drive;
     private Cabin cabin;
     private CentralUnit centralUnit;
+
+    public void chargeTruck(int amount){
+        this.getDrive().charge(amount);
+        this.getCabin().getBatteryDisplay().writeValue(String.valueOf(this.getDrive().getBatteryPercentage()));
+    }
 
     public BlueLight[] getBlueLights() {
         return blueLights;

@@ -1,6 +1,6 @@
 package drive;
 
-public class BatteryBox {
+public class BatteryBox implements IBatteryBox{
 
     private final Battery[][] batteries;
 
