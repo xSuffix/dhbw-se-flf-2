@@ -1,10 +1,10 @@
 package cabin;
 
 import enums.PedalType;
-import truck.CentralUnit;
+import truck.ICentralUnit;
 
 public class GasPedal extends Pedal{
-    public GasPedal(CentralUnit centralUnit){
+    public GasPedal(ICentralUnit centralUnit){
         super(PedalType.Gas,centralUnit);
     }
 }

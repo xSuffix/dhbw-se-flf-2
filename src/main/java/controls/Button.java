@@ -1,13 +1,13 @@
 package controls;
 
 import enums.ButtonType;
-import truck.CentralUnit;
+import truck.ICentralUnit;
 
 public class Button {
-    private CentralUnit centralUnit;
-    private ButtonType type;
+    private final ICentralUnit centralUnit;
+    private final ButtonType type;
 
-    public Button(CentralUnit centralUnit,ButtonType type){
+    public Button(ICentralUnit centralUnit,ButtonType type){
         this.centralUnit = centralUnit;
         this.type = type;
     }

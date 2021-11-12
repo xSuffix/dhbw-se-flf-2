@@ -2,6 +2,7 @@ package cabin;
 
 import enums.SeatPositions;
 import truck.CentralUnit;
+import truck.ICentralUnit;
 
 
 public class Cabin {
@@ -17,7 +18,7 @@ public class Cabin {
     private final SpeedDisplay speedDisplay;
     private final BatteryDisplay batteryDisplay;
 
-    public Cabin(CentralUnit centralUnit){
+    public Cabin(ICentralUnit centralUnit){
         this.seats = new Seat[SeatPositions.values().length];
         int i = 0;
         for(SeatPositions pos : SeatPositions.values()) {

@@ -1,12 +1,13 @@
 package cabin;
 
 import truck.CentralUnit;
+import truck.ICentralUnit;
 
 public class SteeringWheel {
     private int rotation;
-    private CentralUnit centralUnit;
+    private final ICentralUnit centralUnit;
 
-    public SteeringWheel(CentralUnit centralUnit){
+    public SteeringWheel(ICentralUnit centralUnit){
         this.centralUnit = centralUnit;
         rotation = 0;
     }

@@ -2,7 +2,7 @@ package cabin;
 
 import controls.Button;
 import enums.ButtonType;
-import truck.CentralUnit;
+import truck.ICentralUnit;
 
 public class ControlPanel {
     private final Button motorSwitch;
@@ -11,7 +11,7 @@ public class ControlPanel {
     private final Button frontHeadlightSwitch;
     private final Button roofHeadLightSwitch;
 
-    public ControlPanel(CentralUnit centralUnit){
+    public ControlPanel(ICentralUnit centralUnit){
         this.motorSwitch = new Button(centralUnit,ButtonType.motorSwitch);
         this.warningLightSwitch = new Button(centralUnit,ButtonType.warningLightSwitch);
         this.blueLightSwitch = new Button(centralUnit,ButtonType.blueLightSwitch);

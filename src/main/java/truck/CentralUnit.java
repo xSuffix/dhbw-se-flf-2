@@ -6,11 +6,11 @@ import lights.BlueLight;
 import lights.HeadLight;
 import lights.WarningLight;
 
-public class CentralUnit {
+public class CentralUnit implements ICentralUnit {
 
-    private final AirportFireTruck airportFireTruck;
+    private final IAirportFireTruck airportFireTruck;
 
-    public CentralUnit(AirportFireTruck airportFireTruck){
+    public CentralUnit(IAirportFireTruck airportFireTruck){
         this.airportFireTruck = airportFireTruck;
     }
 

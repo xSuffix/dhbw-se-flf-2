@@ -1,10 +1,10 @@
 package cabin;
 
 import enums.PedalType;
-import truck.CentralUnit;
+import truck.ICentralUnit;
 
 public class BreakPedal extends Pedal{
-    public BreakPedal(CentralUnit centralUnit){
+    public BreakPedal(ICentralUnit centralUnit){
         super(PedalType.Brake,centralUnit);
     }
 }
