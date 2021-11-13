@@ -75,4 +75,8 @@ public class Drive {
     public float getBatteryPercentage(){
         return batteryManagement.getChargePercentage(batteryBox);
     }
+
+    public ElectricMotor[] getElectricMotors(){
+        return this.electricMotors;
+    }
 }

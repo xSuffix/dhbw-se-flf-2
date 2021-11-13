@@ -4,6 +4,7 @@ import cabin.Cabin;
 import drive.Drive;
 import lights.BlueLight;
 import lights.HeadLight;
+import lights.TurnSignalLight;
 import lights.WarningLight;
 
 public interface IAirportFireTruck {
@@ -23,4 +24,8 @@ public interface IAirportFireTruck {
     HeadLight[] getHeadLightsFrontLeft();
 
     HeadLight[] getHeadLightsFrontRight();
+
+    TurnSignalLight[] getTurnSignalLightLeft();
+
+    TurnSignalLight[] getTurnSignalLightRight();
 }

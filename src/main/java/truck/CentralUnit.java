@@ -4,6 +4,7 @@ import enums.ButtonType;
 import enums.PedalType;
 import lights.BlueLight;
 import lights.HeadLight;
+import lights.TurnSignalLight;
 import lights.WarningLight;
 
 public class CentralUnit implements ICentralUnit {
@@ -24,9 +25,31 @@ public class CentralUnit implements ICentralUnit {
         airportFireTruck.getCabin().getBatteryDisplay().writeValue(String.valueOf(airportFireTruck.getDrive().getBatteryPercentage()));
     }
 
-    //rotates axles to the exact rotation of steering wheel
+    //rotates axles to the exact rotation of steering wheel plus turn on
     public void turnSteeringWheel(int rotation){
         airportFireTruck.getDrive().rotateAxles(rotation);
+        if(rotation<0){
+            for(TurnSignalLight light : airportFireTruck.getTurnSignalLightLeft()){
+                light.turnOn();
+            }
+            for(TurnSignalLight light : airportFireTruck.getTurnSignalLightRight()){
+                light.turnOff();
+            }
+        } else if(rotation>0){
+            for(TurnSignalLight light : airportFireTruck.getTurnSignalLightLeft()){
+                light.turnOff();
+            }
+            for(TurnSignalLight light : airportFireTruck.getTurnSignalLightRight()){
+                light.turnOn();
+            }
+        } else {
+            for(TurnSignalLight light : airportFireTruck.getTurnSignalLightLeft()){
+                light.turnOff();
+            }
+            for(TurnSignalLight light : airportFireTruck.getTurnSignalLightRight()){
+                light.turnOff();
+            }
+        }
     }
 
     public void buttonPress(ButtonType type){

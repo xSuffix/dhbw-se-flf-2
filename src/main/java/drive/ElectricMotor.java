@@ -18,4 +18,8 @@ public class ElectricMotor {
     public void stop(){
         this.isStarted = false;
     }
+
+    public boolean isStarted(){
+        return this.isStarted;
+    }
 }
