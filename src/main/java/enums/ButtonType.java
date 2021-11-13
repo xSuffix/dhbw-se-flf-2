@@ -8,4 +8,6 @@ public enum ButtonType {
     blueLightSwitch,
     frontHeadlightSwitch,
     roofHeadLightSwitch,
+    leftDoorButton,
+    rightDoorButton,
 }

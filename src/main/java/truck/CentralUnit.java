@@ -79,7 +79,8 @@ public class CentralUnit implements ICentralUnit {
                 }
 
             }
-
+            case leftDoorButton -> airportFireTruck.getCabin().getLeftDoor().switchState();
+            case rightDoorButton -> airportFireTruck.getCabin().getRightDoor().switchState();
         }
     }
 }

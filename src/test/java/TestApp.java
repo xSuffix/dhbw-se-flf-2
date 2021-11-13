@@ -22,5 +22,8 @@ public class TestApp {
             assertTrue(motor.isStarted());
         }
 
+        assertFalse(airportFireTruck.getCabin().getLeftDoor().isOpen());
+        airportFireTruck.getCabin().getLeftDoor().getOuterButton().press();
+        assertTrue(airportFireTruck.getCabin().getLeftDoor().isOpen());
     }
 }

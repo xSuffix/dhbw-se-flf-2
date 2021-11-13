@@ -1,13 +1,14 @@
 package cabin;
 
+import enums.ButtonType;
 import enums.SeatPositions;
 import truck.CentralUnit;
 import truck.ICentralUnit;
 
 
 public class Cabin {
-    private BusDoor leftDoor;
-    private BusDoor rightDoor;
+    private final BusDoor leftDoor;
+    private final BusDoor rightDoor;
     private final Seat[] seats;
     private final JoyStick leftJoyStick;
     private final JoyStick rightJoyStick;
@@ -33,8 +34,8 @@ public class Cabin {
         this.controlPanel = new ControlPanel(centralUnit);
         this.leftJoyStick = new JoyStick();
         this.rightJoyStick = new JoyStick();
-        this.leftDoor = new BusDoor();
-        this.rightDoor = new BusDoor();
+        this.leftDoor = new BusDoor(centralUnit, ButtonType.leftDoorButton);
+        this.rightDoor = new BusDoor(centralUnit, ButtonType.rightDoorButton);
     }
 
     public Seat getSeat(int pos){
@@ -71,5 +72,13 @@ public class Cabin {
 
     public BatteryDisplay getBatteryDisplay() {
         return batteryDisplay;
+    }
+
+    public BusDoor getLeftDoor() {
+        return leftDoor;
+    }
+
+    public BusDoor getRightDoor() {
+        return rightDoor;
     }
 }
