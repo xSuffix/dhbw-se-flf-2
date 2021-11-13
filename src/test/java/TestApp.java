@@ -1,4 +1,5 @@
 import drive.ElectricMotor;
+import enums.FrontLauncherOutput;
 import org.junit.jupiter.api.*;
 import truck.AirportFireTruck;
 
@@ -25,5 +26,6 @@ public class TestApp {
         assertFalse(airportFireTruck.getCabin().getLeftDoor().isOpen());
         airportFireTruck.getCabin().getLeftDoor().getOuterButton().press();
         assertTrue(airportFireTruck.getCabin().getLeftDoor().isOpen());
+
     }
 }

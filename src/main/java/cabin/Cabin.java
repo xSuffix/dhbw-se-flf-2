@@ -1,6 +1,7 @@
 package cabin;
 
 import enums.ButtonType;
+import enums.JoyStickType;
 import enums.SeatPositions;
 import truck.CentralUnit;
 import truck.ICentralUnit;
@@ -32,8 +33,8 @@ public class Cabin {
         this.breakPedal = new BreakPedal(centralUnit);
         this.gasPedal = new GasPedal(centralUnit);
         this.controlPanel = new ControlPanel(centralUnit);
-        this.leftJoyStick = new JoyStick();
-        this.rightJoyStick = new JoyStick();
+        this.leftJoyStick = new JoyStick(centralUnit, JoyStickType.LEFT);
+        this.rightJoyStick = new JoyStick(centralUnit, JoyStickType.RIGHT);
         this.leftDoor = new BusDoor(centralUnit, ButtonType.leftDoorButton);
         this.rightDoor = new BusDoor(centralUnit, ButtonType.rightDoorButton);
     }

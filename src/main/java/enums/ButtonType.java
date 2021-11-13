@@ -10,4 +10,10 @@ public enum ButtonType {
     roofHeadLightSwitch,
     leftDoorButton,
     rightDoorButton,
+    leftJoyStickLeft,
+    leftJoyStickRight,
+    leftJoyStickBack,
+    rightJoyStickLeft,
+    rightJoyStickRight,
+    rightJoyStickBack,
 }
