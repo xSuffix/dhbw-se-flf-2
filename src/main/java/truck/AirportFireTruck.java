@@ -2,6 +2,7 @@ package truck;
 
 import cabin.Cabin;
 import drive.Drive;
+import enums.ExtinguishingType;
 import lights.*;
 
 public class AirportFireTruck implements IAirportFireTruck{
@@ -17,6 +18,8 @@ public class AirportFireTruck implements IAirportFireTruck{
     private final Drive drive;
     private final Cabin cabin;
     private final CentralUnit centralUnit;
+    private final Tank waterTank;
+    private final Tank foampowderTank;
 
     private AirportFireTruck(Builder builder){
         this.centralUnit = new CentralUnit(this);
@@ -31,6 +34,8 @@ public class AirportFireTruck implements IAirportFireTruck{
         this.warningLights = builder.warningLights;
         this.turnSignalLightLeft = builder.turnSignalLightLeft;
         this.turnSignalLightRight = builder.turnSignalLightRight;
+        this.waterTank = builder.waterTank;
+        this.foampowderTank = builder.foampowderTank;
     }
 
     public void chargeTruck(int amount){
@@ -86,6 +91,14 @@ public class AirportFireTruck implements IAirportFireTruck{
         return centralUnit;
     }
 
+    public Tank getWaterTank() {
+        return waterTank;
+    }
+
+    public Tank getFoampowderTank() {
+        return foampowderTank;
+    }
+
     public static class Builder {
 
         private final TurnSignalLight[] turnSignalLightLeft;
@@ -98,6 +111,8 @@ public class AirportFireTruck implements IAirportFireTruck{
         private final HeadLight[] headLightsFrontRight;
         private final HeadLight[] headLightsRoof;
         private final Drive drive;
+        private final Tank waterTank;
+        private final Tank foampowderTank;
 
         public Builder(){
             this.turnSignalLightLeft = new TurnSignalLight[2];
@@ -136,6 +151,9 @@ public class AirportFireTruck implements IAirportFireTruck{
                 this.headLightsRoof[i] = new HeadLight();
             }
             this.drive = new Drive();
+            this.waterTank = new Tank(ExtinguishingType.WATER,50,25,10);
+            this.foampowderTank = new Tank(ExtinguishingType.FOAMPOWDER,25,10,10);
+
         }
 
         public AirportFireTruck build(){

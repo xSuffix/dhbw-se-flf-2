@@ -28,4 +28,8 @@ public interface IAirportFireTruck {
     TurnSignalLight[] getTurnSignalLightLeft();
 
     TurnSignalLight[] getTurnSignalLightRight();
+
+    Tank getWaterTank();
+
+    Tank getFoampowderTank();
 }

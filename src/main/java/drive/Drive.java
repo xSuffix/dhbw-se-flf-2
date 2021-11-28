@@ -48,7 +48,8 @@ public class Drive {
                 motor.rotate(vel);
                 currentVelocity = vel;
             }
-            batteryManagement.takeEnergy(batteryBox,vel*4);
+            int receivedEnergy = batteryManagement.takeEnergy(batteryBox,vel*4);
+            if (receivedEnergy < vel*4) throw new RuntimeException("Battery empty, shutting down :)");
         }
     }
 
