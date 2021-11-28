@@ -81,6 +81,15 @@ public class CentralUnit implements ICentralUnit {
             }
             case leftDoorButton -> airportFireTruck.getCabin().getLeftDoor().switchState();
             case rightDoorButton -> airportFireTruck.getCabin().getRightDoor().switchState();
+            // joystick for frontlauncher
+            case leftJoyStickLeft -> airportFireTruck.getFrontLauncher().pan();
+            case leftJoyStickRight -> airportFireTruck.getFrontLauncher().switchRatio();
+            case leftJoyStickBack -> airportFireTruck.getFrontLauncher().sprayWater(airportFireTruck.getCabin().getControlPanel().getFrontLauncherKnob().getValue());
+            // joystick for rooflauncher
+            case rightJoyStickLeft -> airportFireTruck.getRoofLauncher().extend();
+            case rightJoyStickRight -> airportFireTruck.getRoofLauncher().switchRatio();
+            case rightJoyStickBack -> airportFireTruck.getRoofLauncher().sprayWater(airportFireTruck.getCabin().getControlPanel().getRoofLauncherKnob().getValue());
+
         }
     }
 }

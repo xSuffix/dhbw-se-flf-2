@@ -32,4 +32,12 @@ public interface IAirportFireTruck {
     Tank getWaterTank();
 
     Tank getFoampowderTank();
+
+    MixingUnit getMixingUnit();
+
+    FrontLauncher getFrontLauncher();
+
+    RoofLauncher getRoofLauncher();
+
+    FloorSprayingNoozle[] getFloorSprayingNoozles();
 }

@@ -20,6 +20,10 @@ public class AirportFireTruck implements IAirportFireTruck{
     private final CentralUnit centralUnit;
     private final Tank waterTank;
     private final Tank foampowderTank;
+    private final MixingUnit mixingUnit;
+    private final FrontLauncher frontLauncher;
+    private final RoofLauncher roofLauncher;
+    private final FloorSprayingNoozle[] floorSprayingNoozles;
 
     private AirportFireTruck(Builder builder){
         this.centralUnit = new CentralUnit(this);
@@ -36,6 +40,10 @@ public class AirportFireTruck implements IAirportFireTruck{
         this.turnSignalLightRight = builder.turnSignalLightRight;
         this.waterTank = builder.waterTank;
         this.foampowderTank = builder.foampowderTank;
+        this.mixingUnit = builder.mixingUnit;
+        this.frontLauncher = builder.frontLauncher;
+        this.roofLauncher = builder.roofLauncher;
+        this.floorSprayingNoozles = builder.floorSprayingNoozles;
     }
 
     public void chargeTruck(int amount){
@@ -99,6 +107,22 @@ public class AirportFireTruck implements IAirportFireTruck{
         return foampowderTank;
     }
 
+    public MixingUnit getMixingUnit() {
+        return mixingUnit;
+    }
+
+    public FrontLauncher getFrontLauncher() {
+        return frontLauncher;
+    }
+
+    public RoofLauncher getRoofLauncher() {
+        return roofLauncher;
+    }
+
+    public FloorSprayingNoozle[] getFloorSprayingNoozles() {
+        return floorSprayingNoozles;
+    }
+
     public static class Builder {
 
         private final TurnSignalLight[] turnSignalLightLeft;
@@ -113,6 +137,10 @@ public class AirportFireTruck implements IAirportFireTruck{
         private final Drive drive;
         private final Tank waterTank;
         private final Tank foampowderTank;
+        private final MixingUnit mixingUnit;
+        private final FrontLauncher frontLauncher;
+        private final RoofLauncher roofLauncher;
+        private final FloorSprayingNoozle[] floorSprayingNoozles;
 
         public Builder(){
             this.turnSignalLightLeft = new TurnSignalLight[2];
@@ -153,6 +181,13 @@ public class AirportFireTruck implements IAirportFireTruck{
             this.drive = new Drive();
             this.waterTank = new Tank(ExtinguishingType.WATER,50,25,10);
             this.foampowderTank = new Tank(ExtinguishingType.FOAMPOWDER,25,10,10);
+            this.mixingUnit = new MixingUnit(this.waterTank, this.foampowderTank);
+            this.frontLauncher = new FrontLauncher(this.mixingUnit);
+            this.roofLauncher = new RoofLauncher(this.mixingUnit);
+            this.floorSprayingNoozles = new FloorSprayingNoozle[7];
+            for (int i = 0; i < floorSprayingNoozles.length;i++){
+                this.floorSprayingNoozles[i] = new FloorSprayingNoozle(this.waterTank);
+            }
 
         }
 
