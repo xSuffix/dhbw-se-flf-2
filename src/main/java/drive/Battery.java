@@ -1,20 +1,19 @@
 package drive;
 
+import java.util.Arrays;
+
 public class Battery {
 
     private final int[][][] capacity;
 
     public Battery(int l, int h,int b){
         this.capacity = new int[l][h][b];
-        for (int[][] x : capacity){
-            for (int [] y : x){
-                for (int z : y){
-                    z = 0;
-                }
+        for (int[][] le : capacity) {
+            for (int[] ho : le) {
+                Arrays.fill(ho, 1);
             }
         }
     }
-
 
     public int getCurrentCapacity() {
         int cap = 0;
@@ -33,11 +32,11 @@ public class Battery {
     }
 
     public void charge(int amount){
-        for (int[][] l : capacity) {
-            for (int[] h : l) {
-                for (int b : h) {
-                    if (b == 0 && amount > 0){
-                        b = 1;
+        for (int i = 0;i < capacity.length;i++) {
+            for (int j = 0;j < capacity[i].length;j++) {
+                for (int k = 0; k < capacity[i][j].length;k++) {
+                    if (capacity[i][j][k] == 0 && amount > 0){
+                        capacity[i][j][k] = 1;
                         amount--;
                     }
                 }

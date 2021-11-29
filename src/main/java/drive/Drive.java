@@ -71,6 +71,10 @@ public class Drive {
         return rotation;
     }
 
+    public int getBatteryCharge(){
+        return batteryManagement.getCharge(batteryBox);
+    }
+
     public float getBatteryPercentage(){
         return batteryManagement.getChargePercentage(batteryBox);
     }

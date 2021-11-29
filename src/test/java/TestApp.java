@@ -1,5 +1,8 @@
 import drive.ElectricMotor;
+import enums.ExtinguishingType;
 import enums.FrontLauncherOutput;
+import enums.LauncherState;
+import enums.RoofLauncherOutput;
 import lights.BlueLight;
 import lights.HeadLight;
 import lights.Light;
@@ -17,6 +20,12 @@ public class TestApp {
     @BeforeEach
     public void setup() {
         airportFireTruck = new AirportFireTruck.Builder().build();
+        airportFireTruck.chargeTruck(airportFireTruck.getDrive().getBatteryBox().getMaxCharge());
+        airportFireTruck.getWaterTank().fill(airportFireTruck.getWaterTank().getTotalCapacity(), ExtinguishingType.WATER);
+        airportFireTruck.getFoampowderTank().fill(airportFireTruck.getFoampowderTank().getTotalCapacity(), ExtinguishingType.FOAMPOWDER);
+        //open doors in parking position!
+        airportFireTruck.getCabin().getRightDoor().getOuterButton().press();
+        airportFireTruck.getCabin().getLeftDoor().getOuterButton().press();
     }
 
     @Test
@@ -116,7 +125,21 @@ public class TestApp {
     @Test
     @Order(3)
     public void handleParking(){
-
+        assertTrue(seatsUnoccupied());
+        assertFalse(motorsOn());
+        assertTrue(busDoorsOpen());
+        assertFalse(airportFireTruck.getRoofLauncher().isSecondSemgentExtended());
+        assertNotSame(airportFireTruck.getFrontLauncher().getState(), LauncherState.ACTIVE);
+        checkLights(airportFireTruck.getHeadLightsRoof(),false);
+        checkLights(airportFireTruck.getHeadLightsFrontLeft(),false);
+        checkLights(airportFireTruck.getHeadLightsFrontRight(),false);
+        checkLights(airportFireTruck.getBlueLights(),false);
+        checkLights(airportFireTruck.getWarningLights(),false);
+        assertEquals(100,airportFireTruck.getDrive().getBatteryPercentage());
+        assertEquals(100,airportFireTruck.getWaterTank().getCurrentFillPercentage());
+        assertEquals(100,airportFireTruck.getFoampowderTank().getCurrentFillPercentage());
+        assertEquals(FrontLauncherOutput.A.getValue(), airportFireTruck.getCabin().getControlPanel().getFrontLauncherKnob().getValue());
+        assertEquals(RoofLauncherOutput.A.getValue(), airportFireTruck.getCabin().getControlPanel().getRoofLauncherKnob().getValue());
     }
 
     @Test
@@ -164,5 +187,17 @@ public class TestApp {
         }
         return true;
     }
+
+    public boolean seatsUnoccupied(){
+        for (int i = 0; i<4;i++){
+            if (airportFireTruck.getCabin().getSeat(i).isOccupied()) return false;
+        }
+        return true;
+    }
+
+    public boolean busDoorsOpen(){
+        return airportFireTruck.getCabin().getLeftDoor().isOpen() && airportFireTruck.getCabin().getRightDoor().isOpen();
+    }
+
 
 }

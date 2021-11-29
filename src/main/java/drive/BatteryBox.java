@@ -34,7 +34,7 @@ public class BatteryBox implements IBatteryBox{
     }
 
     public float getCurrentChargePercentage(){
-        return (float)getCurrentCharge()/getMaxCharge();
+        return ((float)getCurrentCharge()/getMaxCharge()) * 100;
     }
 
     public void charge(int amount){
@@ -44,7 +44,7 @@ public class BatteryBox implements IBatteryBox{
                 if (amount > 0){
                     if (amount > chargeDelta){
                         b.charge(chargeDelta);
-                        amount =- chargeDelta;
+                        amount = amount - chargeDelta;
                     } else {
                         b.charge(amount);
                         amount = 0;

@@ -14,11 +14,11 @@ public class Tank {
 
     public void fill(int amount, ExtinguishingType type){
         if (this.type != type) throw new RuntimeException("Do not mix Extinguishing Agents in the tank!!!");
-        for (ExtinguishingType[][] b : capacity){
-            for (ExtinguishingType[] h : b){
-                for (ExtinguishingType l : h){
-                    if (l == null && amount > 0){
-                        l = this.type;
+        for (int i = 0;i < capacity.length;i++) {
+            for (int j = 0;j < capacity[i].length;j++) {
+                for (int k = 0; k < capacity[i][j].length;k++) {
+                    if (capacity[i][j][k] == null && amount > 0){
+                        capacity[i][j][k] = this.type;
                         amount--;
                     }
                 }
@@ -28,11 +28,11 @@ public class Tank {
 
     public ExtinguishingType[] getAgent(int amount){
         int amountAvail = 0;
-        for (ExtinguishingType[][] b : capacity){
-            for (ExtinguishingType[] h : b){
-                for (ExtinguishingType l : h){
-                    if (l == this.type && amount > 0){
-                        l = null;
+        for (int i = 0;i < capacity.length;i++) {
+            for (int j = 0;j < capacity[i].length;j++) {
+                for (int k = 0; k < capacity[i][j].length;k++) {
+                    if (capacity[i][j][k] == this.type && amount > 0){
+                        capacity[i][j][k] = null;
                         amount--;
                         amountAvail ++;
                     }
@@ -48,6 +48,24 @@ public class Tank {
 
     public int getTotalCapacity(){
         return capacity.length * capacity[0].length * capacity[0][0].length;
+    }
+
+    public int getCurrentCapacity() {
+        int cap = 0;
+        for (ExtinguishingType[][] l : capacity){
+            for (ExtinguishingType[] h : l){
+                for (ExtinguishingType b : h){
+                    if (b != null){
+                        cap += 1;
+                    }
+                }
+            }
+        }
+        return cap;
+    }
+
+    public float getCurrentFillPercentage(){
+        return ((float)getCurrentCapacity()/getTotalCapacity()) * 100;
     }
 
     public ExtinguishingType getType(){
