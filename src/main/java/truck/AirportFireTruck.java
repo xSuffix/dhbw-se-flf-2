@@ -1,7 +1,7 @@
 package truck;
 
 import cabin.Cabin;
-import drive.Drive;
+import drive.*;
 import enums.ExtinguishingType;
 import lights.*;
 
@@ -141,8 +141,25 @@ public class AirportFireTruck implements IAirportFireTruck{
         private final FrontLauncher frontLauncher;
         private final RoofLauncher roofLauncher;
         private final FloorSprayingNoozle[] floorSprayingNoozles;
+        private final ElectricMotor[] electricMotors;
+        private final BatteryBox batteryBox;
+        private final SteeringAxle[] frontAxles;
+        private final Axle[] backAxles;
 
         public Builder(){
+            this.frontAxles = new SteeringAxle[2];
+            for(int i = 0;i < frontAxles.length;i++){
+                frontAxles[i] = new SteeringAxle();
+            }
+            this.backAxles = new Axle[2];
+            for(int i = 0;i < backAxles.length;i++){
+                backAxles[i] = new Axle();
+            }
+            this.electricMotors = new ElectricMotor[2];
+            for(int i = 0;i<electricMotors.length;i++){
+                electricMotors[i] = new ElectricMotor();
+            }
+            this.batteryBox = new BatteryBox();
             this.turnSignalLightLeft = new TurnSignalLight[2];
             this.turnSignalLightRight = new TurnSignalLight[2];
             for(int i = 0;i<turnSignalLightLeft.length;i++){
@@ -178,7 +195,7 @@ public class AirportFireTruck implements IAirportFireTruck{
             for(int i = 0;i<headLightsRoof.length;i++){
                 this.headLightsRoof[i] = new HeadLight();
             }
-            this.drive = new Drive();
+            this.drive = new Drive(this.electricMotors,this.batteryBox,this.frontAxles,this.backAxles);
             this.waterTank = new Tank(ExtinguishingType.WATER,50,25,10);
             this.foampowderTank = new Tank(ExtinguishingType.FOAMPOWDER,25,10,10);
             this.mixingUnit = new MixingUnit(this.waterTank, this.foampowderTank);

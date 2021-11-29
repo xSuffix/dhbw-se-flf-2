@@ -9,20 +9,11 @@ public class Drive {
     private final Axle[] backAxles;
     private int currentVelocity;
 
-    public Drive(){
-        this.frontAxles = new SteeringAxle[2];
-        for(int i = 0;i < frontAxles.length;i++){
-            frontAxles[i] = new SteeringAxle();
-        }
-        this.backAxles = new Axle[2];
-        for(int i = 0;i < backAxles.length;i++){
-            backAxles[i] = new Axle();
-        }
-        this.electricMotors = new ElectricMotor[2];
-        for(int i = 0;i<electricMotors.length;i++){
-            electricMotors[i] = new ElectricMotor();
-        }
-        this.batteryBox = new BatteryBox();
+    public Drive(ElectricMotor[] motors, BatteryBox box, SteeringAxle[] frontAxles, Axle[] backAxles){
+        this.electricMotors = motors;
+        this.batteryBox = box;
+        this.frontAxles = frontAxles;
+        this.backAxles = backAxles;
         this.currentVelocity = 0;
     }
 
@@ -36,6 +27,13 @@ public class Drive {
         for(ElectricMotor motor : electricMotors){
             motor.start();
         }
+    }
+
+    public boolean motorsOn(){
+        for(ElectricMotor motor : electricMotors){
+            if(!motor.isStarted()) return false;
+        }
+        return true;
     }
 
     public void charge(int amount){
@@ -79,5 +77,21 @@ public class Drive {
 
     public ElectricMotor[] getElectricMotors(){
         return this.electricMotors;
+    }
+
+    public BatteryManagement getBatteryManagement() {
+        return batteryManagement;
+    }
+
+    public BatteryBox getBatteryBox() {
+        return batteryBox;
+    }
+
+    public SteeringAxle[] getFrontAxles() {
+        return frontAxles;
+    }
+
+    public Axle[] getBackAxles() {
+        return backAxles;
     }
 }

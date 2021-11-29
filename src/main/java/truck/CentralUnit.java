@@ -54,7 +54,10 @@ public class CentralUnit implements ICentralUnit {
 
     public void buttonPress(ButtonType type){
         switch (type){
-            case motorSwitch -> airportFireTruck.getDrive().startMotors();
+            case motorSwitch -> {
+                if (airportFireTruck.getDrive().motorsOn()) airportFireTruck.getDrive().stopMotors();
+                else airportFireTruck.getDrive().startMotors();
+            }
             case blueLightSwitch -> {
                 for (BlueLight light : airportFireTruck.getBlueLights()){
                     light.switchState();

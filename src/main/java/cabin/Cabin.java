@@ -20,6 +20,7 @@ public class Cabin {
     private final SpeedDisplay speedDisplay;
     private final BatteryDisplay batteryDisplay;
 
+    // todo hier die composition raus ziehen maybe
     public Cabin(ICentralUnit centralUnit){
         this.seats = new Seat[SeatPositions.values().length];
         int i = 0;
