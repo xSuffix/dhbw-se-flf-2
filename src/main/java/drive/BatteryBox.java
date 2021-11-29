@@ -55,17 +55,18 @@ public class BatteryBox implements IBatteryBox{
     }
 
     public int takeEnergy(int amount){
+        int energy = 0;
         for(Battery[] row : batteries){
             for(Battery b : row) {
                 if(b.getCurrentCapacity() >= amount && amount > 0){
-                    b.takeEnergy(amount);
+                    energy += b.takeEnergy(amount);
                     amount = 0;
                 } else if (amount > 0){
-                    amount =- b.getCurrentCapacity();
-                    b.takeEnergy(b.getCurrentCapacity());
+                    amount = amount - b.getCurrentCapacity();
+                    energy += b.takeEnergy(b.getCurrentCapacity());
                 }
             }
         }
-        return amount;
+        return energy;
     }
 }

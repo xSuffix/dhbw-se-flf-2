@@ -49,8 +49,8 @@ public class Battery {
         for(int b = capacity.length-1;b >= 0;b--){
             for(int h = capacity[b].length-1;h >= 0;h--){
                 for(int l = capacity[b][h].length-1;l >= 0;l--){
-                    if(l == 1 && amount != 0){
-                        l = 0;
+                    if(capacity[b][h][l] == 1 && amount > 0){
+                        capacity[b][h][l] = 0;
                         energy++;
                         amount--;
                     }

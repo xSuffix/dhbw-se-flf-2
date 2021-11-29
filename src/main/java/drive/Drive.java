@@ -47,6 +47,7 @@ public class Drive {
                 currentVelocity = vel;
             }
             int receivedEnergy = batteryManagement.takeEnergy(batteryBox,vel*4);
+            System.out.println(receivedEnergy);
             if (receivedEnergy < vel*4) throw new RuntimeException("Battery empty, shutting down :)");
         }
     }
