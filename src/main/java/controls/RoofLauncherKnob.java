@@ -2,7 +2,7 @@ package controls;
 
 import enums.RoofLauncherOutput;
 
-public class RoofLauncherKnob extends TurningKnob{
+public class RoofLauncherKnob extends TurningKnob {
 
     private RoofLauncherOutput state;
 
@@ -10,15 +10,15 @@ public class RoofLauncherKnob extends TurningKnob{
         this.state = RoofLauncherOutput.A;
     }
 
-    public void turnLeft(){
+    public void turnLeft() {
         this.state = this.state.getPrevious();
     }
 
-    public void turnRight(){
+    public void turnRight() {
         this.state = this.state.getNext();
     }
 
-    public int getValue(){
+    public int getValue() {
         return this.state.getValue();
     }
 

@@ -9,15 +9,15 @@ public class FrontLauncherKnob {
         this.state = FrontLauncherOutput.A;
     }
 
-    public void turnLeft(){
+    public void turnLeft() {
         this.state = this.state.getPrevious();
     }
 
-    public void turnRight(){
+    public void turnRight() {
         this.state = this.state.getNext();
     }
 
-    public int getValue(){
+    public int getValue() {
         return this.state.getValue();
     }
 }

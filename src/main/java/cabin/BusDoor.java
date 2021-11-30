@@ -5,25 +5,25 @@ import enums.ButtonType;
 import truck.ICentralUnit;
 
 public class BusDoor {
-    private boolean isOpen;
     private final Button innerButton;
     private final Button outerButton;
+    private boolean isOpen;
 
-    public BusDoor(ICentralUnit centralUnit, ButtonType type){
+    public BusDoor(ICentralUnit centralUnit, ButtonType type) {
         this.isOpen = false;
-        this.innerButton = new Button(centralUnit,type);
-        this.outerButton = new Button(centralUnit,type);
+        this.innerButton = new Button(centralUnit, type);
+        this.outerButton = new Button(centralUnit, type);
     }
 
-    public void switchState(){
+    public void toggle() {
         this.isOpen = !this.isOpen;
     }
 
-    public void close(){
+    public void close() {
         this.isOpen = false;
     }
 
-    public void open(){
+    public void open() {
         this.isOpen = true;
     }
 

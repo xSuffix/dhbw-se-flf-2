@@ -3,26 +3,28 @@ package lights;
 import enums.LightColor;
 
 public abstract class Light {
-    private boolean on;
-    protected LightColor color;
 
-    public Light(){
+    protected LightColor color;
+    private boolean on;
+
+    public Light() {
         this.on = false;
     }
 
-    public boolean isOn(){
+    public boolean isOn() {
         return this.on;
     }
 
-    public void turnOn(){
+    public void turnOn() {
         this.on = true;
     }
 
-    public void turnOff(){
+    public void turnOff() {
         this.on = false;
     }
 
-    public void switchState(){
+    public void toggle() {
         this.on = !this.on;
     }
+
 }

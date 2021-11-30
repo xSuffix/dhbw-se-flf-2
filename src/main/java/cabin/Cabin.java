@@ -3,7 +3,6 @@ package cabin;
 import enums.ButtonType;
 import enums.JoyStickType;
 import enums.SeatPositions;
-import truck.CentralUnit;
 import truck.ICentralUnit;
 
 
@@ -21,10 +20,10 @@ public class Cabin {
     private final BatteryDisplay batteryDisplay;
 
     // todo hier die composition raus ziehen maybe
-    public Cabin(ICentralUnit centralUnit){
+    public Cabin(ICentralUnit centralUnit) {
         this.seats = new Seat[SeatPositions.values().length];
         int i = 0;
-        for(SeatPositions pos : SeatPositions.values()) {
+        for (SeatPositions pos : SeatPositions.values()) {
             seats[i] = new Seat(pos);
             i++;
         }
@@ -40,7 +39,7 @@ public class Cabin {
         this.rightDoor = new BusDoor(centralUnit, ButtonType.rightDoorButton);
     }
 
-    public Seat getSeat(int pos){
+    public Seat getSeat(int pos) {
         return seats[pos];
     }
 

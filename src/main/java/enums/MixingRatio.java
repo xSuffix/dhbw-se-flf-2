@@ -12,12 +12,12 @@ public enum MixingRatio {
         this.value = i;
     }
 
-    public int getValue(){
+    public int getValue() {
         return this.value;
     }
 
-    public MixingRatio getPrevious(){
-        switch (this.getValue()){
+    public MixingRatio getPrevious() {
+        switch (this.getValue()) {
             case 0 -> {
                 return MixingRatio.D;
             }
@@ -35,8 +35,8 @@ public enum MixingRatio {
         return null;
     }
 
-    public MixingRatio getNext(){
-        switch (this.getValue()){
+    public MixingRatio getNext() {
+        switch (this.getValue()) {
             case 0 -> {
                 return MixingRatio.B;
             }

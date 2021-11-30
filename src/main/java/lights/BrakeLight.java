@@ -2,9 +2,9 @@ package lights;
 
 import enums.LightColor;
 
-public class BrakeLight extends Light{
+public class BrakeLight extends Light {
 
-    public BrakeLight(){
+    public BrakeLight() {
         this.color = LightColor.RED;
     }
 

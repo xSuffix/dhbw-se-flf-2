@@ -4,20 +4,20 @@ import enums.ExtinguishingType;
 
 public class Tank {
 
-    private ExtinguishingType type;
-    private ExtinguishingType[][][] capacity;
+    private final ExtinguishingType type;
+    private final ExtinguishingType[][][] capacity;
 
-    public Tank(ExtinguishingType type, int l, int h, int b){
+    public Tank(ExtinguishingType type, int l, int h, int b) {
         this.type = type;
         this.capacity = new ExtinguishingType[l][h][b];
     }
 
-    public void fill(int amount, ExtinguishingType type){
+    public void fill(int amount, ExtinguishingType type) {
         if (this.type != type) throw new RuntimeException("Do not mix Extinguishing Agents in the tank!!!");
-        for (int i = 0;i < capacity.length;i++) {
-            for (int j = 0;j < capacity[i].length;j++) {
-                for (int k = 0; k < capacity[i][j].length;k++) {
-                    if (capacity[i][j][k] == null && amount > 0){
+        for (int i = 0; i < capacity.length; i++) {
+            for (int j = 0; j < capacity[i].length; j++) {
+                for (int k = 0; k < capacity[i][j].length; k++) {
+                    if (capacity[i][j][k] == null && amount > 0) {
                         capacity[i][j][k] = this.type;
                         amount--;
                     }
@@ -26,36 +26,36 @@ public class Tank {
         }
     }
 
-    public ExtinguishingType[] getAgent(int amount){
+    public ExtinguishingType[] getAgent(int amount) {
         int amountAvail = 0;
-        for (int i = 0;i < capacity.length;i++) {
-            for (int j = 0;j < capacity[i].length;j++) {
-                for (int k = 0; k < capacity[i][j].length;k++) {
-                    if (capacity[i][j][k] == this.type && amount > 0){
+        for (int i = 0; i < capacity.length; i++) {
+            for (int j = 0; j < capacity[i].length; j++) {
+                for (int k = 0; k < capacity[i][j].length; k++) {
+                    if (capacity[i][j][k] == this.type && amount > 0) {
                         capacity[i][j][k] = null;
                         amount--;
-                        amountAvail ++;
+                        amountAvail++;
                     }
                 }
             }
         }
         ExtinguishingType[] amountReturned = new ExtinguishingType[amountAvail];
-        for (ExtinguishingType unit : amountReturned){
+        for (ExtinguishingType unit : amountReturned) {
             unit = this.type;
         }
         return amountReturned;
     }
 
-    public int getTotalCapacity(){
+    public int getTotalCapacity() {
         return capacity.length * capacity[0].length * capacity[0][0].length;
     }
 
     public int getCurrentCapacity() {
         int cap = 0;
-        for (ExtinguishingType[][] l : capacity){
-            for (ExtinguishingType[] h : l){
-                for (ExtinguishingType b : h){
-                    if (b != null){
+        for (ExtinguishingType[][] l : capacity) {
+            for (ExtinguishingType[] h : l) {
+                for (ExtinguishingType b : h) {
+                    if (b != null) {
                         cap += 1;
                     }
                 }
@@ -64,11 +64,11 @@ public class Tank {
         return cap;
     }
 
-    public float getCurrentFillPercentage(){
-        return ((float)getCurrentCapacity()/getTotalCapacity()) * 100;
+    public float getCurrentFillPercentage() {
+        return ((float) getCurrentCapacity() / getTotalCapacity()) * 100;
     }
 
-    public ExtinguishingType getType(){
+    public ExtinguishingType getType() {
         return this.type;
     }
 }
