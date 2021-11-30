@@ -23,7 +23,7 @@ public enum RoofLauncherOutput {
             case 1000 -> {
                 return RoofLauncherOutput.A;
             }
-            case 1500 -> {
+            case 2500 -> {
                 return RoofLauncherOutput.B;
             }
 
@@ -39,7 +39,7 @@ public enum RoofLauncherOutput {
             case 1000 -> {
                 return RoofLauncherOutput.C;
             }
-            case 1500 -> {
+            case 2500 -> {
                 return RoofLauncherOutput.A;
             }
 
