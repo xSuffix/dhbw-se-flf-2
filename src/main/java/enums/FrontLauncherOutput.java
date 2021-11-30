@@ -15,12 +15,12 @@ public enum FrontLauncherOutput {
         this.value = i;
     }
 
-    public int getValue(){
+    public int getValue() {
         return this.value;
     }
 
-    public FrontLauncherOutput getPrevious(){
-        switch (this.getValue()){
+    public FrontLauncherOutput getPrevious() {
+        switch (this.getValue()) {
             case 500 -> {
                 return FrontLauncherOutput.G;
             }
@@ -47,8 +47,8 @@ public enum FrontLauncherOutput {
         return null;
     }
 
-    public FrontLauncherOutput getNext(){
-        switch (this.getValue()){
+    public FrontLauncherOutput getNext() {
+        switch (this.getValue()) {
             case 500 -> {
                 return FrontLauncherOutput.B;
             }

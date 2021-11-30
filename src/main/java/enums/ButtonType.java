@@ -1,7 +1,5 @@
 package enums;
 
-import controls.Button;
-
 public enum ButtonType {
     motorSwitch,
     warningLightSwitch,

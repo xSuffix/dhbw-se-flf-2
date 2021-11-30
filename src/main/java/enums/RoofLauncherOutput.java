@@ -11,12 +11,12 @@ public enum RoofLauncherOutput {
         this.value = i;
     }
 
-    public int getValue(){
+    public int getValue() {
         return this.value;
     }
 
-    public RoofLauncherOutput getPrevious(){
-        switch (this.getValue()){
+    public RoofLauncherOutput getPrevious() {
+        switch (this.getValue()) {
             case 500 -> {
                 return RoofLauncherOutput.C;
             }
@@ -31,8 +31,8 @@ public enum RoofLauncherOutput {
         return null;
     }
 
-    public RoofLauncherOutput getNext(){
-        switch (this.getValue()){
+    public RoofLauncherOutput getNext() {
+        switch (this.getValue()) {
             case 500 -> {
                 return RoofLauncherOutput.B;
             }

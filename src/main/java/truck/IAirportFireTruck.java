@@ -2,36 +2,41 @@ package truck;
 
 import cabin.Cabin;
 import drive.Drive;
-import lights.BlueLight;
-import lights.HeadLight;
-import lights.TurnSignalLight;
-import lights.WarningLight;
+import lights.*;
 
 public interface IAirportFireTruck {
 
     void chargeTruck(int amount);
 
-    Drive getDrive();
-
-    Cabin getCabin();
-
-    BlueLight[] getBlueLights();
-
-    WarningLight[] getWarningLights();
-
-    HeadLight[] getHeadLightsRoof();
+    void useFloorNozzles(int amount);
 
     HeadLight[] getHeadLightsFrontLeft();
 
     HeadLight[] getHeadLightsFrontRight();
 
+    HeadLight[] getHeadLightsRoof();
+
     TurnSignalLight[] getTurnSignalLightLeft();
 
     TurnSignalLight[] getTurnSignalLightRight();
 
+    BrakeLight getBrakeLightLeft();
+
+    BrakeLight getBrakeLightRight();
+
+    BlueLight[] getBlueLights();
+
+    WarningLight[] getWarningLights();
+
+    Drive getDrive();
+
+    CentralUnit getCentralUnit();
+
+    Cabin getCabin();
+
     Tank getWaterTank();
 
-    Tank getFoampowderTank();
+    Tank getFoamPowderTank();
 
     MixingUnit getMixingUnit();
 
@@ -39,7 +44,5 @@ public interface IAirportFireTruck {
 
     RoofLauncher getRoofLauncher();
 
-    FloorSprayingNoozle[] getFloorSprayingNoozles();
-
-    void useFloorNoozles(int amount);
+    FloorSprayingNozzle[] getFloorSprayingNozzles();
 }

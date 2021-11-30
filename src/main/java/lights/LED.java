@@ -1,5 +1,5 @@
 package lights;
 
-public class LED{
+public class LED {
 
 }

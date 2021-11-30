@@ -1,6 +1,6 @@
 package cabin;
 
-public class SpeedDisplay extends Display{
+public class SpeedDisplay extends Display {
     public SpeedDisplay() {
         super("km/h");
     }

@@ -13,10 +13,10 @@ public class JoyStick {
     private final Button frontRightButton;
     private final Button backSwitch;
 
-    public JoyStick(ICentralUnit centralUnit, JoyStickType type){
+    public JoyStick(ICentralUnit centralUnit, JoyStickType type) {
         this.centralUnit = centralUnit;
         this.type = type;
-        if(type == JoyStickType.LEFT) {
+        if (type == JoyStickType.LEFT) {
             this.frontLeftButton = new Button(centralUnit, ButtonType.leftJoyStickLeft);
             this.frontRightButton = new Button(centralUnit, ButtonType.leftJoyStickRight);
             this.backSwitch = new Button(centralUnit, ButtonType.leftJoyStickBack);
@@ -27,7 +27,7 @@ public class JoyStick {
         }
     }
 
-    public JoyStickType getType(){
+    public JoyStickType getType() {
         return type;
     }
 

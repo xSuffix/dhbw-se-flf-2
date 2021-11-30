@@ -2,9 +2,10 @@ package lights;
 
 import enums.LightColor;
 
-public class HeadLight extends Light{
+public class HeadLight extends Light {
 
-    public HeadLight(){
+    public HeadLight() {
         this.color = LightColor.WHITE;
     }
+
 }
