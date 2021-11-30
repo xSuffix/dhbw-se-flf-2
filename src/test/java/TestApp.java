@@ -74,7 +74,7 @@ public class TestApp {
         assertNotNull(airportFireTruck.getBrakeLightRight());
 
         assertNotNull(airportFireTruck.getCentralUnit());
-        assertNotNull(airportFireTruck.getFloorSprayingNoozles());
+        assertNotNull(airportFireTruck.getFloorSprayingNozzles());
         assertNotNull(airportFireTruck.getMixingUnit());
         assertNotNull(airportFireTruck.getFoamPowderTank());
         assertNotNull(airportFireTruck.getFrontLauncher());

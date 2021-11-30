@@ -8,6 +8,8 @@ public interface IAirportFireTruck {
 
     void chargeTruck(int amount);
 
+    void useFloorNozzles(int amount);
+
     HeadLight[] getHeadLightsFrontLeft();
 
     HeadLight[] getHeadLightsFrontRight();
@@ -42,7 +44,5 @@ public interface IAirportFireTruck {
 
     RoofLauncher getRoofLauncher();
 
-    FloorSprayingNozzle[] getFloorSprayingNoozles();
-
-    void useFloorNoozles(int amount);
+    FloorSprayingNozzle[] getFloorSprayingNozzles();
 }

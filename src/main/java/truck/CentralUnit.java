@@ -93,7 +93,7 @@ public class CentralUnit implements ICentralUnit {
             case rightJoyStickRight -> airportFireTruck.getRoofLauncher().switchRatio();
             case rightJoyStickBack -> airportFireTruck.getRoofLauncher().sprayWater(airportFireTruck.getCabin().getControlPanel().getRoofLauncherKnob().getValue());
 
-            case selfProtection -> airportFireTruck.useFloorNoozles(100);
+            case selfProtection -> airportFireTruck.useFloorNozzles(100);
         }
     }
 }

@@ -51,22 +51,18 @@ public class AirportFireTruck implements IAirportFireTruck {
         this.getCabin().getBatteryDisplay().writeValue(String.valueOf(this.getDrive().getBatteryPercentage()));
     }
 
-    public void useFloorNoozles(int amount){
-        for(FloorSprayingNozzle noozle : floorSprayingNozzles){
-            noozle.sprayWater(amount);
+    public void useFloorNozzles(int amount){
+        for(FloorSprayingNozzle nozzle : floorSprayingNozzles){
+            nozzle.sprayWater(amount);
         }
-    }
-
-    public BlueLight[] getBlueLights() {
-        return blueLights;
-    }
-
-    public HeadLight[] getHeadLightsFrontRight() {
-        return headLightsFrontRight;
     }
 
     public HeadLight[] getHeadLightsFrontLeft() {
         return headLightsFrontLeft;
+    }
+
+    public HeadLight[] getHeadLightsFrontRight() {
+        return headLightsFrontRight;
     }
 
     public HeadLight[] getHeadLightsRoof() {
@@ -89,12 +85,12 @@ public class AirportFireTruck implements IAirportFireTruck {
         return brakeLightRight;
     }
 
-    public WarningLight[] getWarningLights() {
-        return warningLights;
+    public BlueLight[] getBlueLights() {
+        return blueLights;
     }
 
-    public FloorSprayingNozzle[] getFloorSprayingNoozles() {
-        return floorSprayingNozzles;
+    public WarningLight[] getWarningLights() {
+        return warningLights;
     }
 
     public Drive getDrive() {
