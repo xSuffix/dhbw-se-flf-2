@@ -52,7 +52,7 @@ public class AirportFireTruck implements IAirportFireTruck {
     }
 
     public void useFloorNoozles(int amount){
-        for(FloorSprayingNoozle noozle : floorSprayingNoozles){
+        for(FloorSprayingNozzle noozle : floorSprayingNozzles){
             noozle.sprayWater(amount);
         }
     }
@@ -63,6 +63,10 @@ public class AirportFireTruck implements IAirportFireTruck {
 
     public HeadLight[] getHeadLightsFrontRight() {
         return headLightsFrontRight;
+    }
+
+    public HeadLight[] getHeadLightsFrontLeft() {
+        return headLightsFrontLeft;
     }
 
     public HeadLight[] getHeadLightsRoof() {
@@ -87,6 +91,10 @@ public class AirportFireTruck implements IAirportFireTruck {
 
     public WarningLight[] getWarningLights() {
         return warningLights;
+    }
+
+    public FloorSprayingNozzle[] getFloorSprayingNoozles() {
+        return floorSprayingNozzles;
     }
 
     public Drive getDrive() {
@@ -204,8 +212,8 @@ public class AirportFireTruck implements IAirportFireTruck {
             }
             this.drive = new Drive(this.electricMotors, this.batteryBox, this.frontAxles, this.backAxles);
 
-            this.waterTank = new Tank(ExtinguishingType.WATER, 50, 25, 10);
-            this.foamPowderTank = new Tank(ExtinguishingType.FOAMPOWDER, 25, 10, 10);
+            this.waterTank = new Tank(ExtinguishingType.WATER, 75, 30, 15);
+            this.foamPowderTank = new Tank(ExtinguishingType.FOAMPOWDER, 75, 30, 5);
             this.mixingUnit = new MixingUnit(this.waterTank, this.foamPowderTank);
             this.frontLauncher = new FrontLauncher(this.mixingUnit);
             this.roofLauncher = new RoofLauncher(this.mixingUnit);

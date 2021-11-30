@@ -42,7 +42,7 @@ public interface IAirportFireTruck {
 
     RoofLauncher getRoofLauncher();
 
-    FloorSprayingNoozle[] getFloorSprayingNoozles();
+    FloorSprayingNozzle[] getFloorSprayingNoozles();
 
     void useFloorNoozles(int amount);
 }
