@@ -3,7 +3,7 @@ package enums;
 public enum RoofLauncherOutput {
     A(500),
     B(1000),
-    C(1500);
+    C(2500);
 
     private final int value;
 
@@ -23,7 +23,7 @@ public enum RoofLauncherOutput {
             case 1000 -> {
                 return RoofLauncherOutput.A;
             }
-            case 1500 -> {
+            case 2500 -> {
                 return RoofLauncherOutput.B;
             }
 
@@ -39,7 +39,7 @@ public enum RoofLauncherOutput {
             case 1000 -> {
                 return RoofLauncherOutput.C;
             }
-            case 1500 -> {
+            case 2500 -> {
                 return RoofLauncherOutput.A;
             }
 

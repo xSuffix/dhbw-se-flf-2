@@ -51,8 +51,14 @@ public class AirportFireTruck implements IAirportFireTruck {
         this.getCabin().getBatteryDisplay().writeValue(String.valueOf(this.getDrive().getBatteryPercentage()));
     }
 
-    public HeadLight[] getHeadLightsFrontLeft() {
-        return headLightsFrontLeft;
+    public void useFloorNoozles(int amount){
+        for(FloorSprayingNoozle noozle : floorSprayingNoozles){
+            noozle.sprayWater(amount);
+        }
+    }
+
+    public BlueLight[] getBlueLights() {
+        return blueLights;
     }
 
     public HeadLight[] getHeadLightsFrontRight() {
@@ -77,10 +83,6 @@ public class AirportFireTruck implements IAirportFireTruck {
 
     public BrakeLight getBrakeLightRight() {
         return brakeLightRight;
-    }
-
-    public BlueLight[] getBlueLights() {
-        return blueLights;
     }
 
     public WarningLight[] getWarningLights() {

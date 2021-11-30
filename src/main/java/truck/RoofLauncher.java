@@ -17,9 +17,11 @@ public class RoofLauncher extends WaterLauncher {
         if (super.getState() == LauncherState.INACTIVE) {
             this.firstSegmentRotation = 90;
             this.secondSemgentExtended = true;
+            super.state = LauncherState.ACTIVE;
         } else {
             this.firstSegmentRotation = 0;
             this.secondSemgentExtended = false;
+            super.state = LauncherState.INACTIVE;
         }
     }
 
@@ -27,7 +29,7 @@ public class RoofLauncher extends WaterLauncher {
         return firstSegmentRotation;
     }
 
-    public boolean isSecondSemgentExtended() {
+    public boolean isSecondSegmentExtended() {
         return secondSemgentExtended;
     }
 }

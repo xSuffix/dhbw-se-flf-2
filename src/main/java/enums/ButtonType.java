@@ -14,4 +14,5 @@ public enum ButtonType {
     rightJoyStickLeft,
     rightJoyStickRight,
     rightJoyStickBack,
+    selfProtection
 }
