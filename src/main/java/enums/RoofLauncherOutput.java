@@ -3,7 +3,7 @@ package enums;
 public enum RoofLauncherOutput {
     A(500),
     B(1000),
-    C(1500);
+    C(2500);
 
     private final int value;
 

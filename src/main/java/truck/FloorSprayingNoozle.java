@@ -1,7 +1,7 @@
 package truck;
 
 public class FloorSprayingNoozle {
-    private Tank waterTank;
+    private final Tank waterTank;
 
     public FloorSprayingNoozle(Tank water){
         this.waterTank = water;

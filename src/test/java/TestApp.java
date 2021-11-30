@@ -1,8 +1,5 @@
 import drive.ElectricMotor;
-import enums.ExtinguishingType;
-import enums.FrontLauncherOutput;
-import enums.LauncherState;
-import enums.RoofLauncherOutput;
+import enums.*;
 import lights.BlueLight;
 import lights.HeadLight;
 import lights.Light;
@@ -129,7 +126,7 @@ public class TestApp {
         assertTrue(seatsUnoccupied());
         checkMotors(false);
         checkIfDoorsOpen(true);
-        assertFalse(airportFireTruck.getRoofLauncher().isSecondSemgentExtended());
+        assertFalse(airportFireTruck.getRoofLauncher().isSecondSegmentExtended());
         assertNotSame(airportFireTruck.getFrontLauncher().getState(), LauncherState.ACTIVE);
         checkLights(airportFireTruck.getHeadLightsRoof(),false);
         checkLights(airportFireTruck.getHeadLightsFrontLeft(),false);
@@ -146,15 +143,8 @@ public class TestApp {
     @Test
     @Order(4)
     public void handleInspectionDrive(){
-        airportFireTruck.getCabin().getSeat(0).sitDown();
-        airportFireTruck.getCabin().getSeat(1).sitDown();
-        airportFireTruck.getCabin().getControlPanel().getMotorSwitch().press();
-        checkMotors(true);
-        assertTrue(airportFireTruck.getCabin().getSeat(0).isOccupied());
-        assertTrue(airportFireTruck.getCabin().getSeat(1).isOccupied());
-        airportFireTruck.getCabin().getLeftDoor().getInnerButton().press();
-        airportFireTruck.getCabin().getRightDoor().getInnerButton().press();
-        checkIfDoorsOpen(false);
+        preDeployment();
+
         airportFireTruck.getCabin().getControlPanel().getWarningLightSwitch().press();
         airportFireTruck.getCabin().getControlPanel().getBlueLightSwitch().press();
         checkLights(airportFireTruck.getHeadLightsRoof(),false);
@@ -162,10 +152,6 @@ public class TestApp {
         checkLights(airportFireTruck.getHeadLightsFrontRight(),false);
         checkLights(airportFireTruck.getBlueLights(),true);
         checkLights(airportFireTruck.getWarningLights(),true);
-        assertEquals(100,airportFireTruck.getWaterTank().getCurrentFillPercentage());
-        assertEquals(100,airportFireTruck.getFoampowderTank().getCurrentFillPercentage());
-        assertEquals(FrontLauncherOutput.A.getValue(), airportFireTruck.getCabin().getControlPanel().getFrontLauncherKnob().getValue());
-        assertEquals(RoofLauncherOutput.A.getValue(), airportFireTruck.getCabin().getControlPanel().getRoofLauncherKnob().getValue());
 
         checkDriving(7,5,0,0);
         airportFireTruck.getCabin().getSteeringWheel().rotate(-5);
@@ -183,24 +169,106 @@ public class TestApp {
     @Test
     @Order(5)
     public void handleEmergencyService(){
+        preDeployment();
+        turnAllLightsOn();
+
+        int waterLevel = airportFireTruck.getWaterTank().getCurrentCapacity();
+        airportFireTruck.getCabin().getControlPanel().getSelfProtectionButton().press();
+        // waterusage: 7*100
+        assertEquals(waterLevel-700,airportFireTruck.getWaterTank().getCurrentCapacity());
+        airportFireTruck.getCabin().getLeftJoyStick().getFrontLeftButton().press();
+        assertEquals(90, airportFireTruck.getFrontLauncher().getRotation());
+        assertEquals(LauncherState.ACTIVE,airportFireTruck.getFrontLauncher().getState());
+
+        airportFireTruck.getCabin().getLeftJoyStick().getFrontRightButton().press();
+        airportFireTruck.getCabin().getLeftJoyStick().getFrontRightButton().press();
+        assertEquals(MixingRatio.C.getValue(),airportFireTruck.getFrontLauncher().getRatio().getValue());
+
+        for (int i = 0;i<5;i++)
+            airportFireTruck.getCabin().getControlPanel().getFrontLauncherKnob().turnRight();
+
+        waterLevel = airportFireTruck.getWaterTank().getCurrentCapacity();
+        int foamLevel = airportFireTruck.getFoampowderTank().getCurrentCapacity();
+
+        for (int i = 0;i<3;i++)
+            airportFireTruck.getCabin().getLeftJoyStick().getBackSwitch().press();
+        //wasser = 3*3000*0,95
+        //foam = 3*3000*0,05
+        assertEquals(waterLevel - 9000*0.95,airportFireTruck.getWaterTank().getCurrentCapacity());
+        assertEquals(foamLevel - 9000*0.05,airportFireTruck.getFoampowderTank().getCurrentCapacity());
+
+        airportFireTruck.getCabin().getRightJoyStick().getFrontLeftButton().press();
+        assertEquals(90, airportFireTruck.getRoofLauncher().getFirstSegmentRotation());
+        assertEquals(LauncherState.ACTIVE,airportFireTruck.getRoofLauncher().getState());
+        assertTrue(airportFireTruck.getRoofLauncher().isSecondSegmentExtended());
+        airportFireTruck.getCabin().getRightJoyStick().getFrontRightButton().press();
+        assertEquals(MixingRatio.B.getValue(),airportFireTruck.getRoofLauncher().getRatio().getValue());
+
+        airportFireTruck.getCabin().getControlPanel().getRoofLauncherKnob().turnRight();
+        airportFireTruck.getCabin().getControlPanel().getRoofLauncherKnob().turnRight();
+
+        waterLevel = airportFireTruck.getWaterTank().getCurrentCapacity();
+        foamLevel = airportFireTruck.getFoampowderTank().getCurrentCapacity();
+
+        for (int i = 0;i<3;i++)
+            airportFireTruck.getCabin().getRightJoyStick().getBackSwitch().press();
+
+        //wasser = 3*2500*0,97
+        //foam = 3*2500*0,03
+        assertEquals(waterLevel - 7500*0.97,airportFireTruck.getWaterTank().getCurrentCapacity());
+        assertEquals(foamLevel - 7500*0.03,airportFireTruck.getFoampowderTank().getCurrentCapacity());
+
 
     }
 
     @Test
     @Order(6)
     public void handleFuelTruckOnFire(){
-
+        preDeployment();
+        turnAllLightsOn();
     }
 
     @Test
     @Order(7)
     public void handlePushbackVehicleOnFire(){
-
+        preDeployment();
+        turnAllLightsOn();
     }
 
     @Test
     @Order(8)
     public void handleAirplaneEngineFire(){
+        preDeployment();
+        turnAllLightsOn();
+    }
+
+    public void turnAllLightsOn(){
+        airportFireTruck.getCabin().getControlPanel().getBlueLightSwitch().press();
+        airportFireTruck.getCabin().getControlPanel().getWarningLightSwitch().press();
+        airportFireTruck.getCabin().getControlPanel().getRoofHeadLightSwitch().press();
+        airportFireTruck.getCabin().getControlPanel().getFrontHeadlightSwitch().press();
+
+        checkLights(airportFireTruck.getHeadLightsRoof(),true);
+        checkLights(airportFireTruck.getHeadLightsFrontLeft(),true);
+        checkLights(airportFireTruck.getHeadLightsFrontRight(),true);
+        checkLights(airportFireTruck.getBlueLights(),true);
+        checkLights(airportFireTruck.getWarningLights(),true);
+    }
+
+    public void preDeployment(){
+        airportFireTruck.getCabin().getSeat(0).sitDown();
+        airportFireTruck.getCabin().getSeat(1).sitDown();
+        airportFireTruck.getCabin().getControlPanel().getMotorSwitch().press();
+        checkMotors(true);
+        assertTrue(airportFireTruck.getCabin().getSeat(0).isOccupied());
+        assertTrue(airportFireTruck.getCabin().getSeat(1).isOccupied());
+        airportFireTruck.getCabin().getLeftDoor().getInnerButton().press();
+        airportFireTruck.getCabin().getRightDoor().getInnerButton().press();
+        checkIfDoorsOpen(false);
+        assertEquals(100,airportFireTruck.getWaterTank().getCurrentFillPercentage());
+        assertEquals(100,airportFireTruck.getFoampowderTank().getCurrentFillPercentage());
+        assertEquals(FrontLauncherOutput.A.getValue(), airportFireTruck.getCabin().getControlPanel().getFrontLauncherKnob().getValue());
+        assertEquals(RoofLauncherOutput.A.getValue(), airportFireTruck.getCabin().getControlPanel().getRoofLauncherKnob().getValue());
 
     }
 

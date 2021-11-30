@@ -51,6 +51,12 @@ public class AirportFireTruck implements IAirportFireTruck{
         this.getCabin().getBatteryDisplay().writeValue(String.valueOf(this.getDrive().getBatteryPercentage()));
     }
 
+    public void useFloorNoozles(int amount){
+        for(FloorSprayingNoozle noozle : floorSprayingNoozles){
+            noozle.sprayWater(amount);
+        }
+    }
+
     public BlueLight[] getBlueLights() {
         return blueLights;
     }
@@ -196,8 +202,8 @@ public class AirportFireTruck implements IAirportFireTruck{
                 this.headLightsRoof[i] = new HeadLight();
             }
             this.drive = new Drive(this.electricMotors,this.batteryBox,this.frontAxles,this.backAxles);
-            this.waterTank = new Tank(ExtinguishingType.WATER,50,25,10);
-            this.foampowderTank = new Tank(ExtinguishingType.FOAMPOWDER,25,10,10);
+            this.waterTank = new Tank(ExtinguishingType.WATER,75,30,15);
+            this.foampowderTank = new Tank(ExtinguishingType.FOAMPOWDER,75,30,5);
             this.mixingUnit = new MixingUnit(this.waterTank, this.foampowderTank);
             this.frontLauncher = new FrontLauncher(this.mixingUnit);
             this.roofLauncher = new RoofLauncher(this.mixingUnit);

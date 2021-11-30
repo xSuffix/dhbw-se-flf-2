@@ -14,6 +14,7 @@ public class ControlPanel {
     private final Button roofHeadLightSwitch;
     private final FrontLauncherKnob frontLauncherKnob;
     private final RoofLauncherKnob roofLauncherKnob;
+    private final Button selfProtection;
 
     public ControlPanel(ICentralUnit centralUnit){
         this.motorSwitch = new Button(centralUnit,ButtonType.motorSwitch);
@@ -23,6 +24,11 @@ public class ControlPanel {
         this.roofHeadLightSwitch = new Button(centralUnit,ButtonType.roofHeadLightSwitch);
         this.frontLauncherKnob = new FrontLauncherKnob();
         this.roofLauncherKnob = new RoofLauncherKnob();
+        this.selfProtection = new Button(centralUnit,ButtonType.selfProtection);
+    }
+
+    public Button getSelfProtectionButton() {
+        return selfProtection;
     }
 
     public Button getMotorSwitch() {
