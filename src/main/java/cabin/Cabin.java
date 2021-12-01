@@ -1,55 +1,57 @@
 package cabin;
 
-import enums.ButtonType;
-import enums.JoyStickType;
 import enums.SeatPositions;
 import truck.ICentralUnit;
-
 
 public class Cabin {
 
     private final BusDoor leftDoor;
     private final BusDoor rightDoor;
     private final Seat[] seats;
-    private final JoyStick leftJoyStick;
-    private final JoyStick rightJoyStick;
+    private final Joystick leftJoystick;
+    private final Joystick rightJoystick;
     private final ControlPanel controlPanel;
     private final SteeringWheel steeringWheel;
-    private final GasPedal gasPedal;
-    private final BreakPedal breakPedal;
-    private final SpeedDisplay speedDisplay;
     private final BatteryDisplay batteryDisplay;
+    private final SpeedDisplay speedDisplay;
+    private final BreakPedal breakPedal;
+    private final GasPedal gasPedal;
 
     // todo hier die composition raus ziehen maybe
     public Cabin(ICentralUnit centralUnit) {
+        this.leftDoor = new BusDoor(centralUnit, ButtonType.LEFT_DOOR);
+        this.rightDoor = new BusDoor(centralUnit, ButtonType.RIGHT_DOOR);
         this.seats = new Seat[SeatPositions.values().length];
         int i = 0;
-        for (SeatPositions pos : SeatPositions.values()) {
-            seats[i] = new Seat(pos);
-            i++;
-        }
+        for (SeatPositions pos : SeatPositions.values()) seats[i++] = new Seat(pos);
+        this.leftJoystick = new Joystick(centralUnit, JoystickType.LEFT);
+        this.rightJoystick = new Joystick(centralUnit, JoystickType.RIGHT);
+        this.controlPanel = new ControlPanel(centralUnit);
+        this.steeringWheel = new SteeringWheel(centralUnit);
         this.batteryDisplay = new BatteryDisplay();
         this.speedDisplay = new SpeedDisplay();
-        this.steeringWheel = new SteeringWheel(centralUnit);
         this.breakPedal = new BreakPedal(centralUnit);
         this.gasPedal = new GasPedal(centralUnit);
-        this.controlPanel = new ControlPanel(centralUnit);
-        this.leftJoyStick = new JoyStick(centralUnit, JoyStickType.LEFT);
-        this.rightJoyStick = new JoyStick(centralUnit, JoyStickType.RIGHT);
-        this.leftDoor = new BusDoor(centralUnit, ButtonType.leftDoorButton);
-        this.rightDoor = new BusDoor(centralUnit, ButtonType.rightDoorButton);
+    }
+
+    public BusDoor getLeftDoor() {
+        return leftDoor;
+    }
+
+    public BusDoor getRightDoor() {
+        return rightDoor;
     }
 
     public Seat getSeat(int pos) {
         return seats[pos];
     }
 
-    public JoyStick getLeftJoyStick() {
-        return leftJoyStick;
+    public Joystick getLeftJoystick() {
+        return leftJoystick;
     }
 
-    public JoyStick getRightJoyStick() {
-        return rightJoyStick;
+    public Joystick getRightJoystick() {
+        return rightJoystick;
     }
 
     public ControlPanel getControlPanel() {
@@ -60,28 +62,20 @@ public class Cabin {
         return steeringWheel;
     }
 
-    public GasPedal getGasPedal() {
-        return gasPedal;
-    }
-
-    public BreakPedal getBreakPedal() {
-        return breakPedal;
+    public BatteryDisplay getBatteryDisplay() {
+        return batteryDisplay;
     }
 
     public SpeedDisplay getSpeedDisplay() {
         return speedDisplay;
     }
 
-    public BatteryDisplay getBatteryDisplay() {
-        return batteryDisplay;
+    public BreakPedal getBreakPedal() {
+        return breakPedal;
     }
 
-    public BusDoor getLeftDoor() {
-        return leftDoor;
-    }
-
-    public BusDoor getRightDoor() {
-        return rightDoor;
+    public GasPedal getGasPedal() {
+        return gasPedal;
     }
 
 }

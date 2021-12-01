@@ -6,7 +6,7 @@ import truck.ICentralUnit;
 public class BreakPedal extends Pedal {
 
     public BreakPedal(ICentralUnit centralUnit) {
-        super(PedalType.Brake, centralUnit);
+        super(PedalType.BRAKE, centralUnit);
     }
 
 }

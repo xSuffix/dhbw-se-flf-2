@@ -10,8 +10,8 @@ public abstract class Display {
         this.value = "0";
     }
 
-    public void writeValue(String newValue) {
-        this.value = newValue;
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public String read() {

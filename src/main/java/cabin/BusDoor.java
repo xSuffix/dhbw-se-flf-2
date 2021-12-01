@@ -1,7 +1,6 @@
 package cabin;
 
 import controls.Button;
-import enums.ButtonType;
 import truck.ICentralUnit;
 
 public class BusDoor {

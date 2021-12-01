@@ -19,7 +19,7 @@ public class TestApp {
         airportFireTruck = new AirportFireTruck.Builder().build();
         airportFireTruck.chargeTruck(airportFireTruck.getDrive().getBatteryBox().getMaxCharge());
         airportFireTruck.getWaterTank().fill(airportFireTruck.getWaterTank().getTotalCapacity(), ExtinguishingType.WATER);
-        airportFireTruck.getFoamPowderTank().fill(airportFireTruck.getFoamPowderTank().getTotalCapacity(), ExtinguishingType.FOAMPOWDER);
+        airportFireTruck.getFoamPowderTank().fill(airportFireTruck.getFoamPowderTank().getTotalCapacity(), ExtinguishingType.FOAM_POWDER);
         //open doors in parking position!
         airportFireTruck.getCabin().getRightDoor().getOuterButton().press();
         airportFireTruck.getCabin().getLeftDoor().getOuterButton().press();
@@ -47,8 +47,8 @@ public class TestApp {
         assertNotNull(airportFireTruck.getCabin().getControlPanel().getRoofHeadLightSwitch());
         assertNotNull(airportFireTruck.getCabin().getControlPanel().getMotorSwitch());
 
-        assertNotNull(airportFireTruck.getCabin().getLeftJoyStick());
-        assertNotNull(airportFireTruck.getCabin().getRightJoyStick());
+        assertNotNull(airportFireTruck.getCabin().getLeftJoystick());
+        assertNotNull(airportFireTruck.getCabin().getRightJoystick());
         assertNotNull(airportFireTruck.getCabin().getSpeedDisplay());
         assertNotNull(airportFireTruck.getCabin().getBatteryDisplay());
         assertNotNull(airportFireTruck.getCabin().getLeftDoor());
@@ -220,7 +220,7 @@ public class TestApp {
         //reset to inital postion!
         airportFireTruck.getCabin().getControlPanel().getRoofLauncherKnob().turnLeft();
         airportFireTruck.getCabin().getControlPanel().getRoofLauncherKnob().turnLeft();
-        airportFireTruck.getCabin().getRightJoyStick().getFrontLeftButton().press();
+        airportFireTruck.getCabin().getRightJoystick().getFrontLeftButton().press();
 
         testRoofLauncher(5,2500,MixingRatio.D);
         armFrontLauncher();
@@ -238,7 +238,7 @@ public class TestApp {
             case 10 -> i = 3;
         }
         for(int j = 0;j < i;j++)
-            airportFireTruck.getCabin().getRightJoyStick().getFrontRightButton().press();
+            airportFireTruck.getCabin().getRightJoystick().getFrontRightButton().press();
         assertEquals(ratio.getValue(),airportFireTruck.getRoofLauncher().getRatio().getValue());
 
         switch (amount){
@@ -251,7 +251,7 @@ public class TestApp {
             airportFireTruck.getCabin().getControlPanel().getRoofLauncherKnob().turnRight();
 
         for (int j = 0;j<iters;j++)
-            airportFireTruck.getCabin().getRightJoyStick().getBackSwitch().press();
+            airportFireTruck.getCabin().getRightJoystick().getBackSwitch().press();
 
         assertEquals(waterLevel - amount*iters*(((double)100 - (ratio.getValue()))/100),airportFireTruck.getWaterTank().getCurrentCapacity());
         assertEquals(foamLevel - amount*iters*(((double)ratio.getValue())/100),airportFireTruck.getFoamPowderTank().getCurrentCapacity());
@@ -270,14 +270,14 @@ public class TestApp {
             case 10 -> i = 3;
         }
         for(int j = 0;j < i;j++)
-            airportFireTruck.getCabin().getLeftJoyStick().getFrontRightButton().press();
+            airportFireTruck.getCabin().getLeftJoystick().getFrontRightButton().press();
         assertEquals(ratio.getValue(),airportFireTruck.getFrontLauncher().getRatio().getValue());
 
         for (int j = 0;j<(amount/500)-1;j++)
             airportFireTruck.getCabin().getControlPanel().getFrontLauncherKnob().turnRight();
 
         for (int j = 0;j<iters;j++)
-            airportFireTruck.getCabin().getLeftJoyStick().getBackSwitch().press();
+            airportFireTruck.getCabin().getLeftJoystick().getBackSwitch().press();
 
         assertEquals(waterLevel - amount*iters*(((double)100 - (ratio.getValue()))/100),airportFireTruck.getWaterTank().getCurrentCapacity());
         assertEquals(foamLevel - amount*iters*(((double)ratio.getValue())/100),airportFireTruck.getFoamPowderTank().getCurrentCapacity());
@@ -285,13 +285,13 @@ public class TestApp {
     }
 
     public void armFrontLauncher(){
-        airportFireTruck.getCabin().getLeftJoyStick().getFrontLeftButton().press();
+        airportFireTruck.getCabin().getLeftJoystick().getFrontLeftButton().press();
         assertEquals(90, airportFireTruck.getFrontLauncher().getRotation());
         assertEquals(LauncherState.ACTIVE,airportFireTruck.getFrontLauncher().getState());
     }
 
     public void armRoofLauncher(){
-        airportFireTruck.getCabin().getRightJoyStick().getFrontLeftButton().press();
+        airportFireTruck.getCabin().getRightJoystick().getFrontLeftButton().press();
         assertEquals(90, airportFireTruck.getRoofLauncher().getFirstSegmentRotation());
         assertEquals(LauncherState.ACTIVE,airportFireTruck.getRoofLauncher().getState());
         assertTrue(airportFireTruck.getRoofLauncher().isSecondSegmentExtended());

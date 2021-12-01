@@ -1,6 +1,6 @@
 package controls;
 
-import enums.ButtonType;
+import cabin.ButtonType;
 import truck.ICentralUnit;
 
 public class Button {

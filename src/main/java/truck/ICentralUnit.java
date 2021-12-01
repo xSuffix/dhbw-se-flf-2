@@ -1,6 +1,6 @@
 package truck;
 
-import enums.ButtonType;
+import cabin.ButtonType;
 import enums.PedalType;
 
 public interface ICentralUnit {

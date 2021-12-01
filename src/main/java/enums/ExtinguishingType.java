@@ -2,6 +2,6 @@ package enums;
 
 public enum ExtinguishingType {
     WATER,
-    FOAMPOWDER,
+    FOAM_POWDER,
 }
 

@@ -48,7 +48,7 @@ public class AirportFireTruck implements IAirportFireTruck {
 
     public void chargeTruck(int amount) {
         this.getDrive().charge(amount);
-        this.getCabin().getBatteryDisplay().writeValue(String.valueOf(this.getDrive().getBatteryPercentage()));
+        this.getCabin().getBatteryDisplay().setValue(String.valueOf(this.getDrive().getBatteryPercentage()));
     }
 
     public void useFloorNozzles(int amount) {
@@ -209,7 +209,7 @@ public class AirportFireTruck implements IAirportFireTruck {
             this.drive = new Drive(this.electricMotors, this.batteryBox, this.frontAxles, this.backAxles);
 
             this.waterTank = new Tank(ExtinguishingType.WATER, 75, 30, 15);
-            this.foamPowderTank = new Tank(ExtinguishingType.FOAMPOWDER, 75, 30, 5);
+            this.foamPowderTank = new Tank(ExtinguishingType.FOAM_POWDER, 75, 30, 5);
             this.mixingUnit = new MixingUnit(this.waterTank, this.foamPowderTank);
             this.frontLauncher = new FrontLauncher(this.mixingUnit);
             this.roofLauncher = new RoofLauncher(this.mixingUnit);

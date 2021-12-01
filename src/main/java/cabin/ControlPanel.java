@@ -3,7 +3,6 @@ package cabin;
 import controls.Button;
 import controls.FrontLauncherKnob;
 import controls.RoofLauncherKnob;
-import enums.ButtonType;
 import truck.ICentralUnit;
 
 public class ControlPanel {
@@ -13,19 +12,19 @@ public class ControlPanel {
     private final Button blueLightSwitch;
     private final Button frontHeadlightSwitch;
     private final Button roofHeadLightSwitch;
+    private final Button selfProtection;
     private final FrontLauncherKnob frontLauncherKnob;
     private final RoofLauncherKnob roofLauncherKnob;
-    private final Button selfProtection;
 
     public ControlPanel(ICentralUnit centralUnit) {
-        this.motorSwitch = new Button(centralUnit, ButtonType.motorSwitch);
-        this.warningLightSwitch = new Button(centralUnit, ButtonType.warningLightSwitch);
-        this.blueLightSwitch = new Button(centralUnit, ButtonType.blueLightSwitch);
-        this.frontHeadlightSwitch = new Button(centralUnit, ButtonType.frontHeadlightSwitch);
-        this.roofHeadLightSwitch = new Button(centralUnit, ButtonType.roofHeadLightSwitch);
+        this.motorSwitch = new Button(centralUnit, ButtonType.ELECTRIC_MOTOR);
+        this.warningLightSwitch = new Button(centralUnit, ButtonType.WARNING_LIGHT);
+        this.blueLightSwitch = new Button(centralUnit, ButtonType.BLUE_LIGHT);
+        this.frontHeadlightSwitch = new Button(centralUnit, ButtonType.HEAD_LIGHT);
+        this.roofHeadLightSwitch = new Button(centralUnit, ButtonType.ROOF_LIGHT);
+        this.selfProtection = new Button(centralUnit, ButtonType.FIRE_SELF_PROTECTION);
         this.frontLauncherKnob = new FrontLauncherKnob();
         this.roofLauncherKnob = new RoofLauncherKnob();
-        this.selfProtection = new Button(centralUnit, ButtonType.selfProtection);
     }
 
     public Button getSelfProtectionButton() {

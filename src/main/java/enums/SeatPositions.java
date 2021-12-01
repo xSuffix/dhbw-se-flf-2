@@ -1,8 +1,8 @@
 package enums;
 
 public enum SeatPositions {
-    FRONTLEFT,
-    FRONTRIGHT,
-    BACKLEFT,
-    BACKRIGHT
+    FRONT_LEFT,
+    FRONT_RIGHT,
+    BACK_LEFT,
+    BACK_RIGHT
 }
