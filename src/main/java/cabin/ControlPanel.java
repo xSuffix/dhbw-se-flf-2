@@ -24,7 +24,7 @@ public class ControlPanel {
         this.roofHeadLightSwitch = new Button(centralUnit, ButtonType.roofHeadLightSwitch);
         this.frontLauncherKnob = new FrontLauncherKnob();
         this.roofLauncherKnob = new RoofLauncherKnob();
-        this.selfProtection = new Button(centralUnit,ButtonType.selfProtection);
+        this.selfProtection = new Button(centralUnit, ButtonType.selfProtection);
     }
 
     public Button getSelfProtectionButton() {

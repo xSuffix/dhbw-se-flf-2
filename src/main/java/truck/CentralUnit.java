@@ -29,24 +29,24 @@ public class CentralUnit implements ICentralUnit {
     public void turnSteeringWheel(int rotation) {
         airportFireTruck.getDrive().rotateAxles(rotation);
         if (rotation < 0) {
-            for (TurnSignalLight light : airportFireTruck.getTurnSignalLightLeft()) {
+            for (TurnSignalLight light : airportFireTruck.getTurnSignalLightsLeft()) {
                 light.turnOn();
             }
-            for (TurnSignalLight light : airportFireTruck.getTurnSignalLightRight()) {
+            for (TurnSignalLight light : airportFireTruck.getTurnSignalLightsRight()) {
                 light.turnOff();
             }
         } else if (rotation > 0) {
-            for (TurnSignalLight light : airportFireTruck.getTurnSignalLightLeft()) {
+            for (TurnSignalLight light : airportFireTruck.getTurnSignalLightsLeft()) {
                 light.turnOff();
             }
-            for (TurnSignalLight light : airportFireTruck.getTurnSignalLightRight()) {
+            for (TurnSignalLight light : airportFireTruck.getTurnSignalLightsRight()) {
                 light.turnOn();
             }
         } else {
-            for (TurnSignalLight light : airportFireTruck.getTurnSignalLightLeft()) {
+            for (TurnSignalLight light : airportFireTruck.getTurnSignalLightsLeft()) {
                 light.turnOff();
             }
-            for (TurnSignalLight light : airportFireTruck.getTurnSignalLightRight()) {
+            for (TurnSignalLight light : airportFireTruck.getTurnSignalLightsRight()) {
                 light.turnOff();
             }
         }

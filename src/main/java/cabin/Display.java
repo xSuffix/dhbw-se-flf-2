@@ -1,8 +1,8 @@
 package cabin;
 
 public abstract class Display {
-    private String value;
     private final String unit;
+    private String value;
 
     public Display(String unit) {
         this.unit = unit;

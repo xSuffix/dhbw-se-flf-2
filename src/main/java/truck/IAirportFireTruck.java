@@ -16,9 +16,9 @@ public interface IAirportFireTruck {
 
     HeadLight[] getHeadLightsRoof();
 
-    TurnSignalLight[] getTurnSignalLightLeft();
+    TurnSignalLight[] getTurnSignalLightsLeft();
 
-    TurnSignalLight[] getTurnSignalLightRight();
+    TurnSignalLight[] getTurnSignalLightsRight();
 
     BrakeLight getBrakeLightLeft();
 

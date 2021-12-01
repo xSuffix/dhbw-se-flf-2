@@ -9,8 +9,8 @@ public class AirportFireTruck implements IAirportFireTruck {
     private final HeadLight[] headLightsFrontLeft;
     private final HeadLight[] headLightsFrontRight;
     private final HeadLight[] headLightsRoof;
-    private final TurnSignalLight[] turnSignalLightLeft;
-    private final TurnSignalLight[] turnSignalLightRight;
+    private final TurnSignalLight[] turnSignalLightsLeft;
+    private final TurnSignalLight[] turnSignalLightsRight;
     private final BrakeLight brakeLightLeft;
     private final BrakeLight brakeLightRight;
     private final BlueLight[] blueLights;
@@ -29,8 +29,8 @@ public class AirportFireTruck implements IAirportFireTruck {
         this.headLightsFrontLeft = builder.headLightsFrontLeft;
         this.headLightsFrontRight = builder.headLightsFrontRight;
         this.headLightsRoof = builder.headLightsRoof;
-        this.turnSignalLightLeft = builder.turnSignalLightLeft;
-        this.turnSignalLightRight = builder.turnSignalLightRight;
+        this.turnSignalLightsLeft = builder.turnSignalLightsLeft;
+        this.turnSignalLightsRight = builder.turnSignalLightsRight;
         this.brakeLightLeft = builder.brakeLightLeft;
         this.brakeLightRight = builder.brakeLightRight;
         this.blueLights = builder.blueLights;
@@ -51,8 +51,8 @@ public class AirportFireTruck implements IAirportFireTruck {
         this.getCabin().getBatteryDisplay().writeValue(String.valueOf(this.getDrive().getBatteryPercentage()));
     }
 
-    public void useFloorNozzles(int amount){
-        for(FloorSprayingNozzle nozzle : floorSprayingNozzles){
+    public void useFloorNozzles(int amount) {
+        for (FloorSprayingNozzle nozzle : floorSprayingNozzles) {
             nozzle.sprayWater(amount);
         }
     }
@@ -69,12 +69,12 @@ public class AirportFireTruck implements IAirportFireTruck {
         return headLightsRoof;
     }
 
-    public TurnSignalLight[] getTurnSignalLightLeft() {
-        return turnSignalLightLeft;
+    public TurnSignalLight[] getTurnSignalLightsLeft() {
+        return turnSignalLightsLeft;
     }
 
-    public TurnSignalLight[] getTurnSignalLightRight() {
-        return turnSignalLightRight;
+    public TurnSignalLight[] getTurnSignalLightsRight() {
+        return turnSignalLightsRight;
     }
 
     public BrakeLight getBrakeLightLeft() {
@@ -134,8 +134,8 @@ public class AirportFireTruck implements IAirportFireTruck {
         private final HeadLight[] headLightsFrontLeft;
         private final HeadLight[] headLightsFrontRight;
         private final HeadLight[] headLightsRoof;
-        private final TurnSignalLight[] turnSignalLightLeft;
-        private final TurnSignalLight[] turnSignalLightRight;
+        private final TurnSignalLight[] turnSignalLightsLeft;
+        private final TurnSignalLight[] turnSignalLightsRight;
         private final BrakeLight brakeLightLeft;
         private final BrakeLight brakeLightRight;
         private final BlueLight[] blueLights;
@@ -164,11 +164,11 @@ public class AirportFireTruck implements IAirportFireTruck {
                 this.headLightsRoof[i] = new HeadLight();
             }
 
-            this.turnSignalLightLeft = new TurnSignalLight[2];
-            this.turnSignalLightRight = new TurnSignalLight[2];
-            for (int i = 0; i < turnSignalLightLeft.length; i++) {
-                this.turnSignalLightLeft[i] = new TurnSignalLight();
-                this.turnSignalLightRight[i] = new TurnSignalLight();
+            this.turnSignalLightsLeft = new TurnSignalLight[2];
+            this.turnSignalLightsRight = new TurnSignalLight[2];
+            for (int i = 0; i < turnSignalLightsLeft.length; i++) {
+                this.turnSignalLightsLeft[i] = new TurnSignalLight();
+                this.turnSignalLightsRight[i] = new TurnSignalLight();
             }
 
             this.brakeLightLeft = new BrakeLight();

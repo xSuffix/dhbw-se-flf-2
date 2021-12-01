@@ -68,8 +68,8 @@ public class TestApp {
         assertNotNull(airportFireTruck.getHeadLightsRoof());
         assertNotNull(airportFireTruck.getWarningLights());
         assertNotNull(airportFireTruck.getBlueLights());
-        assertNotNull(airportFireTruck.getTurnSignalLightLeft());
-        assertNotNull(airportFireTruck.getTurnSignalLightRight());
+        assertNotNull(airportFireTruck.getTurnSignalLightsLeft());
+        assertNotNull(airportFireTruck.getTurnSignalLightsRight());
         assertNotNull(airportFireTruck.getBrakeLightLeft());
         assertNotNull(airportFireTruck.getBrakeLightRight());
 
