@@ -1,6 +1,5 @@
 package controls;
 
-import cabin.ButtonType;
 import truck.ICentralUnit;
 
 public class Button {

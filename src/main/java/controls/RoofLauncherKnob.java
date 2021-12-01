@@ -1,7 +1,5 @@
 package controls;
 
-import enums.RoofLauncherOutput;
-
 public class RoofLauncherKnob extends TurningKnob {
 
     private RoofLauncherOutput state;

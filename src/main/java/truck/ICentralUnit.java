@@ -1,6 +1,7 @@
 package truck;
 
-import cabin.ButtonType;
+import controls.ButtonType;
+import controls.TurningKnobType;
 import enums.PedalType;
 
 public interface ICentralUnit {
@@ -9,5 +10,7 @@ public interface ICentralUnit {
     void buttonPress(ButtonType type);
 
     void pedalPress(PedalType type);
+
+    <E> void turningKnobTurn(TurningKnobType type, E setting);
 
 }

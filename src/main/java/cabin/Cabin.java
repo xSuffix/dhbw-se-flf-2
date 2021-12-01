@@ -1,5 +1,6 @@
 package cabin;
 
+import controls.ButtonType;
 import enums.SeatPositions;
 import truck.ICentralUnit;
 

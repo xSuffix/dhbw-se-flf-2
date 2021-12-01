@@ -1,7 +1,5 @@
 package controls;
 
-import enums.FrontLauncherOutput;
-
 public class FrontLauncherKnob {
 
     private FrontLauncherOutput state;

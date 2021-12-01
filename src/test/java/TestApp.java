@@ -1,3 +1,4 @@
+import controls.RoofLauncherOutput;
 import drive.ElectricMotor;
 import enums.*;
 import lights.BlueLight;

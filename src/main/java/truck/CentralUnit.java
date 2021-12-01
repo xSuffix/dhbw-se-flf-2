@@ -1,6 +1,8 @@
 package truck;
 
-import cabin.ButtonType;
+import controls.ButtonType;
+import controls.FrontLauncherOutput;
+import controls.TurningKnobType;
 import enums.PedalType;
 import lights.BlueLight;
 import lights.HeadLight;
@@ -15,17 +17,8 @@ public class CentralUnit implements ICentralUnit {
         this.airportFireTruck = airportFireTruck;
     }
 
-    public void pedalPress(PedalType type) {
-        switch (type) {
-            case GAS -> airportFireTruck.getDrive().drive(airportFireTruck.getDrive().getCurrentVelocity() + 4);
-            case BRAKE -> airportFireTruck.getDrive().drive(airportFireTruck.getDrive().getCurrentVelocity() - 4);
-        }
-        //update speed/battery displays while driving
-        airportFireTruck.getCabin().getSpeedDisplay().setValue(String.valueOf(airportFireTruck.getDrive().getCurrentVelocity()));
-        airportFireTruck.getCabin().getBatteryDisplay().setValue(String.valueOf(airportFireTruck.getDrive().getBatteryPercentage()));
-    }
-
     //rotates axles to the exact rotation of steering wheel plus turn on
+    @Override
     public void turnSteeringWheel(int rotation) {
         airportFireTruck.getDrive().rotateAxles(rotation);
         if (rotation < 0) {
@@ -52,6 +45,7 @@ public class CentralUnit implements ICentralUnit {
         }
     }
 
+    @Override
     public void buttonPress(ButtonType type) {
         switch (type) {
             case ELECTRIC_MOTOR -> {
@@ -80,7 +74,6 @@ public class CentralUnit implements ICentralUnit {
                 for (HeadLight light : airportFireTruck.getHeadLightsFrontRight()) {
                     light.toggle();
                 }
-
             }
             case FIRE_SELF_PROTECTION -> airportFireTruck.useFloorNozzles(100);
 
@@ -98,5 +91,29 @@ public class CentralUnit implements ICentralUnit {
             case RIGHT_JOYSTICK_BACK -> airportFireTruck.getRoofLauncher().sprayWater(airportFireTruck.getCabin().getControlPanel().getRoofLauncherKnob().getValue());
         }
     }
+
+    @Override
+    public void pedalPress(PedalType type) {
+        switch (type) {
+            case GAS -> airportFireTruck.getDrive().drive(airportFireTruck.getDrive().getCurrentVelocity() + 4);
+            case BRAKE -> airportFireTruck.getDrive().drive(airportFireTruck.getDrive().getCurrentVelocity() - 4);
+        }
+        //update speed/battery displays while driving
+        airportFireTruck.getCabin().getSpeedDisplay().setValue(String.valueOf(airportFireTruck.getDrive().getCurrentVelocity()));
+        airportFireTruck.getCabin().getBatteryDisplay().setValue(String.valueOf(airportFireTruck.getDrive().getBatteryPercentage()));
+    }
+
+    @Override
+    public <E> void turningKnobTurn(TurningKnobType type, E setting) {
+        switch (type) {
+            case FRONT_LAUNCHER -> {
+                int value = ((FrontLauncherOutput) setting).getValue();
+                System.out.println(value);
+                airportFireTruck.getFrontLauncher();
+            }
+            case ROOF_LAUNCHER -> airportFireTruck.getRoofLauncher();
+        }
+    }
+
 
 }
