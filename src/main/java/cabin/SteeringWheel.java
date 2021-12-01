@@ -3,6 +3,7 @@ package cabin;
 import truck.ICentralUnit;
 
 public class SteeringWheel {
+
     private final ICentralUnit centralUnit;
     private int rotation;
 

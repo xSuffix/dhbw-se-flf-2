@@ -4,6 +4,7 @@ import enums.ButtonType;
 import truck.ICentralUnit;
 
 public class Button {
+
     private final ICentralUnit centralUnit;
     private final ButtonType type;
 

@@ -69,4 +69,5 @@ public class BatteryBox implements IBatteryBox {
         }
         return energy;
     }
+
 }

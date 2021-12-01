@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TestApp {
+
     private AirportFireTruck airportFireTruck;
 
     @BeforeEach
@@ -380,6 +381,5 @@ public class TestApp {
         assertEquals(state, airportFireTruck.getCabin().getLeftDoor().isOpen());
         assertEquals(state, airportFireTruck.getCabin().getRightDoor().isOpen());
     }
-
 
 }

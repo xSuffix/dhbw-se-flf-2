@@ -96,4 +96,5 @@ public class CentralUnit implements ICentralUnit {
             case selfProtection -> airportFireTruck.useFloorNozzles(100);
         }
     }
+
 }

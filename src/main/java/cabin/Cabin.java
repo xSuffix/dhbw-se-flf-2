@@ -7,6 +7,7 @@ import truck.ICentralUnit;
 
 
 public class Cabin {
+
     private final BusDoor leftDoor;
     private final BusDoor rightDoor;
     private final Seat[] seats;
@@ -82,4 +83,5 @@ public class Cabin {
     public BusDoor getRightDoor() {
         return rightDoor;
     }
+
 }

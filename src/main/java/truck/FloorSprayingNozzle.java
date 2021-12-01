@@ -11,4 +11,5 @@ public class FloorSprayingNozzle {
         if (amount > 100) amount = 100;
         System.out.println("Sprühe " + waterTank.getAgent(amount).length + " Einheiten Wasser!");
     }
+
 }

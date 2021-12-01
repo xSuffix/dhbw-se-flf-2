@@ -42,5 +42,6 @@ public class JoyStick {
     public Button getBackSwitch() {
         return backSwitch;
     }
+
 }
 

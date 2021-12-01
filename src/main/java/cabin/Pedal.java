@@ -4,6 +4,7 @@ import enums.PedalType;
 import truck.ICentralUnit;
 
 public abstract class Pedal {
+
     private final PedalType type;
     private final ICentralUnit centralUnit;
 
@@ -15,4 +16,5 @@ public abstract class Pedal {
     public void pressPedal() {
         centralUnit.pedalPress(type);
     }
+
 }

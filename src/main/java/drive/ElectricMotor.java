@@ -1,6 +1,7 @@
 package drive;
 
 public class ElectricMotor {
+
     private boolean isStarted;
 
     public ElectricMotor() {
@@ -22,4 +23,5 @@ public class ElectricMotor {
     public boolean isStarted() {
         return this.isStarted;
     }
+
 }

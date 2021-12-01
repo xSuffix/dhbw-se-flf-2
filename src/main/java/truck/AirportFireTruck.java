@@ -129,8 +129,8 @@ public class AirportFireTruck implements IAirportFireTruck {
         return floorSprayingNozzles;
     }
 
-    public static class Builder {
 
+    public static class Builder {
         private final HeadLight[] headLightsFrontLeft;
         private final HeadLight[] headLightsFrontRight;
         private final HeadLight[] headLightsRoof;

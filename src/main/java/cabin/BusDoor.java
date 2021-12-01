@@ -5,6 +5,7 @@ import enums.ButtonType;
 import truck.ICentralUnit;
 
 public class BusDoor {
+
     private final Button innerButton;
     private final Button outerButton;
     private boolean isOpen;
@@ -38,4 +39,5 @@ public class BusDoor {
     public Button getOuterButton() {
         return outerButton;
     }
+
 }

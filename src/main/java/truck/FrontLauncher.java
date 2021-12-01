@@ -24,4 +24,5 @@ public class FrontLauncher extends WaterLauncher {
     public int getRotation() {
         return this.rotation;
     }
+
 }

@@ -5,22 +5,22 @@ import enums.LauncherState;
 public class RoofLauncher extends WaterLauncher {
 
     private int firstSegmentRotation;
-    private boolean secondSemgentExtended;
+    private boolean secondSegmentExtended;
 
     public RoofLauncher(MixingUnit mixingUnit) {
         super(mixingUnit);
         firstSegmentRotation = 0;
-        secondSemgentExtended = false;
+        secondSegmentExtended = false;
     }
 
     public void extend() {
         if (super.getState() == LauncherState.INACTIVE) {
             this.firstSegmentRotation = 90;
-            this.secondSemgentExtended = true;
+            this.secondSegmentExtended = true;
             super.state = LauncherState.ACTIVE;
         } else {
             this.firstSegmentRotation = 0;
-            this.secondSemgentExtended = false;
+            this.secondSegmentExtended = false;
             super.state = LauncherState.INACTIVE;
         }
     }
@@ -30,6 +30,7 @@ public class RoofLauncher extends WaterLauncher {
     }
 
     public boolean isSecondSegmentExtended() {
-        return secondSemgentExtended;
+        return secondSegmentExtended;
     }
+
 }

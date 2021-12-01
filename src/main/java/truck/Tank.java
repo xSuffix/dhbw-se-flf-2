@@ -71,4 +71,5 @@ public class Tank {
     public ExtinguishingType getType() {
         return this.type;
     }
+
 }

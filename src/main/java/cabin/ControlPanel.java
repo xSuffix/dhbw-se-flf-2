@@ -7,6 +7,7 @@ import enums.ButtonType;
 import truck.ICentralUnit;
 
 public class ControlPanel {
+
     private final Button motorSwitch;
     private final Button warningLightSwitch;
     private final Button blueLightSwitch;
@@ -58,4 +59,5 @@ public class ControlPanel {
     public RoofLauncherKnob getRoofLauncherKnob() {
         return roofLauncherKnob;
     }
+
 }

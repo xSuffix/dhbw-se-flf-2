@@ -1,6 +1,7 @@
 package cabin;
 
 public abstract class Display {
+
     private final String unit;
     private String value;
 
@@ -16,4 +17,5 @@ public abstract class Display {
     public String read() {
         return this.value + this.unit;
     }
+
 }

@@ -3,6 +3,7 @@ package cabin;
 import enums.SeatPositions;
 
 public class Seat {
+
     private final SeatPositions position;
     private final Respirator respirator;
     private boolean occupied;
@@ -40,4 +41,5 @@ public class Seat {
     public Respirator getRespirator() {
         return this.respirator;
     }
+
 }

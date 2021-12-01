@@ -3,6 +3,7 @@ package controls;
 import enums.FrontLauncherOutput;
 
 public class FrontLauncherKnob {
+
     private FrontLauncherOutput state;
 
     public FrontLauncherKnob() {
@@ -20,4 +21,5 @@ public class FrontLauncherKnob {
     public int getValue() {
         return this.state.getValue();
     }
+
 }
