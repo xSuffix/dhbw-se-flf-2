@@ -1,7 +1,8 @@
 package truck;
 
-import cabin.ButtonType;
-import enums.PedalType;
+import controls.ButtonType;
+import controls.TurningKnobType;
+import controls.PedalType;
 
 public interface ICentralUnit {
     void turnSteeringWheel(int rotation);
@@ -9,5 +10,7 @@ public interface ICentralUnit {
     void buttonPress(ButtonType type);
 
     void pedalPress(PedalType type);
+
+    <E> void turningKnobTurn(TurningKnobType type, E setting);
 
 }

@@ -1,4 +1,4 @@
-package enums;
+package controls;
 
 public enum PedalType {
     BRAKE,

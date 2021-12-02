@@ -1,4 +1,4 @@
-package cabin;
+package controls;
 
 import truck.ICentralUnit;
 

@@ -1,6 +1,5 @@
-package cabin;
+package controls;
 
-import controls.Button;
 import truck.ICentralUnit;
 
 public class Joystick {

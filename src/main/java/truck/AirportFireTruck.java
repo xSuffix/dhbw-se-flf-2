@@ -9,6 +9,8 @@ public class AirportFireTruck implements IAirportFireTruck {
     private final HeadLight[] headLightsFrontLeft;
     private final HeadLight[] headLightsFrontRight;
     private final HeadLight[] headLightsRoof;
+    private final HeadLight[] sideLightsLeft;
+    private final HeadLight[] sideLightsRight;
     private final TurnSignalLight[] turnSignalLightsLeft;
     private final TurnSignalLight[] turnSignalLightsRight;
     private final BrakeLight brakeLightLeft;
@@ -29,6 +31,8 @@ public class AirportFireTruck implements IAirportFireTruck {
         this.headLightsFrontLeft = builder.headLightsFrontLeft;
         this.headLightsFrontRight = builder.headLightsFrontRight;
         this.headLightsRoof = builder.headLightsRoof;
+        this.sideLightsLeft = builder.sideLightsLeft;
+        this.sideLightsRight = builder.sideLightsRight;
         this.turnSignalLightsLeft = builder.turnSignalLightsLeft;
         this.turnSignalLightsRight = builder.turnSignalLightsRight;
         this.brakeLightLeft = builder.brakeLightLeft;
@@ -67,6 +71,14 @@ public class AirportFireTruck implements IAirportFireTruck {
 
     public HeadLight[] getHeadLightsRoof() {
         return headLightsRoof;
+    }
+
+    public HeadLight[] getSideLightsLeft() {
+        return sideLightsLeft;
+    }
+
+    public HeadLight[] getSideLightsRight() {
+        return sideLightsRight;
     }
 
     public TurnSignalLight[] getTurnSignalLightsLeft() {
@@ -134,6 +146,8 @@ public class AirportFireTruck implements IAirportFireTruck {
         private final HeadLight[] headLightsFrontLeft;
         private final HeadLight[] headLightsFrontRight;
         private final HeadLight[] headLightsRoof;
+        private final HeadLight[] sideLightsLeft;
+        private final HeadLight[] sideLightsRight;
         private final TurnSignalLight[] turnSignalLightsLeft;
         private final TurnSignalLight[] turnSignalLightsRight;
         private final BrakeLight brakeLightLeft;
@@ -162,6 +176,12 @@ public class AirportFireTruck implements IAirportFireTruck {
             this.headLightsRoof = new HeadLight[4];
             for (int i = 0; i < headLightsRoof.length; i++) {
                 this.headLightsRoof[i] = new HeadLight();
+            }
+            this.sideLightsLeft = new HeadLight[5];
+            this.sideLightsRight = new HeadLight[5];
+            for (int i = 0; i < sideLightsLeft.length; i++) {
+                this.sideLightsLeft[i] = new HeadLight();
+                this.sideLightsRight[i] = new HeadLight();
             }
 
             this.turnSignalLightsLeft = new TurnSignalLight[2];
