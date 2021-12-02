@@ -44,20 +44,20 @@ public class TestApp {
 
         //Control Panel
         assertNotNull(airportFireTruck.getCabin().getControlPanel());
-        assertNotNull(airportFireTruck.getCabin().getControlPanel().getRoofLauncherKnob());
-        assertNotNull(airportFireTruck.getCabin().getControlPanel().getFrontLauncherKnob());
         assertNotNull(airportFireTruck.getCabin().getControlPanel().getBlueLightSwitch());
         assertNotNull(airportFireTruck.getCabin().getControlPanel().getWarningLightSwitch());
         assertNotNull(airportFireTruck.getCabin().getControlPanel().getFrontHeadlightSwitch());
         assertNotNull(airportFireTruck.getCabin().getControlPanel().getRoofHeadLightSwitch());
         assertNotNull(airportFireTruck.getCabin().getControlPanel().getMotorSwitch());
 
-        assertNotNull(airportFireTruck.getCabin().getLeftJoystick());
-        assertNotNull(airportFireTruck.getCabin().getRightJoystick());
-        assertNotNull(airportFireTruck.getCabin().getSpeedDisplay());
-        assertNotNull(airportFireTruck.getCabin().getBatteryDisplay());
         assertNotNull(airportFireTruck.getCabin().getLeftDoor());
         assertNotNull(airportFireTruck.getCabin().getRightDoor());
+        assertNotNull(airportFireTruck.getCabin().getRoofLauncherKnob());
+        assertNotNull(airportFireTruck.getCabin().getFrontLauncherKnob());
+        assertNotNull(airportFireTruck.getCabin().getLeftJoystick());
+        assertNotNull(airportFireTruck.getCabin().getRightJoystick());
+        assertNotNull(airportFireTruck.getCabin().getBatteryDisplay());
+        assertNotNull(airportFireTruck.getCabin().getSpeedDisplay());
 
 
         //Drive
@@ -138,8 +138,8 @@ public class TestApp {
         assertEquals(100, airportFireTruck.getDrive().getBatteryPercentage());
         assertEquals(100, airportFireTruck.getWaterTank().getCurrentFillPercentage());
         assertEquals(100, airportFireTruck.getFoamPowderTank().getCurrentFillPercentage());
-        assertEquals(FrontLauncherOutput.A, airportFireTruck.getCabin().getControlPanel().getFrontLauncherKnob().getState());
-        assertEquals(RoofLauncherOutput.A, airportFireTruck.getCabin().getControlPanel().getRoofLauncherKnob().getState());
+        assertEquals(FrontLauncherOutput.A, airportFireTruck.getCabin().getFrontLauncherKnob().getState());
+        assertEquals(RoofLauncherOutput.A, airportFireTruck.getCabin().getRoofLauncherKnob().getState());
     }
 
     @Test
@@ -220,8 +220,8 @@ public class TestApp {
         testRoofLauncher(5, 2500, MixingRatio.D);
 
         //reset to initial position!
-        airportFireTruck.getCabin().getControlPanel().getRoofLauncherKnob().turnLeft();
-        airportFireTruck.getCabin().getControlPanel().getRoofLauncherKnob().turnLeft();
+        airportFireTruck.getCabin().getRoofLauncherKnob().turnLeft();
+        airportFireTruck.getCabin().getRoofLauncherKnob().turnLeft();
         airportFireTruck.getCabin().getRightJoystick().getFrontLeftButton().press();
 
         testRoofLauncher(5, 2500, MixingRatio.D);
@@ -250,7 +250,7 @@ public class TestApp {
         }
 
         for (int j = 0; j < i; j++)
-            airportFireTruck.getCabin().getControlPanel().getRoofLauncherKnob().turnRight();
+            airportFireTruck.getCabin().getRoofLauncherKnob().turnRight();
 
         for (int j = 0; j < iters; j++)
             airportFireTruck.getCabin().getRightJoystick().getBackSwitch().press();
@@ -276,7 +276,7 @@ public class TestApp {
         assertEquals(ratio.getValue(), airportFireTruck.getFrontLauncher().getRatio().getValue());
 
         for (int j = 0; j < (amount / 500) - 1; j++)
-            airportFireTruck.getCabin().getControlPanel().getFrontLauncherKnob().turnRight();
+            airportFireTruck.getCabin().getFrontLauncherKnob().turnRight();
 
         for (int j = 0; j < iters; j++)
             airportFireTruck.getCabin().getLeftJoystick().getBackSwitch().press();
@@ -324,8 +324,8 @@ public class TestApp {
         checkIfDoorsOpen(false);
         assertEquals(100, airportFireTruck.getWaterTank().getCurrentFillPercentage());
         assertEquals(100, airportFireTruck.getFoamPowderTank().getCurrentFillPercentage());
-        assertEquals(FrontLauncherOutput.A, airportFireTruck.getCabin().getControlPanel().getFrontLauncherKnob().getState());
-        assertEquals(RoofLauncherOutput.A, airportFireTruck.getCabin().getControlPanel().getRoofLauncherKnob().getState());
+        assertEquals(FrontLauncherOutput.A, airportFireTruck.getCabin().getFrontLauncherKnob().getState());
+        assertEquals(RoofLauncherOutput.A, airportFireTruck.getCabin().getRoofLauncherKnob().getState());
     }
 
     public void checkDriving(int iterationsAccelerating, int iterationsCruising, int iterationsBreaking, int direction) {

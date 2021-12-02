@@ -1,6 +1,5 @@
 package truck;
 
-import controls.RoofLauncherOutput;
 import enums.LauncherState;
 
 public class RoofLauncher extends WaterLauncher {

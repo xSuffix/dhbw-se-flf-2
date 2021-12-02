@@ -1,6 +1,6 @@
 package cabin;
 
-import controls.ButtonType;
+import controls.*;
 import enums.SeatPositions;
 import truck.ICentralUnit;
 
@@ -12,6 +12,8 @@ public class Cabin {
     private final Joystick leftJoystick;
     private final Joystick rightJoystick;
     private final ControlPanel controlPanel;
+    private final TurningKnob<FrontLauncherOutput> frontLauncherKnob;
+    private final TurningKnob<RoofLauncherOutput> roofLauncherKnob;
     private final SteeringWheel steeringWheel;
     private final BatteryDisplay batteryDisplay;
     private final SpeedDisplay speedDisplay;
@@ -28,6 +30,8 @@ public class Cabin {
         this.leftJoystick = new Joystick(centralUnit, JoystickType.LEFT);
         this.rightJoystick = new Joystick(centralUnit, JoystickType.RIGHT);
         this.controlPanel = new ControlPanel(centralUnit);
+        this.frontLauncherKnob = new TurningKnob<>(centralUnit, TurningKnobType.FRONT_LAUNCHER, FrontLauncherOutput.A);
+        this.roofLauncherKnob = new TurningKnob<>(centralUnit, TurningKnobType.ROOF_LAUNCHER, RoofLauncherOutput.A);
         this.steeringWheel = new SteeringWheel(centralUnit);
         this.batteryDisplay = new BatteryDisplay();
         this.speedDisplay = new SpeedDisplay();
@@ -57,6 +61,14 @@ public class Cabin {
 
     public ControlPanel getControlPanel() {
         return controlPanel;
+    }
+
+    public TurningKnob<FrontLauncherOutput> getFrontLauncherKnob() {
+        return frontLauncherKnob;
+    }
+
+    public TurningKnob<RoofLauncherOutput> getRoofLauncherKnob() {
+        return roofLauncherKnob;
     }
 
     public SteeringWheel getSteeringWheel() {

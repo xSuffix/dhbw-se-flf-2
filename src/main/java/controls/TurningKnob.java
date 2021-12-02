@@ -10,10 +10,10 @@ public class TurningKnob<E extends Enum<E>> {
 
     private final ICentralUnit centralUnit;
     private final TurningKnobType type;
-    private E state;
     private final List<E> enumConstants;
     private final E min;
     private final E max;
+    private E state;
 
     public TurningKnob(ICentralUnit centralUnit, TurningKnobType type, E output) {
         this.centralUnit = centralUnit;

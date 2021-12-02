@@ -1,6 +1,5 @@
-package cabin;
+package controls;
 
-import controls.*;
 import truck.ICentralUnit;
 
 public class ControlPanel {
@@ -11,8 +10,6 @@ public class ControlPanel {
     private final Button frontHeadlightSwitch;
     private final Button roofHeadLightSwitch;
     private final Button selfProtection;
-    private final TurningKnob<FrontLauncherOutput> frontLauncherKnob;
-    private final TurningKnob<RoofLauncherOutput> roofLauncherKnob;
 
     public ControlPanel(ICentralUnit centralUnit) {
         this.motorSwitch = new Button(centralUnit, ButtonType.ELECTRIC_MOTOR);
@@ -21,8 +18,6 @@ public class ControlPanel {
         this.frontHeadlightSwitch = new Button(centralUnit, ButtonType.HEAD_LIGHT);
         this.roofHeadLightSwitch = new Button(centralUnit, ButtonType.ROOF_LIGHT);
         this.selfProtection = new Button(centralUnit, ButtonType.FIRE_SELF_PROTECTION);
-        this.frontLauncherKnob = new TurningKnob<>(centralUnit, TurningKnobType.FRONT_LAUNCHER, FrontLauncherOutput.A);
-        this.roofLauncherKnob = new TurningKnob<>(centralUnit, TurningKnobType.ROOF_LAUNCHER, RoofLauncherOutput.A);
     }
 
     public Button getSelfProtectionButton() {
@@ -47,14 +42,6 @@ public class ControlPanel {
 
     public Button getRoofHeadLightSwitch() {
         return roofHeadLightSwitch;
-    }
-
-    public TurningKnob<FrontLauncherOutput> getFrontLauncherKnob() {
-        return frontLauncherKnob;
-    }
-
-    public TurningKnob<RoofLauncherOutput> getRoofLauncherKnob() {
-        return roofLauncherKnob;
     }
 
 }
