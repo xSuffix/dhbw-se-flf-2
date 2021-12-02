@@ -6,6 +6,7 @@ public enum ButtonType {
     BLUE_LIGHT,
     HEAD_LIGHT,
     ROOF_LIGHT,
+    SIDE_LIGHT,
     FIRE_SELF_PROTECTION,
     LEFT_DOOR,
     RIGHT_DOOR,

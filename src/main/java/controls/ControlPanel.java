@@ -9,6 +9,7 @@ public class ControlPanel {
     private final Button blueLightSwitch;
     private final Button frontHeadlightSwitch;
     private final Button roofHeadLightSwitch;
+    private final Button sideLightsSwitch;
     private final Button selfProtection;
 
     public ControlPanel(ICentralUnit centralUnit) {
@@ -17,6 +18,7 @@ public class ControlPanel {
         this.blueLightSwitch = new Button(centralUnit, ButtonType.BLUE_LIGHT);
         this.frontHeadlightSwitch = new Button(centralUnit, ButtonType.HEAD_LIGHT);
         this.roofHeadLightSwitch = new Button(centralUnit, ButtonType.ROOF_LIGHT);
+        this.sideLightsSwitch = new Button(centralUnit, ButtonType.SIDE_LIGHT);
         this.selfProtection = new Button(centralUnit, ButtonType.FIRE_SELF_PROTECTION);
     }
 
@@ -38,6 +40,10 @@ public class ControlPanel {
 
     public Button getFrontHeadlightSwitch() {
         return frontHeadlightSwitch;
+    }
+
+    public Button getSideLightsSwitch() {
+        return sideLightsSwitch;
     }
 
     public Button getRoofHeadLightSwitch() {

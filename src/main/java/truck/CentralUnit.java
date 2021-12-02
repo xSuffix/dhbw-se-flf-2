@@ -4,7 +4,7 @@ import controls.ButtonType;
 import controls.FrontLauncherOutput;
 import controls.RoofLauncherOutput;
 import controls.TurningKnobType;
-import enums.PedalType;
+import controls.PedalType;
 import lights.BlueLight;
 import lights.HeadLight;
 import lights.TurnSignalLight;
@@ -77,6 +77,14 @@ public class CentralUnit implements ICentralUnit {
                     light.toggle();
                 }
                 for (HeadLight light : airportFireTruck.getHeadLightsFrontRight()) {
+                    light.toggle();
+                }
+            }
+            case SIDE_LIGHT -> {
+                for (HeadLight light : airportFireTruck.getSideLightsLeft()) {
+                    light.toggle();
+                }
+                for (HeadLight light : airportFireTruck.getSideLightsRight()) {
                     light.toggle();
                 }
             }

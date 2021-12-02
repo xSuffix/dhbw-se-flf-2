@@ -1,4 +1,4 @@
-package cabin;
+package controls;
 
 import controls.Button;
 import controls.ButtonType;

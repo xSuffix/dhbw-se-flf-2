@@ -1,19 +1,18 @@
 package controls;
 
-import enums.PedalType;
 import truck.ICentralUnit;
 
-public abstract class Pedal {
+public class Pedal {
 
-    private final PedalType type;
     private final ICentralUnit centralUnit;
+    private final PedalType type;
 
-    public Pedal(PedalType type, ICentralUnit centralUnit) {
-        this.type = type;
+    public Pedal(ICentralUnit centralUnit, PedalType type) {
         this.centralUnit = centralUnit;
+        this.type = type;
     }
 
-    public void pressPedal() {
+    public void press() {
         centralUnit.pedalPress(type);
     }
 

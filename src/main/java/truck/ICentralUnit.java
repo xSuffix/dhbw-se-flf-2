@@ -2,7 +2,7 @@ package truck;
 
 import controls.ButtonType;
 import controls.TurningKnobType;
-import enums.PedalType;
+import controls.PedalType;
 
 public interface ICentralUnit {
     void turnSteeringWheel(int rotation);

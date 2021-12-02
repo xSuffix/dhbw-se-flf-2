@@ -17,16 +17,14 @@ public class Cabin {
     private final SteeringWheel steeringWheel;
     private final BatteryDisplay batteryDisplay;
     private final SpeedDisplay speedDisplay;
-    private final BreakPedal breakPedal;
-    private final GasPedal gasPedal;
+    private final Pedal breakPedal;
+    private final Pedal gasPedal;
 
-    // todo hier die composition raus ziehen maybe
     public Cabin(ICentralUnit centralUnit) {
         this.leftDoor = new BusDoor(centralUnit, ButtonType.LEFT_DOOR);
         this.rightDoor = new BusDoor(centralUnit, ButtonType.RIGHT_DOOR);
         this.seats = new Seat[SeatPositions.values().length];
-        int i = 0;
-        for (SeatPositions pos : SeatPositions.values()) seats[i++] = new Seat(pos);
+        for (int i = 0; i < seats.length; i++) seats[i] = new Seat(SeatPositions.values()[i]);
         this.leftJoystick = new Joystick(centralUnit, JoystickType.LEFT);
         this.rightJoystick = new Joystick(centralUnit, JoystickType.RIGHT);
         this.controlPanel = new ControlPanel(centralUnit);
@@ -35,8 +33,8 @@ public class Cabin {
         this.steeringWheel = new SteeringWheel(centralUnit);
         this.batteryDisplay = new BatteryDisplay();
         this.speedDisplay = new SpeedDisplay();
-        this.breakPedal = new BreakPedal(centralUnit);
-        this.gasPedal = new GasPedal(centralUnit);
+        this.breakPedal = new Pedal(centralUnit, PedalType.BRAKE);
+        this.gasPedal = new Pedal(centralUnit, PedalType.GAS);
     }
 
     public BusDoor getLeftDoor() {
@@ -83,11 +81,11 @@ public class Cabin {
         return speedDisplay;
     }
 
-    public BreakPedal getBreakPedal() {
+    public Pedal getBreakPedal() {
         return breakPedal;
     }
 
-    public GasPedal getGasPedal() {
+    public Pedal getGasPedal() {
         return gasPedal;
     }
 
