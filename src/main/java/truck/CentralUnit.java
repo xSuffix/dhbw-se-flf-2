@@ -2,6 +2,7 @@ package truck;
 
 import controls.ButtonType;
 import controls.FrontLauncherOutput;
+import controls.RoofLauncherOutput;
 import controls.TurningKnobType;
 import enums.PedalType;
 import lights.BlueLight;
@@ -12,9 +13,13 @@ import lights.WarningLight;
 public class CentralUnit implements ICentralUnit {
 
     private final IAirportFireTruck airportFireTruck;
+    private int frontLauncherOutput;
+    private int roofLauncherOutput;
 
     public CentralUnit(IAirportFireTruck airportFireTruck) {
         this.airportFireTruck = airportFireTruck;
+        this.frontLauncherOutput = 500;
+        this.roofLauncherOutput = 500;
     }
 
     //rotates axles to the exact rotation of steering wheel plus turn on
@@ -83,12 +88,12 @@ public class CentralUnit implements ICentralUnit {
             // joystick for front launcher
             case LEFT_JOYSTICK_LEFT -> airportFireTruck.getFrontLauncher().pan();
             case LEFT_JOYSTICK_RIGHT -> airportFireTruck.getFrontLauncher().switchRatio();
-            case LEFT_JOYSTICK_BACK -> airportFireTruck.getFrontLauncher().sprayWater(airportFireTruck.getCabin().getControlPanel().getFrontLauncherKnob().getValue());
+            case LEFT_JOYSTICK_BACK -> airportFireTruck.getFrontLauncher().sprayWater(frontLauncherOutput);
 
             // joystick for roof launcher
             case RIGHT_JOYSTICK_LEFT -> airportFireTruck.getRoofLauncher().extend();
             case RIGHT_JOYSTICK_RIGHT -> airportFireTruck.getRoofLauncher().switchRatio();
-            case RIGHT_JOYSTICK_BACK -> airportFireTruck.getRoofLauncher().sprayWater(airportFireTruck.getCabin().getControlPanel().getRoofLauncherKnob().getValue());
+            case RIGHT_JOYSTICK_BACK -> airportFireTruck.getRoofLauncher().sprayWater(roofLauncherOutput);
         }
     }
 
@@ -106,12 +111,8 @@ public class CentralUnit implements ICentralUnit {
     @Override
     public <E> void turningKnobTurn(TurningKnobType type, E setting) {
         switch (type) {
-            case FRONT_LAUNCHER -> {
-                int value = ((FrontLauncherOutput) setting).getValue();
-                System.out.println(value);
-                airportFireTruck.getFrontLauncher();
-            }
-            case ROOF_LAUNCHER -> airportFireTruck.getRoofLauncher();
+            case FRONT_LAUNCHER -> frontLauncherOutput = Math.min(Math.max(((FrontLauncherOutput) setting).getValue(), 0), 3500);
+            case ROOF_LAUNCHER -> roofLauncherOutput = Math.min(Math.max(((RoofLauncherOutput) setting).getValue(), 0), 10000);
         }
     }
 

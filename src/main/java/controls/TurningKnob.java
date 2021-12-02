@@ -10,7 +10,7 @@ public class TurningKnob<E extends Enum<E>> {
 
     private final ICentralUnit centralUnit;
     private final TurningKnobType type;
-    private E output;
+    private E state;
     private final List<E> enumConstants;
     private final E min;
     private final E max;
@@ -18,34 +18,34 @@ public class TurningKnob<E extends Enum<E>> {
     public TurningKnob(ICentralUnit centralUnit, TurningKnobType type, E output) {
         this.centralUnit = centralUnit;
         this.type = type;
-        this.output = output;
+        this.state = output;
         enumConstants = Arrays.asList(output.getDeclaringClass().getEnumConstants());
         min = Collections.min(enumConstants);
         max = Collections.max(enumConstants);
     }
 
-    public void turnLeft() {
-        int index = enumConstants.indexOf(output);
+    public E getState() {
+        return state;
+    }
 
-        if (output != min) {
-            output = enumConstants.get(index - 1);
+    public void turnLeft() {
+        int index = enumConstants.indexOf(state);
+
+        if (state != min) {
+            state = enumConstants.get(index - 1);
         }
 
-        centralUnit.turningKnobTurn(this.type, output);
+        centralUnit.turningKnobTurn(this.type, state);
     }
 
     public void turnRight() {
-        int index = enumConstants.indexOf(output);
-        System.out.println(output);
+        int index = enumConstants.indexOf(state);
+        System.out.println(state);
 
-        if (output != max) {
-            output = enumConstants.get(index + 1);
+        if (state != max) {
+            state = enumConstants.get(index + 1);
         }
-        centralUnit.turningKnobTurn(this.type, output);
-    }
-
-    public int getValue() {
-        int value = (int) output;
+        centralUnit.turningKnobTurn(this.type, state);
     }
 
 }
