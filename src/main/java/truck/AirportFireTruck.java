@@ -1,8 +1,13 @@
 package truck;
 
+import cabin.BatteryDisplay;
 import cabin.Cabin;
+import cabin.Seat;
+import cabin.SpeedDisplay;
+import controls.*;
 import drive.*;
 import enums.ExtinguishingType;
+import enums.SeatPositions;
 import lights.*;
 
 public class AirportFireTruck implements IAirportFireTruck {
@@ -41,7 +46,7 @@ public class AirportFireTruck implements IAirportFireTruck {
         this.warningLights = builder.warningLights;
         this.drive = builder.drive;
         this.centralUnit = new CentralUnit(this);
-        this.cabin = new Cabin(this.centralUnit);
+        this.cabin = new Cabin(this.centralUnit,builder.smartJoySticks);
         this.waterTank = builder.waterTank;
         this.foamPowderTank = builder.foamPowderTank;
         this.mixingUnit = builder.mixingUnit;
@@ -154,10 +159,6 @@ public class AirportFireTruck implements IAirportFireTruck {
         private final BrakeLight brakeLightRight;
         private final BlueLight[] blueLights;
         private final WarningLight[] warningLights;
-        private final ElectricMotor[] electricMotors;
-        private final BatteryBox batteryBox;
-        private final SteeringAxle[] frontAxles;
-        private final Axle[] backAxles;
         private final Drive drive;
         private final Tank waterTank;
         private final Tank foamPowderTank;
@@ -165,8 +166,10 @@ public class AirportFireTruck implements IAirportFireTruck {
         private final FrontLauncher frontLauncher;
         private final RoofLauncher roofLauncher;
         private final FloorSprayingNozzle[] floorSprayingNozzles;
+        private final boolean smartJoySticks;
 
-        public Builder() {
+        public Builder(boolean smartJoySticks) {
+            this.smartJoySticks = smartJoySticks;
             this.headLightsFrontLeft = new HeadLight[3];
             this.headLightsFrontRight = new HeadLight[3];
             for (int i = 0; i < headLightsFrontLeft.length; i++) {
@@ -213,20 +216,20 @@ public class AirportFireTruck implements IAirportFireTruck {
                 this.warningLights[i] = new WarningLight(1);
             }
 
-            this.electricMotors = new ElectricMotor[2];
+            ElectricMotor[] electricMotors = new ElectricMotor[2];
             for (int i = 0; i < electricMotors.length; i++) {
                 electricMotors[i] = new ElectricMotor();
             }
-            this.batteryBox = new BatteryBox();
-            this.frontAxles = new SteeringAxle[2];
+            BatteryBox batteryBox = new BatteryBox();
+            SteeringAxle[] frontAxles = new SteeringAxle[2];
             for (int i = 0; i < frontAxles.length; i++) {
                 frontAxles[i] = new SteeringAxle();
             }
-            this.backAxles = new Axle[2];
+            Axle[] backAxles = new Axle[2];
             for (int i = 0; i < backAxles.length; i++) {
                 backAxles[i] = new Axle();
             }
-            this.drive = new Drive(this.electricMotors, this.batteryBox, this.frontAxles, this.backAxles);
+            this.drive = new Drive(electricMotors, batteryBox, frontAxles, backAxles);
 
             this.waterTank = new Tank(ExtinguishingType.WATER, 75, 30, 15);
             this.foamPowderTank = new Tank(ExtinguishingType.FOAM_POWDER, 75, 30, 5);

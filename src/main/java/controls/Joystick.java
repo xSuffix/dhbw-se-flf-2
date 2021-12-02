@@ -9,15 +9,26 @@ public class Joystick {
     private final Button frontRightButton;
     private final Button backSwitch;
 
-    public Joystick(ICentralUnit centralUnit, JoystickType type) {
+    //beim smarten joystick werden die vorderen beiden knöpfe sozusagen zusammengeschweißt
+    public Joystick(ICentralUnit centralUnit, JoystickType type, boolean smart) {
         this.type = type;
         if (type == JoystickType.LEFT) {
-            this.frontLeftButton = new Button(centralUnit, ButtonType.LEFT_JOYSTICK_LEFT);
-            this.frontRightButton = new Button(centralUnit, ButtonType.LEFT_JOYSTICK_RIGHT);
+            if (smart) {
+                this.frontLeftButton = new Button(centralUnit, ButtonType.SMART_JOYSTICK_LEFT);
+                this.frontRightButton = new Button(centralUnit, ButtonType.SMART_JOYSTICK_LEFT);
+            } else {
+                this.frontLeftButton = new Button(centralUnit, ButtonType.LEFT_JOYSTICK_LEFT);
+                this.frontRightButton = new Button(centralUnit, ButtonType.LEFT_JOYSTICK_RIGHT);
+            }
             this.backSwitch = new Button(centralUnit, ButtonType.LEFT_JOYSTICK_BACK);
         } else {
-            this.frontLeftButton = new Button(centralUnit, ButtonType.RIGHT_JOYSTICK_LEFT);
-            this.frontRightButton = new Button(centralUnit, ButtonType.RIGHT_JOYSTICK_RIGHT);
+            if (smart) {
+                this.frontLeftButton = new Button(centralUnit, ButtonType.SMART_JOYSTICK_RIGHT);
+                this.frontRightButton = new Button(centralUnit, ButtonType.SMART_JOYSTICK_RIGHT);
+            } else {
+                this.frontLeftButton = new Button(centralUnit, ButtonType.RIGHT_JOYSTICK_LEFT);
+                this.frontRightButton = new Button(centralUnit, ButtonType.RIGHT_JOYSTICK_RIGHT);
+            }
             this.backSwitch = new Button(centralUnit, ButtonType.RIGHT_JOYSTICK_BACK);
         }
     }

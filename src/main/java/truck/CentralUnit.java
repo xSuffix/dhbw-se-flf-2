@@ -5,6 +5,8 @@ import controls.FrontLauncherOutput;
 import controls.RoofLauncherOutput;
 import controls.TurningKnobType;
 import controls.PedalType;
+import enums.LauncherState;
+import enums.MixingRatio;
 import lights.BlueLight;
 import lights.HeadLight;
 import lights.TurnSignalLight;
@@ -102,6 +104,24 @@ public class CentralUnit implements ICentralUnit {
             case RIGHT_JOYSTICK_LEFT -> airportFireTruck.getRoofLauncher().extend();
             case RIGHT_JOYSTICK_RIGHT -> airportFireTruck.getRoofLauncher().switchRatio();
             case RIGHT_JOYSTICK_BACK -> airportFireTruck.getRoofLauncher().sprayWater(roofLauncherOutput);
+
+            case SMART_JOYSTICK_LEFT -> {
+                if (airportFireTruck.getFrontLauncher().getState() == LauncherState.INACTIVE)
+                    airportFireTruck.getFrontLauncher().pan();
+                else if (airportFireTruck.getFrontLauncher().getRatio() == MixingRatio.D)
+                    airportFireTruck.getFrontLauncher().pan();
+                else
+                    airportFireTruck.getFrontLauncher().switchRatio();
+            }
+
+            case SMART_JOYSTICK_RIGHT -> {
+                if (airportFireTruck.getRoofLauncher().getState() == LauncherState.INACTIVE)
+                    airportFireTruck.getRoofLauncher().extend();
+                else if (airportFireTruck.getRoofLauncher().getRatio() == MixingRatio.D)
+                    airportFireTruck.getRoofLauncher().extend();
+                else
+                    airportFireTruck.getRoofLauncher().switchRatio();
+            }
         }
     }
 

@@ -20,7 +20,7 @@ public class TestApp {
 
     @BeforeEach
     public void setup() {
-        airportFireTruck = new AirportFireTruck.Builder().build();
+        airportFireTruck = new AirportFireTruck.Builder(false).build();
         airportFireTruck.chargeTruck(airportFireTruck.getDrive().getBatteryBox().getMaxCharge());
         airportFireTruck.getWaterTank().fill(airportFireTruck.getWaterTank().getTotalCapacity(), ExtinguishingType.WATER);
         airportFireTruck.getFoamPowderTank().fill(airportFireTruck.getFoamPowderTank().getTotalCapacity(), ExtinguishingType.FOAM_POWDER);
