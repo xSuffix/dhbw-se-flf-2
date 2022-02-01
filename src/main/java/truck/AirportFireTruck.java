@@ -231,8 +231,8 @@ public class AirportFireTruck implements IAirportFireTruck {
             }
             this.drive = new Drive(electricMotors, batteryBox, frontAxles, backAxles);
 
-            this.waterTank = new Tank(ExtinguishingType.WATER, 75, 30, 15);
-            this.foamPowderTank = new Tank(ExtinguishingType.FOAM_POWDER, 75, 30, 5);
+            this.waterTank = new Tank(ExtinguishingType.WATER, 75, 45, 30);
+            this.foamPowderTank = new Tank(ExtinguishingType.FOAM_POWDER, 75, 45, 10);
             this.mixingUnit = new MixingUnit(this.waterTank, this.foamPowderTank);
             this.frontLauncher = new FrontLauncher(this.mixingUnit);
             this.roofLauncher = new RoofLauncher(this.mixingUnit);

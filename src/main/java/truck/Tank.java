@@ -40,9 +40,10 @@ public class Tank {
             }
         }
         ExtinguishingType[] amountReturned = new ExtinguishingType[amountAvail];
-        for (ExtinguishingType unit : amountReturned) {
-            unit = this.type;
-        }
+        // for (ExtinguishingType unit : amountReturned) {
+        //     unit = this.type;
+        // }
+        for (int i = 0;i<amountReturned.length;i++) amountReturned[i] = this.type;
         return amountReturned;
     }
 
