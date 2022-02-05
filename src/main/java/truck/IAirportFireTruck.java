@@ -10,27 +10,27 @@ public interface IAirportFireTruck {
 
     void useFloorNozzles(int amount);
 
-    HeadLight[] getHeadLightsFrontLeft();
+    Light[] getHeadLightsFrontLeft();
 
-    HeadLight[] getHeadLightsFrontRight();
+    Light[] getHeadLightsFrontRight();
 
-    HeadLight[] getHeadLightsRoof();
+    Light[] getHeadLightsRoof();
 
-    HeadLight[] getSideLightsLeft();
+    Light[] getSideLightsLeft();
 
-    HeadLight[] getSideLightsRight();
+    Light[] getSideLightsRight();
 
-    TurnSignalLight[] getTurnSignalLightsLeft();
+    Light[] getTurnSignalLightsLeft();
 
-    TurnSignalLight[] getTurnSignalLightsRight();
+    Light[] getTurnSignalLightsRight();
 
-    BrakeLight getBrakeLightLeft();
+    Light getBrakeLightLeft();
 
-    BrakeLight getBrakeLightRight();
+    Light getBrakeLightRight();
 
-    BlueLight[] getBlueLights();
+    Light[] getBlueLights();
 
-    WarningLight[] getWarningLights();
+    Light[] getWarningLights();
 
     Drive getDrive();
 

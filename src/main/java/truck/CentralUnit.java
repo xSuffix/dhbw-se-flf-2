@@ -7,10 +7,7 @@ import controls.TurningKnobType;
 import controls.PedalType;
 import enums.LauncherState;
 import enums.MixingRatio;
-import lights.BlueLight;
-import lights.HeadLight;
-import lights.TurnSignalLight;
-import lights.WarningLight;
+import lights.Light;
 
 public class CentralUnit implements ICentralUnit {
 
@@ -29,24 +26,24 @@ public class CentralUnit implements ICentralUnit {
     public void turnSteeringWheel(int rotation) {
         airportFireTruck.getDrive().rotateAxles(rotation);
         if (rotation < 0) {
-            for (TurnSignalLight light : airportFireTruck.getTurnSignalLightsLeft()) {
+            for (Light light : airportFireTruck.getTurnSignalLightsLeft()) {
                 light.turnOn();
             }
-            for (TurnSignalLight light : airportFireTruck.getTurnSignalLightsRight()) {
+            for (Light light : airportFireTruck.getTurnSignalLightsRight()) {
                 light.turnOff();
             }
         } else if (rotation > 0) {
-            for (TurnSignalLight light : airportFireTruck.getTurnSignalLightsLeft()) {
+            for (Light light : airportFireTruck.getTurnSignalLightsLeft()) {
                 light.turnOff();
             }
-            for (TurnSignalLight light : airportFireTruck.getTurnSignalLightsRight()) {
+            for (Light light : airportFireTruck.getTurnSignalLightsRight()) {
                 light.turnOn();
             }
         } else {
-            for (TurnSignalLight light : airportFireTruck.getTurnSignalLightsLeft()) {
+            for (Light light : airportFireTruck.getTurnSignalLightsLeft()) {
                 light.turnOff();
             }
-            for (TurnSignalLight light : airportFireTruck.getTurnSignalLightsRight()) {
+            for (Light light : airportFireTruck.getTurnSignalLightsRight()) {
                 light.turnOff();
             }
         }
@@ -60,33 +57,33 @@ public class CentralUnit implements ICentralUnit {
                 else airportFireTruck.getDrive().startMotors();
             }
             case BLUE_LIGHT -> {
-                for (BlueLight light : airportFireTruck.getBlueLights()) {
+                for (Light light : airportFireTruck.getBlueLights()) {
                     light.toggle();
                 }
             }
             case WARNING_LIGHT -> {
-                for (WarningLight light : airportFireTruck.getWarningLights()) {
+                for (Light light : airportFireTruck.getWarningLights()) {
                     light.toggle();
                 }
             }
             case ROOF_LIGHT -> {
-                for (HeadLight light : airportFireTruck.getHeadLightsRoof()) {
+                for (Light light : airportFireTruck.getHeadLightsRoof()) {
                     light.toggle();
                 }
             }
             case HEAD_LIGHT -> {
-                for (HeadLight light : airportFireTruck.getHeadLightsFrontLeft()) {
+                for (Light light : airportFireTruck.getHeadLightsFrontLeft()) {
                     light.toggle();
                 }
-                for (HeadLight light : airportFireTruck.getHeadLightsFrontRight()) {
+                for (Light light : airportFireTruck.getHeadLightsFrontRight()) {
                     light.toggle();
                 }
             }
             case SIDE_LIGHT -> {
-                for (HeadLight light : airportFireTruck.getSideLightsLeft()) {
+                for (Light light : airportFireTruck.getSideLightsLeft()) {
                     light.toggle();
                 }
-                for (HeadLight light : airportFireTruck.getSideLightsRight()) {
+                for (Light light : airportFireTruck.getSideLightsRight()) {
                     light.toggle();
                 }
             }

@@ -4,10 +4,7 @@ import drive.ElectricMotor;
 import enums.ExtinguishingType;
 import enums.LauncherState;
 import enums.MixingRatio;
-import lights.BlueLight;
-import lights.HeadLight;
 import lights.Light;
-import lights.WarningLight;
 import org.junit.jupiter.api.*;
 import truck.AirportFireTruck;
 
@@ -355,19 +352,7 @@ public class TestApp {
         assertEquals(direction, airportFireTruck.getDrive().getAxleRotation());
     }
 
-    public void checkLights(BlueLight[] lights, boolean state) {
-        for (Light light : lights) {
-            assertEquals(state, light.isOn());
-        }
-    }
-
-    public void checkLights(WarningLight[] lights, boolean state) {
-        for (Light light : lights) {
-            assertEquals(state, light.isOn());
-        }
-    }
-
-    public void checkLights(HeadLight[] lights, boolean state) {
+    public void checkLights(Light[] lights, boolean state) {
         for (Light light : lights) {
             assertEquals(state, light.isOn());
         }

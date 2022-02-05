@@ -1,27 +1,22 @@
 package truck;
 
-import cabin.BatteryDisplay;
 import cabin.Cabin;
-import cabin.Seat;
-import cabin.SpeedDisplay;
-import controls.*;
 import drive.*;
 import enums.ExtinguishingType;
-import enums.SeatPositions;
 import lights.*;
 
 public class AirportFireTruck implements IAirportFireTruck {
-    private final HeadLight[] headLightsFrontLeft;
-    private final HeadLight[] headLightsFrontRight;
-    private final HeadLight[] headLightsRoof;
-    private final HeadLight[] sideLightsLeft;
-    private final HeadLight[] sideLightsRight;
-    private final TurnSignalLight[] turnSignalLightsLeft;
-    private final TurnSignalLight[] turnSignalLightsRight;
-    private final BrakeLight brakeLightLeft;
-    private final BrakeLight brakeLightRight;
-    private final BlueLight[] blueLights;
-    private final WarningLight[] warningLights;
+    private final Light[] headLightsFrontLeft;
+    private final Light[] headLightsFrontRight;
+    private final Light[] headLightsRoof;
+    private final Light[] sideLightsLeft;
+    private final Light[] sideLightsRight;
+    private final Light[] turnSignalLightsLeft;
+    private final Light[] turnSignalLightsRight;
+    private final Light brakeLightLeft;
+    private final Light brakeLightRight;
+    private final Light[] blueLights;
+    private final Light[] warningLights;
     private final Drive drive;
     private final Cabin cabin;
     private final CentralUnit centralUnit;
@@ -66,47 +61,47 @@ public class AirportFireTruck implements IAirportFireTruck {
         }
     }
 
-    public HeadLight[] getHeadLightsFrontLeft() {
+    public Light[] getHeadLightsFrontLeft() {
         return headLightsFrontLeft;
     }
 
-    public HeadLight[] getHeadLightsFrontRight() {
+    public Light[] getHeadLightsFrontRight() {
         return headLightsFrontRight;
     }
 
-    public HeadLight[] getHeadLightsRoof() {
+    public Light[] getHeadLightsRoof() {
         return headLightsRoof;
     }
 
-    public HeadLight[] getSideLightsLeft() {
+    public Light[] getSideLightsLeft() {
         return sideLightsLeft;
     }
 
-    public HeadLight[] getSideLightsRight() {
+    public Light[] getSideLightsRight() {
         return sideLightsRight;
     }
 
-    public TurnSignalLight[] getTurnSignalLightsLeft() {
+    public Light[] getTurnSignalLightsLeft() {
         return turnSignalLightsLeft;
     }
 
-    public TurnSignalLight[] getTurnSignalLightsRight() {
+    public Light[] getTurnSignalLightsRight() {
         return turnSignalLightsRight;
     }
 
-    public BrakeLight getBrakeLightLeft() {
+    public Light getBrakeLightLeft() {
         return brakeLightLeft;
     }
 
-    public BrakeLight getBrakeLightRight() {
+    public Light getBrakeLightRight() {
         return brakeLightRight;
     }
 
-    public BlueLight[] getBlueLights() {
+    public Light[] getBlueLights() {
         return blueLights;
     }
 
-    public WarningLight[] getWarningLights() {
+    public Light[] getWarningLights() {
         return warningLights;
     }
 
