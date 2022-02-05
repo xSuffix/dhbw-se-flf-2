@@ -9,7 +9,7 @@ public abstract class WaterLauncher {
     protected LauncherState state;
     private MixingRatio ratio;
 
-    public WaterLauncher(MixingUnit mixingUnit) {
+    public WaterLauncher(IMixingUnit mixingUnit) {
         this.mixingUnit = mixingUnit;
         this.state = LauncherState.INACTIVE;
         this.ratio = MixingRatio.A;

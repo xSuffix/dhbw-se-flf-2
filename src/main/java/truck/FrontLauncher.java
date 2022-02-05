@@ -6,7 +6,7 @@ public class FrontLauncher extends WaterLauncher {
 
     private int rotation;
 
-    public FrontLauncher(MixingUnit mixingUnit) {
+    public FrontLauncher(IMixingUnit mixingUnit) {
         super(mixingUnit);
         this.rotation = 0;
     }
