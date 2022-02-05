@@ -13,4 +13,12 @@ public interface ICentralUnit {
 
     <E> void turningKnobTurn(TurningKnobType type, E setting);
 
+    String getID();
+    
+    String getCode();
+
+    void authorizePerson(String name);
+
+    void checkAuthentication(byte[] encryptedToken);
+
 }

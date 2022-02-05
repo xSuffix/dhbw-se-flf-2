@@ -7,6 +7,7 @@ import enums.MixingRatio;
 import lights.Light;
 import org.junit.jupiter.api.*;
 import truck.AirportFireTruck;
+import id_card.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -230,6 +231,25 @@ public class TestApp {
         testRoofLauncher(5, 2500, MixingRatio.D);
         armFrontLauncher();
         testFrontLauncher(5, 1000, MixingRatio.B);
+    }
+
+    @Test
+    @Disabled
+    public void keyCardTesting(){
+        IDCard idCard = new IDCard(new RFIDChip());
+        IDCardEncoder idCardEncoder = new IDCardEncoder();
+        idCardEncoder.encode(airportFireTruck.getCentralUnit(), idCard, "Red Adair", "password");
+
+        System.out.println(airportFireTruck.getCabin().getRightDoor().isOpen());
+
+        airportFireTruck.getCabin().getLeftDoor().getIdCardReceiver().read(idCard);
+
+        System.out.println(airportFireTruck.getCabin().getRightDoor().isOpen());
+
+        airportFireTruck.getCabin().getLeftDoor().getIdCardReceiver().read(idCard);
+
+        System.out.println(airportFireTruck.getCabin().getRightDoor().isOpen());
+
     }
 
     public void testRoofLauncher(int iters, int amount, MixingRatio ratio) {
