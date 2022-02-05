@@ -9,8 +9,8 @@ public class Cabin {
     private final BusDoor leftDoor;
     private final BusDoor rightDoor;
     private final Seat[] seats;
-    private final Joystick leftJoystick;
-    private final Joystick rightJoystick;
+    private final IJoyStick leftJoystick;
+    private final IJoyStick rightJoystick;
     private final ControlPanel controlPanel;
     private final TurningKnob<FrontLauncherOutput> frontLauncherKnob;
     private final TurningKnob<RoofLauncherOutput> roofLauncherKnob;
@@ -20,13 +20,13 @@ public class Cabin {
     private final Pedal breakPedal;
     private final Pedal gasPedal;
 
-    public Cabin(ICentralUnit centralUnit,boolean smartJoysticks) {
+    public Cabin(ICentralUnit centralUnit) {
         this.leftDoor = new BusDoor(centralUnit, ButtonType.LEFT_DOOR);
         this.rightDoor = new BusDoor(centralUnit, ButtonType.RIGHT_DOOR);
         this.seats = new Seat[SeatPositions.values().length];
         for (int i = 0; i < seats.length; i++) seats[i] = new Seat(SeatPositions.values()[i]);
-        this.leftJoystick = new Joystick(centralUnit, JoystickType.LEFT,smartJoysticks);
-        this.rightJoystick = new Joystick(centralUnit, JoystickType.RIGHT,smartJoysticks);
+        this.leftJoystick = new Joystick(centralUnit, JoystickType.LEFT);
+        this.rightJoystick = new Joystick(centralUnit, JoystickType.RIGHT);
         this.controlPanel = new ControlPanel(centralUnit);
         this.frontLauncherKnob = new TurningKnob<>(centralUnit, TurningKnobType.FRONT_LAUNCHER, FrontLauncherOutput.A);
         this.roofLauncherKnob = new TurningKnob<>(centralUnit, TurningKnobType.ROOF_LAUNCHER, RoofLauncherOutput.A);
@@ -49,11 +49,11 @@ public class Cabin {
         return seats[pos];
     }
 
-    public Joystick getLeftJoystick() {
+    public IJoyStick getLeftJoystick() {
         return leftJoystick;
     }
 
-    public Joystick getRightJoystick() {
+    public IJoyStick getRightJoystick() {
         return rightJoystick;
     }
 

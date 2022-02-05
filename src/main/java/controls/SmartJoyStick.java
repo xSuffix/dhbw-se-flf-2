@@ -2,7 +2,7 @@ package controls;
 
 import truck.ICentralUnit;
 
-public class SmartJoyStick {
+public class SmartJoyStick implements IJoyStick {
 
     private final JoystickType type;
     private final Button button;
@@ -23,11 +23,15 @@ public class SmartJoyStick {
         return type;
     }
 
-    public Button getButton() {
+    public Button getFrontLeftButton() {
         return button;
     }
 
-    public Button getTaster() {
+    public Button getFrontRightButton() {
+        return button;
+    }
+
+    public Button getBackSwitch() {
         return taster;
     }
 }

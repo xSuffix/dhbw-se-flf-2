@@ -41,7 +41,7 @@ public class AirportFireTruck implements IAirportFireTruck {
         this.warningLights = builder.warningLights;
         this.drive = builder.drive;
         this.centralUnit = new CentralUnit(this);
-        this.cabin = new Cabin(this.centralUnit,builder.smartJoySticks);
+        this.cabin = new Cabin(this.centralUnit);
         this.waterTank = builder.waterTank;
         this.foamPowderTank = builder.foamPowderTank;
         this.mixingUnit = builder.mixingUnit;
@@ -161,10 +161,8 @@ public class AirportFireTruck implements IAirportFireTruck {
         private final FrontLauncher frontLauncher;
         private final RoofLauncher roofLauncher;
         private final FloorSprayingNozzle[] floorSprayingNozzles;
-        private final boolean smartJoySticks;
 
-        public Builder(boolean smartJoySticks) {
-            this.smartJoySticks = smartJoySticks;
+        public Builder() {
             this.headLightsFrontLeft = new HeadLight[3];
             this.headLightsFrontRight = new HeadLight[3];
             for (int i = 0; i < headLightsFrontLeft.length; i++) {
