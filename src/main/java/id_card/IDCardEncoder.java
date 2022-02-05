@@ -2,11 +2,15 @@ package id_card;
 
 import truck.ICentralUnit;
 
-import javax.crypto.*;
+import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
 
 public class IDCardEncoder {
 
