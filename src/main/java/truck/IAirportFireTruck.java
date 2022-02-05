@@ -1,7 +1,7 @@
 package truck;
 
 import cabin.Cabin;
-import drive.Drive;
+import drive.IDrive;
 import lights.*;
 
 public interface IAirportFireTruck {
@@ -32,17 +32,17 @@ public interface IAirportFireTruck {
 
     Light[] getWarningLights();
 
-    Drive getDrive();
+    IDrive getDrive();
 
-    CentralUnit getCentralUnit();
+    ICentralUnit getCentralUnit();
 
     Cabin getCabin();
 
-    Tank getWaterTank();
+    ITank getWaterTank();
 
-    Tank getFoamPowderTank();
+    ITank getFoamPowderTank();
 
-    MixingUnit getMixingUnit();
+    IMixingUnit getMixingUnit();
 
     FrontLauncher getFrontLauncher();
 

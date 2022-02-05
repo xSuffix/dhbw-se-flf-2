@@ -5,7 +5,7 @@ import enums.MixingRatio;
 
 public abstract class WaterLauncher {
 
-    private final MixingUnit mixingUnit;
+    private final IMixingUnit mixingUnit;
     protected LauncherState state;
     private MixingRatio ratio;
 

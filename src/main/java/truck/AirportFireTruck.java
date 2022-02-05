@@ -17,12 +17,12 @@ public class AirportFireTruck implements IAirportFireTruck {
     private final Light brakeLightRight;
     private final Light[] blueLights;
     private final Light[] warningLights;
-    private final Drive drive;
+    private final IDrive drive;
     private final Cabin cabin;
-    private final CentralUnit centralUnit;
-    private final Tank waterTank;
-    private final Tank foamPowderTank;
-    private final MixingUnit mixingUnit;
+    private final ICentralUnit centralUnit;
+    private final ITank waterTank;
+    private final ITank foamPowderTank;
+    private final IMixingUnit mixingUnit;
     private final FrontLauncher frontLauncher;
     private final RoofLauncher roofLauncher;
     private final FloorSprayingNozzle[] floorSprayingNozzles;
@@ -105,11 +105,11 @@ public class AirportFireTruck implements IAirportFireTruck {
         return warningLights;
     }
 
-    public Drive getDrive() {
+    public IDrive getDrive() {
         return drive;
     }
 
-    public CentralUnit getCentralUnit() {
+    public ICentralUnit getCentralUnit() {
         return centralUnit;
     }
 
@@ -117,15 +117,15 @@ public class AirportFireTruck implements IAirportFireTruck {
         return cabin;
     }
 
-    public Tank getWaterTank() {
+    public ITank getWaterTank() {
         return waterTank;
     }
 
-    public Tank getFoamPowderTank() {
+    public ITank getFoamPowderTank() {
         return foamPowderTank;
     }
 
-    public MixingUnit getMixingUnit() {
+    public IMixingUnit getMixingUnit() {
         return mixingUnit;
     }
 

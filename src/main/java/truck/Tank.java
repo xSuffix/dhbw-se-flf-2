@@ -2,7 +2,7 @@ package truck;
 
 import enums.ExtinguishingType;
 
-public class Tank {
+public class Tank implements ITank{
 
     private final ExtinguishingType type;
     private final ExtinguishingType[][][] capacity;

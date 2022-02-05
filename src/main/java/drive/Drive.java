@@ -1,6 +1,6 @@
 package drive;
 
-public class Drive {
+public class Drive implements IDrive {
 
     private final ElectricMotor[] electricMotors;
     private final BatteryManagement batteryManagement = BatteryManagement.INSTANCE;

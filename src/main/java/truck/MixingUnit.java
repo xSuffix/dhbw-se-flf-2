@@ -6,12 +6,12 @@ import enums.MixingRatio;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class MixingUnit {
+public class MixingUnit implements IMixingUnit{
 
-    private final Tank waterTank;
-    private final Tank foamPowderTank;
+    private final ITank waterTank;
+    private final ITank foamPowderTank;
 
-    public MixingUnit(Tank water, Tank foam) {
+    public MixingUnit(ITank water, ITank foam) {
         this.waterTank = water;
         this.foamPowderTank = foam;
     }
