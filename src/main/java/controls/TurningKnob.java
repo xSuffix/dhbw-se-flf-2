@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class TurningKnob<E extends Enum<E>> {
+public class TurningKnob<E extends Enum<E>> implements ITurningKnob<E>{
 
     private final ICentralUnit centralUnit;
     private final TurningKnobType type;

@@ -2,7 +2,7 @@ package controls;
 
 import truck.ICentralUnit;
 
-public class SteeringWheel {
+public class SteeringWheel implements ISteeringWheel{
 
     private final ICentralUnit centralUnit;
     private int rotation;

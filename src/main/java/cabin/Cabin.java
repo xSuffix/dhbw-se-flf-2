@@ -12,9 +12,9 @@ public class Cabin {
     private final IJoyStick leftJoystick;
     private final IJoyStick rightJoystick;
     private final ControlPanel controlPanel;
-    private final TurningKnob<FrontLauncherOutput> frontLauncherKnob;
-    private final TurningKnob<RoofLauncherOutput> roofLauncherKnob;
-    private final SteeringWheel steeringWheel;
+    private final ITurningKnob<FrontLauncherOutput> frontLauncherKnob;
+    private final ITurningKnob<RoofLauncherOutput> roofLauncherKnob;
+    private final ISteeringWheel steeringWheel;
     private final BatteryDisplay batteryDisplay;
     private final SpeedDisplay speedDisplay;
     private final Pedal breakPedal;
@@ -61,15 +61,15 @@ public class Cabin {
         return controlPanel;
     }
 
-    public TurningKnob<FrontLauncherOutput> getFrontLauncherKnob() {
+    public ITurningKnob<FrontLauncherOutput> getFrontLauncherKnob() {
         return frontLauncherKnob;
     }
 
-    public TurningKnob<RoofLauncherOutput> getRoofLauncherKnob() {
+    public ITurningKnob<RoofLauncherOutput> getRoofLauncherKnob() {
         return roofLauncherKnob;
     }
 
-    public SteeringWheel getSteeringWheel() {
+    public ISteeringWheel getSteeringWheel() {
         return steeringWheel;
     }
 
