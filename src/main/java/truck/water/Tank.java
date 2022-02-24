@@ -1,8 +1,5 @@
 package truck.water;
 
-import truck.water.ExtinguishingType;
-import truck.water.ITank;
-
 public class Tank implements ITank {
 
     private final ExtinguishingType type;

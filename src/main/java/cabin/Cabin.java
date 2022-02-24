@@ -1,7 +1,6 @@
 package cabin;
 
 import cabin.controls.*;
-import controls.*;
 import truck.ICentralUnit;
 
 public class Cabin {

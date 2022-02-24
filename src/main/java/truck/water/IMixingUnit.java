@@ -1,8 +1,5 @@
 package truck.water;
 
-import truck.water.ExtinguishingType;
-import truck.water.MixingRatio;
-
 import java.util.ArrayList;
 
 public interface IMixingUnit {
