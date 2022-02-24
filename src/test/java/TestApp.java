@@ -1,9 +1,9 @@
-import controls.FrontLauncherOutput;
-import controls.RoofLauncherOutput;
+import cabin.controls.FrontLauncherOutput;
+import cabin.controls.RoofLauncherOutput;
 import drive.ElectricMotor;
-import enums.ExtinguishingType;
-import enums.LauncherState;
-import enums.MixingRatio;
+import truck.water.ExtinguishingType;
+import truck.water.LauncherState;
+import truck.water.MixingRatio;
 import lights.Light;
 import org.junit.jupiter.api.*;
 import truck.AirportFireTruck;

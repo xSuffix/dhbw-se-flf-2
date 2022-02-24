@@ -3,6 +3,7 @@ package truck;
 import cabin.Cabin;
 import drive.IDrive;
 import lights.*;
+import truck.water.*;
 
 public interface IAirportFireTruck {
 

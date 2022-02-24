@@ -1,7 +1,5 @@
 package cabin;
 
-import enums.SeatPositions;
-
 public class Seat {
 
     private final SeatPositions position;

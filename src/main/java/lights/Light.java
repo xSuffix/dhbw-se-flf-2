@@ -1,7 +1,5 @@
 package lights;
 
-import enums.LightColor;
-
 public abstract class Light {
 
     protected LightColor color;

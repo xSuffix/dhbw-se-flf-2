@@ -2,8 +2,9 @@ package truck;
 
 import cabin.Cabin;
 import drive.*;
-import enums.ExtinguishingType;
+import drive.battery.BatteryBox;
 import lights.*;
+import truck.water.*;
 
 public class AirportFireTruck implements IAirportFireTruck {
     private final Light[] headLightsFrontLeft;

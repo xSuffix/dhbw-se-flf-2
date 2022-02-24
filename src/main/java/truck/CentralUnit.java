@@ -1,16 +1,16 @@
 package truck;
 
-import controls.ButtonType;
-import controls.FrontLauncherOutput;
-import controls.RoofLauncherOutput;
-import controls.TurningKnobType;
-import controls.PedalType;
-import enums.LauncherState;
-import enums.MixingRatio;
+import cabin.controls.ButtonType;
+import cabin.controls.FrontLauncherOutput;
+import cabin.controls.RoofLauncherOutput;
+import cabin.controls.TurningKnobType;
+import cabin.controls.PedalType;
 import lights.Light;
 import java.util.List;
 import java.util.ArrayList;
 import id_card.*;
+import truck.water.LauncherState;
+import truck.water.MixingRatio;
 
 public class CentralUnit implements ICentralUnit {
 

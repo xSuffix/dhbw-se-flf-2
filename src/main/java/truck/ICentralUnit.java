@@ -1,8 +1,8 @@
 package truck;
 
-import controls.ButtonType;
-import controls.TurningKnobType;
-import controls.PedalType;
+import cabin.controls.ButtonType;
+import cabin.controls.TurningKnobType;
+import cabin.controls.PedalType;
 
 public interface ICentralUnit {
     void turnSteeringWheel(int rotation);
