@@ -11,11 +11,11 @@ public class SmartJoyStick implements IJoyStick {
     public SmartJoyStick(ICentralUnit centralUnit, JoystickType type) {
         this.type = type;
         if (type == JoystickType.LEFT) {
-            this.taster = new Button(centralUnit,ButtonType.LEFT_JOYSTICK_BACK);
-            this.button = new Button(centralUnit,ButtonType.SMART_JOYSTICK_LEFT);
+            this.taster = new Button(centralUnit, ButtonType.LEFT_JOYSTICK_BACK);
+            this.button = new Button(centralUnit, ButtonType.SMART_JOYSTICK_LEFT);
         } else {
-            this.taster = new Button(centralUnit,ButtonType.RIGHT_JOYSTICK_BACK);
-            this.button = new Button(centralUnit,ButtonType.SMART_JOYSTICK_RIGHT);
+            this.taster = new Button(centralUnit, ButtonType.RIGHT_JOYSTICK_BACK);
+            this.button = new Button(centralUnit, ButtonType.SMART_JOYSTICK_RIGHT);
         }
     }
 

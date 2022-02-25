@@ -2,7 +2,7 @@ package cabin.controls;
 
 import truck.ICentralUnit;
 
-public class Joystick implements IJoyStick{
+public class Joystick implements IJoyStick {
 
     private final JoystickType type;
     private final Button frontLeftButton;

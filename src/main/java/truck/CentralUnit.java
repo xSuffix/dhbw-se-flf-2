@@ -1,26 +1,23 @@
 package truck;
 
-import cabin.controls.ButtonType;
-import cabin.controls.FrontLauncherOutput;
-import cabin.controls.RoofLauncherOutput;
-import cabin.controls.TurningKnobType;
-import cabin.controls.PedalType;
+import cabin.controls.*;
+import id_card.IDCardDecoder;
 import lights.Light;
-import java.util.List;
-import java.util.ArrayList;
-import id_card.*;
 import truck.water.LauncherState;
 import truck.water.MixingRatio;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CentralUnit implements ICentralUnit {
 
     private final IAirportFireTruck airportFireTruck;
-    private int frontLauncherOutput;
-    private int roofLauncherOutput;
     private final String name;
     private final String code;
     private final List<String> authorizedPersons;
     private final IDCardDecoder idCardDecoder;
+    private int frontLauncherOutput;
+    private int roofLauncherOutput;
 
     public CentralUnit(IAirportFireTruck airportFireTruck) {
         this.airportFireTruck = airportFireTruck;
@@ -179,6 +176,5 @@ public class CentralUnit implements ICentralUnit {
             case ROOF_LAUNCHER -> roofLauncherOutput = Math.min(Math.max(((RoofLauncherOutput) setting).getValue(), 0), 10000);
         }
     }
-
 
 }

@@ -1,15 +1,17 @@
 import cabin.controls.FrontLauncherOutput;
 import cabin.controls.RoofLauncherOutput;
 import drive.ElectricMotor;
+import id_card.IDCard;
+import id_card.IDCardEncoder;
+import id_card.RFIDChip;
+import lights.Light;
+import org.junit.jupiter.api.*;
+import staff.Driver;
+import staff.Operator;
+import truck.AirportFireTruck;
 import truck.water.ExtinguishingType;
 import truck.water.LauncherState;
 import truck.water.MixingRatio;
-import lights.Light;
-import staff.*;
-
-import org.junit.jupiter.api.*;
-import truck.AirportFireTruck;
-import id_card.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -239,7 +241,7 @@ public class TestApp {
 
     @Test
     @Disabled
-    public void keyCardTesting(){
+    public void keyCardTesting() {
         IDCard idCard = new IDCard(new RFIDChip());
         IDCardEncoder idCardEncoder = new IDCardEncoder();
         idCardEncoder.encode(airportFireTruck.getCentralUnit(), idCard, "Red Adair", "password");
@@ -291,7 +293,6 @@ public class TestApp {
     }
 
     public void testFrontLauncher(int iters, int amount, MixingRatio ratio) {
-
         int waterLevel = airportFireTruck.getWaterTank().getCurrentCapacity();
         int foamLevel = airportFireTruck.getFoamPowderTank().getCurrentCapacity();
 
@@ -304,15 +305,15 @@ public class TestApp {
         for (int j = 0; j < i; j++)
             driver.pressJoyStickFrontRightButton();
         assertEquals(ratio.getValue(), airportFireTruck.getFrontLauncher().getRatio().getValue());
-        
+
         for (int j = 0; j < (amount / 500) - 1; j++)
-            driver.turnLauchnerKnobToRight();
+            driver.turnLauncherKnobRight();
 
         for (int j = 0; j < iters; j++)
             driver.pressJoyStickFrontBackSwitch();
 
         for (int j = 0; j < (amount / 500) - 1; j++)
-            driver.turnLauchnerKnobToLeft();
+            driver.turnLauncherKnobLeft();
 
         assertEquals(waterLevel - amount * iters * (((double) 100 - (ratio.getValue())) / 100), airportFireTruck.getWaterTank().getCurrentCapacity());
         assertEquals(foamLevel - amount * iters * (((double) ratio.getValue()) / 100), airportFireTruck.getFoamPowderTank().getCurrentCapacity());

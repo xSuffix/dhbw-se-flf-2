@@ -1,8 +1,8 @@
 package lights;
 
 public enum LightColor {
-    ORANGE,
     BLUE,
+    ORANGE,
     RED,
     WHITE,
 }

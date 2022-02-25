@@ -41,7 +41,7 @@ public class Tank implements ITank {
         // for (ExtinguishingType unit : amountReturned) {
         //     unit = this.type;
         // }
-        for (int i = 0;i<amountReturned.length;i++) amountReturned[i] = this.type;
+        for (int i = 0; i < amountReturned.length; i++) amountReturned[i] = this.type;
         return amountReturned;
     }
 
