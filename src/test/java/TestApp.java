@@ -290,25 +290,6 @@ public class TestApp {
         checkIfDoorsOpen(false);
     }
 
-    @Test
-    @Disabled
-    public void keyCardTesting() {
-        IDCard idCard = new IDCard(new RFIDChip());
-        IDCardEncoder idCardEncoder = new IDCardEncoder();
-        idCardEncoder.encode(airportFireTruck.getCentralUnit(), idCard, "Red Adair", "password");
-
-        System.out.println(airportFireTruck.getCabin().getRightDoor().isOpen());
-
-        airportFireTruck.getCabin().getLeftDoor().getIdCardReceiver().read(idCard);
-
-        System.out.println(airportFireTruck.getCabin().getRightDoor().isOpen());
-
-        airportFireTruck.getCabin().getLeftDoor().getIdCardReceiver().read(idCard);
-
-        System.out.println(airportFireTruck.getCabin().getRightDoor().isOpen());
-
-    }
-
     public void testRoofLauncher(int iters, int amount, MixingRatio ratio) {
         int waterLevel = airportFireTruck.getWaterTank().getCurrentCapacity();
         int foamLevel = airportFireTruck.getFoamPowderTank().getCurrentCapacity();
