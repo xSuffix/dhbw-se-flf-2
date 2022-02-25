@@ -9,7 +9,7 @@ public class Joystick implements IJoyStick {
     private final Button frontRightButton;
     private final Button backSwitch;
 
-    //beim smarten joystick werden die vorderen beiden knöpfe sozusagen zusammengeschweißt
+    // beim smarten Joystick werden die vorderen beiden Knöpfe sozusagen zusammengeschweißt
     public Joystick(ICentralUnit centralUnit, JoystickType type) {
         this.type = type;
         if (type == JoystickType.LEFT) {

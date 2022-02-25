@@ -21,7 +21,7 @@ public class TestApp {
     private AirportFireTruck airportFireTruck;
     private Driver driver;
     private Operator operator;
-    private boolean enableSmartJoySticks = false;
+    private final boolean enableSmartJoySticks = false;
 
     @BeforeEach
     public void setup() {
