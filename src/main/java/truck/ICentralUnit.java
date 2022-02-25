@@ -1,8 +1,8 @@
 package truck;
 
 import cabin.controls.ButtonType;
-import cabin.controls.TurningKnobType;
 import cabin.controls.PedalType;
+import cabin.controls.TurningKnobType;
 
 public interface ICentralUnit {
     void turnSteeringWheel(int rotation);
@@ -14,7 +14,7 @@ public interface ICentralUnit {
     <E> void turningKnobTurn(TurningKnobType type, E setting);
 
     String getID();
-    
+
     String getCode();
 
     void authorizePerson(String name);

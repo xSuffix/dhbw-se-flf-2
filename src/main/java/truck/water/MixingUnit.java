@@ -3,7 +3,7 @@ package truck.water;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class MixingUnit implements IMixingUnit{
+public class MixingUnit implements IMixingUnit {
 
     private final ITank waterTank;
     private final ITank foamPowderTank;

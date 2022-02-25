@@ -1,15 +1,15 @@
 package cabin.controls;
 
-import truck.ICentralUnit;
 import id_card.IDCardReceiver;
+import truck.ICentralUnit;
 
 public class BusDoor {
 
     private final Button innerButton;
     private final Button outerButton;
+    IDCardReceiver idCardReceiver;
     private boolean isOpen;
     private boolean isLocked;
-    IDCardReceiver idCardReceiver;
 
     public BusDoor(ICentralUnit centralUnit, ButtonType type) {
         this.isOpen = false;

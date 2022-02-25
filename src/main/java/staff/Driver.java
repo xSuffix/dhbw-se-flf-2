@@ -3,81 +3,81 @@ package staff;
 import truck.IAirportFireTruck;
 
 public class Driver {
-    private IAirportFireTruck airportFireTruck;
+    private final IAirportFireTruck airportFireTruck;
 
-    public Driver(IAirportFireTruck aft){
+    public Driver(IAirportFireTruck aft) {
         airportFireTruck = aft;
     }
 
-    public void takeSeat(){
+    public void takeSeat() {
         airportFireTruck.getCabin().getSeat(0).sitDown();
     }
 
-    public void pressInnerDoorButton(){
+    public void pressInnerDoorButton() {
         airportFireTruck.getCabin().getLeftDoor().getInnerButton().press();
     }
 
-    public void toggleBlueLights(){
+    public void toggleBlueLights() {
         airportFireTruck.getCabin().getControlPanel().getBlueLightSwitch().press();
     }
 
-    public void toggleWarningLights(){
+    public void toggleWarningLights() {
         airportFireTruck.getCabin().getControlPanel().getWarningLightSwitch().press();
     }
 
-    public void toggleFrontHeadLights(){
+    public void toggleFrontHeadLights() {
         airportFireTruck.getCabin().getControlPanel().getFrontHeadlightSwitch().press();
     }
 
-    public void toggleRoofHeadLights(){
+    public void toggleRoofHeadLights() {
         airportFireTruck.getCabin().getControlPanel().getRoofHeadLightSwitch().press();
     }
 
-    public void toggleSideLights(){
+    public void toggleSideLights() {
         airportFireTruck.getCabin().getControlPanel().getSideLightsSwitch().press();
     }
 
-    public void pressMotorSwitch(){
+    public void pressMotorSwitch() {
         airportFireTruck.getCabin().getControlPanel().getMotorSwitch().press();
     }
 
-    public void pressGasPedal(){
+    public void pressGasPedal() {
         airportFireTruck.getCabin().getGasPedal().press();
     }
 
-    public void cruise(){
+    public void cruise() {
         airportFireTruck.getDrive().drive(airportFireTruck.getDrive().getCurrentVelocity());
     }
 
-    public void pressBreakPedal(){
+    public void pressBreakPedal() {
         airportFireTruck.getCabin().getBreakPedal().press();
     }
 
-    public void rotateSteeringWheel(int rotation){
+    public void rotateSteeringWheel(int rotation) {
         airportFireTruck.getCabin().getSteeringWheel().rotate(rotation);
     }
 
-    public void toggleProtection(){
+    public void toggleProtection() {
         airportFireTruck.getCabin().getControlPanel().getSelfProtectionButton().press();
     }
 
-    public void pressJoyStickFrontLeftButton(){
+    public void pressJoyStickFrontLeftButton() {
         airportFireTruck.getCabin().getLeftJoystick().getFrontLeftButton().press();
     }
 
-    public void pressJoyStickFrontRightButton(){
+    public void pressJoyStickFrontRightButton() {
         airportFireTruck.getCabin().getLeftJoystick().getFrontRightButton().press();
     }
 
-    public void pressJoyStickFrontBackSwitch(){
+    public void pressJoyStickFrontBackSwitch() {
         airportFireTruck.getCabin().getLeftJoystick().getBackSwitch().press();
     }
 
-    public void turnLauchnerKnobToRight(){
+    public void turnLauncherKnobRight() {
         airportFireTruck.getCabin().getFrontLauncherKnob().turnRight();
     }
 
-    public void turnLauchnerKnobToLeft(){
+    public void turnLauncherKnobLeft() {
         airportFireTruck.getCabin().getFrontLauncherKnob().turnLeft();
     }
 }
