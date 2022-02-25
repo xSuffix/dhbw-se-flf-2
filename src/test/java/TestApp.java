@@ -66,7 +66,6 @@ public class TestApp {
         assertNotNull(airportFireTruck.getCabin().getBatteryDisplay());
         assertNotNull(airportFireTruck.getCabin().getSpeedDisplay());
 
-
         //Drive
         assertNotNull(airportFireTruck.getDrive());
         assertNotNull(airportFireTruck.getDrive().getElectricMotors());
@@ -132,8 +131,8 @@ public class TestApp {
     @Test
     @Order(3)
     public void handleParking() {
-        assertTrue(seatsUnoccupied());
         checkMotors(false);
+        assertTrue(seatsUnoccupied());
         checkIfDoorsOpen(true);
         assertFalse(airportFireTruck.getRoofLauncher().isSecondSegmentExtended());
         assertNotSame(airportFireTruck.getFrontLauncher().getState(), LauncherState.ACTIVE);
@@ -176,7 +175,6 @@ public class TestApp {
         driver.rotateSteeringWheel(-5);
         checkDriving(0, 0, 7, 0);
         assertEquals(0, airportFireTruck.getDrive().getCurrentVelocity());
-
     }
 
     @Test
@@ -238,6 +236,58 @@ public class TestApp {
         testRoofLauncher(5, 2500, MixingRatio.D);
         armFrontLauncher();
         testFrontLauncher(5, 1000, MixingRatio.B);
+    }
+
+    @Test
+    @Order(9)
+    public void keyCardParking() {
+        IDCard idCard = new IDCard(new RFIDChip());
+        new IDCardEncoder().encode(airportFireTruck.getCentralUnit(), idCard, "Red Adair", "password");
+        driver.takeSeat();
+        operator.takeSeat();
+        driver.pressInnerDoorButton();
+        operator.pressInnerDoorButton();
+        assertFalse(seatsUnoccupied());
+        checkIfDoorsOpen(false);
+
+        // Start scenario
+        operator.pressInnerDoorButton();
+        operator.leaveSeat();
+        driver.pressInnerDoorButton();
+        driver.leaveSeat();
+        checkIfDoorsOpen(true);
+        assertTrue(seatsUnoccupied());
+
+        driver.useIDCard(idCard);
+        assertFalse(airportFireTruck.getCabin().getLeftDoor().isOpen());
+        assertFalse(airportFireTruck.getCabin().getRightDoor().isOpen());
+        assertTrue(airportFireTruck.getCabin().getLeftDoor().isLocked());
+        assertTrue(airportFireTruck.getCabin().getRightDoor().isLocked());
+
+        airportFireTruck.getCabin().getRightDoor().getOuterButton().press();
+        assertFalse(airportFireTruck.getCabin().getLeftDoor().isOpen());
+    }
+
+    @Test
+    @Order(10)
+    public void keyCardInspectionAndEmergency() {
+        IDCard idCard = new IDCard(new RFIDChip());
+        new IDCardEncoder().encode(airportFireTruck.getCentralUnit(), idCard, "Red Adair", "password");
+        airportFireTruck.getCabin().getLeftDoor().toggleLock();
+        airportFireTruck.getCabin().getRightDoor().toggleLock();
+        checkIfDoorsOpen(false);
+        assertTrue(airportFireTruck.getCabin().getLeftDoor().isLocked());
+        assertTrue(airportFireTruck.getCabin().getRightDoor().isLocked());
+
+        // Start scenario
+        driver.useIDCard(idCard);
+        checkIfDoorsOpen(true);
+        operator.takeSeat();
+        operator.pressInnerDoorButton();
+        driver.takeSeat();
+        driver.pressInnerDoorButton();
+        assertFalse(seatsUnoccupied());
+        checkIfDoorsOpen(false);
     }
 
     @Test

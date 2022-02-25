@@ -46,14 +46,15 @@ public class CentralUnit implements ICentralUnit {
 
     @Override
     public void checkAuthentication(byte[] encryptedToken) {
-        // TODO: Check for Token length
         String token = idCardDecoder.decrypt(encryptedToken);
         if (token != null) {
             String id = getID();
             String name = token.substring(id.length() + 1, token.length() - code.length() - 1);
-            boolean validToken = token.equals(id + "-" + name + "-" + code);
-            System.out.println(name);
-            System.out.println(validToken);
+            boolean validToken = token.equals(id + "-" + name + "-" + code) && authorizedPersons.contains(name);
+            if (validToken) {
+                airportFireTruck.getCabin().getLeftDoor().toggleLock();
+                airportFireTruck.getCabin().getRightDoor().toggleLock();
+            }
         }
     }
 

@@ -1,5 +1,6 @@
 package staff;
 
+import id_card.IDCard;
 import truck.IAirportFireTruck;
 
 public class Driver {
@@ -11,6 +12,10 @@ public class Driver {
 
     public void takeSeat() {
         airportFireTruck.getCabin().getSeat(0).sitDown();
+    }
+
+    public void leaveSeat() {
+        airportFireTruck.getCabin().getSeat(0).standUp();
     }
 
     public void pressInnerDoorButton() {
@@ -79,5 +84,9 @@ public class Driver {
 
     public void turnLauncherKnobLeft() {
         airportFireTruck.getCabin().getFrontLauncherKnob().turnLeft();
+    }
+
+    public void useIDCard(IDCard idCard) {
+        airportFireTruck.getCabin().getLeftDoor().getIdCardReceiver().read(idCard);
     }
 }

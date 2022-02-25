@@ -46,6 +46,10 @@ public class BusDoor {
         return isOpen;
     }
 
+    public boolean isLocked() {
+        return isLocked;
+    }
+
     public Button getInnerButton() {
         return innerButton;
     }
