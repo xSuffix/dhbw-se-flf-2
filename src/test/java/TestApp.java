@@ -19,10 +19,11 @@ public class TestApp {
     private AirportFireTruck airportFireTruck;
     private Driver driver;
     private Operator operator;
+    private boolean enableSmartJoySticks = false;
 
     @BeforeEach
     public void setup() {
-        airportFireTruck = new AirportFireTruck.Builder().build();
+        airportFireTruck = new AirportFireTruck.Builder(enableSmartJoySticks).build();
         driver = new Driver(airportFireTruck);
         operator = new Operator(airportFireTruck);
         airportFireTruck.chargeTruck(airportFireTruck.getDrive().getBatteryBox().getMaxCharge());
