@@ -30,11 +30,11 @@ public class Operator {
         airportFireTruck.getCabin().getRightJoystick().getBackSwitch().press();
     }
 
-    public void turnLauchnerKnobToRight() {
+    public void turnLauncherKnobRight() {
         airportFireTruck.getCabin().getRoofLauncherKnob().turnRight();
     }
 
-    public void turnLauchnerKnobToLeft() {
+    public void turnLauncherKnobLeft() {
         airportFireTruck.getCabin().getRoofLauncherKnob().turnLeft();
     }
 

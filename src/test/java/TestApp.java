@@ -279,13 +279,13 @@ public class TestApp {
         }
 
         for (int j = 0; j < i; j++)
-            operator.turnLauchnerKnobToRight();
+            operator.turnLauncherKnobRight();
 
         for (int j = 0; j < iters; j++)
             operator.pressJoyStickFrontBackSwitch();
 
         for (int j = 0; j < i; j++)
-            operator.turnLauchnerKnobToLeft();
+            operator.turnLauncherKnobLeft();
 
         assertEquals(waterLevel - amount * iters * (((double) 100 - (ratio.getValue())) / 100), airportFireTruck.getWaterTank().getCurrentCapacity());
         assertEquals(foamLevel - amount * iters * (((double) ratio.getValue()) / 100), airportFireTruck.getFoamPowderTank().getCurrentCapacity());
