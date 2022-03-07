@@ -1,5 +1,7 @@
 package truck.water;
 
+import java.util.Arrays;
+
 public class Tank implements ITank {
 
     private final ExtinguishingType type;
@@ -38,10 +40,7 @@ public class Tank implements ITank {
             }
         }
         ExtinguishingType[] amountReturned = new ExtinguishingType[amountAvail];
-        // for (ExtinguishingType unit : amountReturned) {
-        //     unit = this.type;
-        // }
-        for (int i = 0; i < amountReturned.length; i++) amountReturned[i] = this.type;
+        Arrays.fill(amountReturned, this.type);
         return amountReturned;
     }
 

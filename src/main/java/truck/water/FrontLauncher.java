@@ -4,8 +4,8 @@ public class FrontLauncher extends WaterLauncher {
 
     private int rotation;
 
-    public FrontLauncher(IMixingUnit mixingUnit) {
-        super(mixingUnit);
+    public FrontLauncher(Object mixingUnit, ITank waterTank, ITank foamTank) {
+        super(mixingUnit, waterTank, foamTank);
         this.rotation = 0;
     }
 

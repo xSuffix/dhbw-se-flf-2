@@ -5,8 +5,8 @@ public class RoofLauncher extends WaterLauncher {
     private int firstSegmentRotation;
     private boolean secondSegmentExtended;
 
-    public RoofLauncher(IMixingUnit mixingUnit) {
-        super(mixingUnit);
+    public RoofLauncher(Object mixingUnit, ITank waterTank, ITank foamTank) {
+        super(mixingUnit, waterTank, foamTank);
         firstSegmentRotation = 0;
         secondSegmentExtended = false;
     }

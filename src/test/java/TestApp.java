@@ -21,10 +21,10 @@ public class TestApp {
     private AirportFireTruck airportFireTruck;
     private Driver driver;
     private Operator operator;
-    private final boolean enableSmartJoySticks = false;
 
     @BeforeEach
     public void setup() {
+        boolean enableSmartJoySticks = false;
         airportFireTruck = new AirportFireTruck.Builder(enableSmartJoySticks).build();
         driver = new Driver(airportFireTruck);
         operator = new Operator(airportFireTruck);

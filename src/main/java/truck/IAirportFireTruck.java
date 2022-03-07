@@ -3,7 +3,10 @@ package truck;
 import cabin.Cabin;
 import drive.IDrive;
 import lights.Light;
-import truck.water.*;
+import truck.water.FloorSprayingNozzle;
+import truck.water.FrontLauncher;
+import truck.water.ITank;
+import truck.water.RoofLauncher;
 
 public interface IAirportFireTruck {
 
@@ -43,7 +46,7 @@ public interface IAirportFireTruck {
 
     ITank getFoamPowderTank();
 
-    IMixingUnit getMixingUnit();
+    Object getMixingUnit();
 
     FrontLauncher getFrontLauncher();
 

@@ -6,6 +6,10 @@ import drive.battery.BatteryBox;
 import lights.*;
 import truck.water.*;
 
+import java.io.File;
+import java.net.URL;
+import java.net.URLClassLoader;
+
 public class AirportFireTruck implements IAirportFireTruck {
     private final Light[] headLightsFrontLeft;
     private final Light[] headLightsFrontRight;
@@ -23,7 +27,7 @@ public class AirportFireTruck implements IAirportFireTruck {
     private final ICentralUnit centralUnit;
     private final ITank waterTank;
     private final ITank foamPowderTank;
-    private final IMixingUnit mixingUnit;
+    private final Object mixingUnit;
     private final FrontLauncher frontLauncher;
     private final RoofLauncher roofLauncher;
     private final FloorSprayingNozzle[] floorSprayingNozzles;
@@ -126,7 +130,7 @@ public class AirportFireTruck implements IAirportFireTruck {
         return foamPowderTank;
     }
 
-    public IMixingUnit getMixingUnit() {
+    public Object getMixingUnit() {
         return mixingUnit;
     }
 
@@ -144,6 +148,8 @@ public class AirportFireTruck implements IAirportFireTruck {
 
 
     public static class Builder {
+        private final Configuration config = Configuration.INSTANCE;
+
         private final HeadLight[] headLightsFrontLeft;
         private final HeadLight[] headLightsFrontRight;
         private final HeadLight[] headLightsRoof;
@@ -158,7 +164,7 @@ public class AirportFireTruck implements IAirportFireTruck {
         private final Drive drive;
         private final Tank waterTank;
         private final Tank foamPowderTank;
-        private final MixingUnit mixingUnit;
+        private final Object mixingUnit;
         private final FrontLauncher frontLauncher;
         private final RoofLauncher roofLauncher;
         private final FloorSprayingNozzle[] floorSprayingNozzles;
@@ -229,17 +235,34 @@ public class AirportFireTruck implements IAirportFireTruck {
 
             this.waterTank = new Tank(ExtinguishingType.WATER, 75, 45, 30);
             this.foamPowderTank = new Tank(ExtinguishingType.FOAM_POWDER, 75, 45, 10);
-            this.mixingUnit = new MixingUnit(this.waterTank, this.foamPowderTank);
-            this.frontLauncher = new FrontLauncher(this.mixingUnit);
-            this.roofLauncher = new RoofLauncher(this.mixingUnit);
+            this.mixingUnit = buildMixingUnit();
+            this.frontLauncher = new FrontLauncher(this.mixingUnit, this.waterTank, this.foamPowderTank);
+            this.roofLauncher = new RoofLauncher(this.mixingUnit, this.waterTank, this.foamPowderTank);
             this.floorSprayingNozzles = new FloorSprayingNozzle[7];
             for (int i = 0; i < floorSprayingNozzles.length; i++) {
                 this.floorSprayingNozzles[i] = new FloorSprayingNozzle(this.waterTank);
             }
         }
 
+        public Object buildMixingUnit() {
+            Object mixingUnitPort = null;
+            try {
+                URL[] urls = {new File(config.pathToMixingUnitJavaArchive + config.mixingUnitJarArchive).toURI().toURL()};
+                URLClassLoader urlClassLoader = new URLClassLoader(urls, AirportFireTruck.class.getClassLoader());
+
+                Class<?> mixingUnitClass = Class.forName("MixingUnit", true, urlClassLoader);
+                Object mixingUnitInstance = mixingUnitClass.getMethod("getInstance").invoke(null);
+
+                mixingUnitPort = mixingUnitClass.getDeclaredField("port").get(mixingUnitInstance);
+            } catch (Exception e) {
+                System.out.println("Hi");
+                e.printStackTrace();
+            }
+            return mixingUnitPort;
+        }
+
         public AirportFireTruck build() {
-            return new AirportFireTruck(this,smartJoySticks);
+            return new AirportFireTruck(this, smartJoySticks);
         }
 
     }

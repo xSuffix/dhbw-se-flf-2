@@ -24,14 +24,14 @@ public class Cabin {
         this.rightDoor = new BusDoor(centralUnit, ButtonType.RIGHT_DOOR);
         this.seats = new Seat[SeatPositions.values().length];
         for (int i = 0; i < seats.length; i++) seats[i] = new Seat(SeatPositions.values()[i]);
-        if (smartJoySticks){
+        if (smartJoySticks) {
             this.leftJoystick = new SmartJoyStick(centralUnit, JoystickType.LEFT);
             this.rightJoystick = new SmartJoyStick(centralUnit, JoystickType.RIGHT);
         } else {
             this.leftJoystick = new Joystick(centralUnit, JoystickType.LEFT);
             this.rightJoystick = new Joystick(centralUnit, JoystickType.RIGHT);
         }
-        
+
         this.controlPanel = new ControlPanel(centralUnit);
         this.frontLauncherKnob = new TurningKnob<>(centralUnit, TurningKnobType.FRONT_LAUNCHER, FrontLauncherOutput.A);
         this.roofLauncherKnob = new TurningKnob<>(centralUnit, TurningKnobType.ROOF_LAUNCHER, RoofLauncherOutput.A);
