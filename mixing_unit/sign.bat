@@ -1,0 +1,2 @@
+"C:\Program Files\Java\jdk-17.0.2\bin\jarsigner" -keystore keystore.jks -storepass flf_2022_se2 build\libs\MixingUnit.jar server
+"C:\Program Files\Java\jdk-17.0.2\bin\jarsigner" -keystore keystore.jks -storepass flf_2022_se2 jar\MixingUnit.jar server
