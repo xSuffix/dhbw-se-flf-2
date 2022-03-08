@@ -2,10 +2,10 @@ package drive;
 
 public class ElectricMotor {
 
-    private boolean isStarted;
+    private boolean started;
 
     public ElectricMotor() {
-        this.isStarted = false;
+        this.started = false;
     }
 
     public int rotate(int vel) {
@@ -13,15 +13,19 @@ public class ElectricMotor {
     }
 
     public void start() {
-        this.isStarted = true;
+        this.started = true;
     }
 
     public void stop() {
-        this.isStarted = false;
+        this.started = false;
     }
 
     public boolean isStarted() {
-        return this.isStarted;
+        return this.started;
+    }
+
+    public void setStarted(boolean started) {
+        this.started = started;
     }
 
 }

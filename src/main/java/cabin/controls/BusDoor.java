@@ -1,5 +1,7 @@
 package cabin.controls;
 
+import cabin.controls.button.Button;
+import cabin.controls.button.ButtonType;
 import id_card.IDCardReceiver;
 import truck.ICentralUnit;
 
@@ -20,24 +22,20 @@ public class BusDoor {
     }
 
     public void toggleOpen() {
-        if (this.isOpen) close();
-        else open();
+        setOpenIfUnlocked(!isOpen);
     }
 
-    public void close() {
-        this.isOpen = false;
-    }
-
-    public void open() {
-        if (!this.isLocked) this.isOpen = true;
+    public void setOpenIfUnlocked(boolean open) {
+        if (open) isOpen = false;
+        else if (!isLocked) isOpen = true;
     }
 
     public void toggleLock() {
         if (isLocked) {
             isLocked = false;
-            open();
+            setOpenIfUnlocked(true);
         } else {
-            close();
+            setOpenIfUnlocked(false);
             isLocked = true;
         }
     }

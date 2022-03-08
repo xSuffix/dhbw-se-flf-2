@@ -1,6 +1,10 @@
 package truck;
 
-import cabin.controls.*;
+import cabin.controls.FrontLauncherOutput;
+import cabin.controls.PedalType;
+import cabin.controls.RoofLauncherOutput;
+import cabin.controls.TurningKnobType;
+import cabin.controls.button.ButtonType;
 import id_card.IDCardDecoder;
 import lights.Light;
 import truck.water.LauncherState;
@@ -58,76 +62,39 @@ public class CentralUnit implements ICentralUnit {
         }
     }
 
-    //rotates axles to the exact rotation of steering wheel plus turn on
+    // rotates axles to the exact rotation of steering wheel plus turn on
     @Override
     public void turnSteeringWheel(int rotation) {
         airportFireTruck.getDrive().rotateAxles(rotation);
-        if (rotation < 0) {
-            for (Light light : airportFireTruck.getTurnSignalLightsLeft()) {
-                light.turnOn();
-            }
-            for (Light light : airportFireTruck.getTurnSignalLightsRight()) {
-                light.turnOff();
-            }
-        } else if (rotation > 0) {
-            for (Light light : airportFireTruck.getTurnSignalLightsLeft()) {
-                light.turnOff();
-            }
-            for (Light light : airportFireTruck.getTurnSignalLightsRight()) {
-                light.turnOn();
-            }
-        } else {
-            for (Light light : airportFireTruck.getTurnSignalLightsLeft()) {
-                light.turnOff();
-            }
-            for (Light light : airportFireTruck.getTurnSignalLightsRight()) {
-                light.turnOff();
-            }
-        }
+        for (Light light : airportFireTruck.getTurnSignalLightsLeft()) light.setOn(rotation < 0);
+        for (Light light : airportFireTruck.getTurnSignalLightsRight()) light.setOn(rotation > 0);
     }
 
     @Override
-    public void buttonPress(ButtonType type) {
+    public void buttonPress(ButtonType type, boolean state) {
         switch (type) {
-            case ELECTRIC_MOTOR -> {
-                if (airportFireTruck.getDrive().motorsOn()) airportFireTruck.getDrive().stopMotors();
-                else airportFireTruck.getDrive().startMotors();
-            }
+            case ELECTRIC_MOTOR -> airportFireTruck.getDrive().setMotorStarted(state);
             case BLUE_LIGHT -> {
-                for (Light light : airportFireTruck.getBlueLights()) {
-                    light.toggle();
-                }
+                for (Light light : airportFireTruck.getBlueLights()) light.setOn(state);
             }
             case WARNING_LIGHT -> {
-                for (Light light : airportFireTruck.getWarningLights()) {
-                    light.toggle();
-                }
+                for (Light light : airportFireTruck.getWarningLights()) light.setOn(state);
             }
             case ROOF_LIGHT -> {
-                for (Light light : airportFireTruck.getHeadLightsRoof()) {
-                    light.toggle();
-                }
+                for (Light light : airportFireTruck.getHeadLightsRoof()) light.setOn(state);
             }
             case HEAD_LIGHT -> {
-                for (Light light : airportFireTruck.getHeadLightsFrontLeft()) {
-                    light.toggle();
-                }
-                for (Light light : airportFireTruck.getHeadLightsFrontRight()) {
-                    light.toggle();
-                }
+                for (Light light : airportFireTruck.getHeadLightsFrontLeft()) light.setOn(state);
+                for (Light light : airportFireTruck.getHeadLightsFrontRight()) light.setOn(state);
             }
             case SIDE_LIGHT -> {
-                for (Light light : airportFireTruck.getSideLightsLeft()) {
-                    light.toggle();
-                }
-                for (Light light : airportFireTruck.getSideLightsRight()) {
-                    light.toggle();
-                }
+                for (Light light : airportFireTruck.getSideLightsLeft()) light.setOn(state);
+                for (Light light : airportFireTruck.getSideLightsRight()) light.setOn(state);
             }
             case FIRE_SELF_PROTECTION -> airportFireTruck.useFloorNozzles(100);
 
-            case LEFT_DOOR -> airportFireTruck.getCabin().getLeftDoor().toggleOpen();
-            case RIGHT_DOOR -> airportFireTruck.getCabin().getRightDoor().toggleOpen();
+            case LEFT_DOOR -> airportFireTruck.getCabin().getLeftDoor().setOpenIfUnlocked(state);
+            case RIGHT_DOOR -> airportFireTruck.getCabin().getRightDoor().setOpenIfUnlocked(state);
 
             // joystick for front launcher
             case LEFT_JOYSTICK_LEFT -> airportFireTruck.getFrontLauncher().pan();
@@ -165,7 +132,7 @@ public class CentralUnit implements ICentralUnit {
             case GAS -> airportFireTruck.getDrive().drive(airportFireTruck.getDrive().getCurrentVelocity() + 4);
             case BRAKE -> airportFireTruck.getDrive().drive(airportFireTruck.getDrive().getCurrentVelocity() - 4);
         }
-        //update speed/battery displays while driving
+        // update speed/battery displays while driving
         airportFireTruck.getCabin().getSpeedDisplay().setValue(String.valueOf(airportFireTruck.getDrive().getCurrentVelocity()));
         airportFireTruck.getCabin().getBatteryDisplay().setValue(String.valueOf(airportFireTruck.getDrive().getBatteryPercentage()));
     }

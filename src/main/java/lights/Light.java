@@ -13,12 +13,8 @@ public abstract class Light {
         return this.on;
     }
 
-    public void turnOn() {
-        this.on = true;
-    }
-
-    public void turnOff() {
-        this.on = false;
+    public void setOn(boolean on) {
+        this.on = on;
     }
 
     public void toggle() {

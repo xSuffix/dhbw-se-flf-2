@@ -20,16 +20,8 @@ public class Drive implements IDrive {
         this.currentVelocity = 0;
     }
 
-    public void stopMotors() {
-        for (ElectricMotor motor : electricMotors) {
-            motor.stop();
-        }
-    }
-
-    public void startMotors() {
-        for (ElectricMotor motor : electricMotors) {
-            motor.start();
-        }
+    public void setMotorStarted(boolean start) {
+        for (ElectricMotor motor : electricMotors) motor.setStarted(start);
     }
 
     public boolean motorsOn() {

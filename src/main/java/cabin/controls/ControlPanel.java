@@ -1,5 +1,7 @@
 package cabin.controls;
 
+import cabin.controls.button.Button;
+import cabin.controls.button.ButtonType;
 import truck.ICentralUnit;
 
 public class ControlPanel {

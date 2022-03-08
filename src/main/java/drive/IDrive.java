@@ -4,9 +4,7 @@ import drive.battery.BatteryBox;
 import drive.battery.BatteryManagement;
 
 public interface IDrive {
-    void stopMotors();
-
-    void startMotors();
+    void setMotorStarted(boolean start);
 
     boolean motorsOn();
 

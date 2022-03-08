@@ -1,4 +1,4 @@
-package cabin.controls;
+package cabin.controls.button;
 
 public enum ButtonType {
     ELECTRIC_MOTOR,
