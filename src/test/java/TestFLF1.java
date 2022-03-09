@@ -16,7 +16,7 @@ import truck.water.MixingRatio;
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class TestApp {
+public class TestFLF1 {
 
     private AirportFireTruck airportFireTruck;
     private Driver driver;
@@ -290,7 +290,7 @@ public class TestApp {
         checkIfDoorsOpen(false);
     }
 
-    public void testRoofLauncher(int iters, int amount, MixingRatio ratio) {
+    public void testRoofLauncher(int iterations, int amount, MixingRatio ratio) {
         int waterLevel = airportFireTruck.getWaterTank().getCurrentCapacity();
         int foamLevel = airportFireTruck.getFoamPowderTank().getCurrentCapacity();
 
@@ -313,18 +313,18 @@ public class TestApp {
         for (int j = 0; j < i; j++)
             operator.turnLauncherKnobRight();
 
-        for (int j = 0; j < iters; j++)
+        for (int j = 0; j < iterations; j++)
             operator.pressJoyStickFrontBackSwitch();
 
         for (int j = 0; j < i; j++)
             operator.turnLauncherKnobLeft();
 
-        assertEquals(waterLevel - amount * iters * (((double) 100 - (ratio.getValue())) / 100), airportFireTruck.getWaterTank().getCurrentCapacity());
-        assertEquals(foamLevel - amount * iters * (((double) ratio.getValue()) / 100), airportFireTruck.getFoamPowderTank().getCurrentCapacity());
+        assertEquals(waterLevel - amount * iterations * (((double) 100 - (ratio.getValue())) / 100), airportFireTruck.getWaterTank().getCurrentCapacity());
+        assertEquals(foamLevel - amount * iterations * (((double) ratio.getValue()) / 100), airportFireTruck.getFoamPowderTank().getCurrentCapacity());
 
     }
 
-    public void testFrontLauncher(int iters, int amount, MixingRatio ratio) {
+    public void testFrontLauncher(int iterations, int amount, MixingRatio ratio) {
         int waterLevel = airportFireTruck.getWaterTank().getCurrentCapacity();
         int foamLevel = airportFireTruck.getFoamPowderTank().getCurrentCapacity();
 
@@ -334,21 +334,17 @@ public class TestApp {
             case 5 -> i = 2;
             case 10 -> i = 3;
         }
-        for (int j = 0; j < i; j++)
-            driver.pressJoyStickFrontRightButton();
+
+        for (int j = 0; j < i; j++) driver.pressJoyStickFrontRightButton();
+
         assertEquals(ratio.getValue(), airportFireTruck.getFrontLauncher().getRatio().getValue());
 
-        for (int j = 0; j < (amount / 500) - 1; j++)
-            driver.turnLauncherKnobRight();
+        for (int j = 0; j < (amount / 500) - 1; j++) driver.turnLauncherKnobRight();
+        for (int j = 0; j < iterations; j++) driver.pressJoyStickFrontBackSwitch();
+        for (int j = 0; j < (amount / 500) - 1; j++) driver.turnLauncherKnobLeft();
 
-        for (int j = 0; j < iters; j++)
-            driver.pressJoyStickFrontBackSwitch();
-
-        for (int j = 0; j < (amount / 500) - 1; j++)
-            driver.turnLauncherKnobLeft();
-
-        assertEquals(waterLevel - amount * iters * (((double) 100 - (ratio.getValue())) / 100), airportFireTruck.getWaterTank().getCurrentCapacity());
-        assertEquals(foamLevel - amount * iters * (((double) ratio.getValue()) / 100), airportFireTruck.getFoamPowderTank().getCurrentCapacity());
+        assertEquals(waterLevel - amount * iterations * (((double) 100 - (ratio.getValue())) / 100), airportFireTruck.getWaterTank().getCurrentCapacity());
+        assertEquals(foamLevel - amount * iterations * (((double) ratio.getValue()) / 100), airportFireTruck.getFoamPowderTank().getCurrentCapacity());
     }
 
     public void armFrontLauncher() {

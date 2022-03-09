@@ -4,7 +4,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class WaterLauncher {
+public abstract class Launcher {
 
     private final Object mixingUnit;
     private final ITank waterTank;
@@ -12,7 +12,7 @@ public abstract class WaterLauncher {
     protected LauncherState state;
     private MixingRatio ratio;
 
-    public WaterLauncher(Object mixingUnit, ITank waterTank, ITank foamTank) {
+    public Launcher(Object mixingUnit, ITank waterTank, ITank foamTank) {
         this.mixingUnit = mixingUnit;
         this.state = LauncherState.INACTIVE;
         this.ratio = MixingRatio.A;
@@ -21,7 +21,7 @@ public abstract class WaterLauncher {
     }
 
     @SuppressWarnings("unchecked")
-    public void sprayWater(int amount) {
+    public void sprayExtinguisher(int amount) {
         ExtinguishingType[] water = waterTank.getAgent(amount - ((amount * ratio.getValue()) / 100));
         ExtinguishingType[] foam = foamTank.getAgent((amount * ratio.getValue()) / 100);
         List<Object> mixedAgent = new ArrayList<>();
@@ -37,7 +37,9 @@ public abstract class WaterLauncher {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("Sprühe " + mixedAgent.size() + " Einheiten Löschmittel!");
+
+        final int size = mixedAgent.size();
+        System.out.printf("[Launcher] Spraying %d units of extinguisher (%.2f%% Water, %.2f%% Foam)%n", size, (float) mixedAgent.stream().filter(type -> type == ExtinguishingType.WATER).count() / size, (float) mixedAgent.stream().filter(type -> type == ExtinguishingType.FOAM_POWDER).count() / size);
     }
 
     public LauncherState getState() {

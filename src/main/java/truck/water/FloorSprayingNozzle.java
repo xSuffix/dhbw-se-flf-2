@@ -9,7 +9,7 @@ public class FloorSprayingNozzle {
 
     public void sprayWater(int amount) {
         if (amount > 100) amount = 100;
-        System.out.println("Sprühe " + waterTank.getAgent(amount).length + " Einheiten Wasser!");
+        System.out.println("[FloorSprayingNozzle] Spraying " + waterTank.getAgent(amount).length + " units of water");
     }
 
 }

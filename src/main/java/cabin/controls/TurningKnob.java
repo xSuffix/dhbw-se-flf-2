@@ -29,22 +29,12 @@ public class TurningKnob<E extends Enum<E>> implements ITurningKnob<E> {
     }
 
     public void turnLeft() {
-        int index = enumConstants.indexOf(state);
-
-        if (state != min) {
-            state = enumConstants.get(index - 1);
-        }
-
+        if (state != min) state = enumConstants.get(enumConstants.indexOf(state) - 1);
         centralUnit.turningKnobTurn(this.type, state);
     }
 
     public void turnRight() {
-        int index = enumConstants.indexOf(state);
-        System.out.println(state);
-
-        if (state != max) {
-            state = enumConstants.get(index + 1);
-        }
+        if (state != max) state = enumConstants.get(enumConstants.indexOf(state) + 1);
         centralUnit.turningKnobTurn(this.type, state);
     }
 

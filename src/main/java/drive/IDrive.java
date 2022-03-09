@@ -1,7 +1,7 @@
 package drive;
 
-import drive.battery.BatteryBox;
 import drive.battery.BatteryManagement;
+import drive.battery.IBatteryBox;
 
 public interface IDrive {
     void setMotorStarted(boolean start);
@@ -26,7 +26,7 @@ public interface IDrive {
 
     BatteryManagement getBatteryManagement();
 
-    BatteryBox getBatteryBox();
+    IBatteryBox getBatteryBox();
 
     SteeringAxle[] getFrontAxles();
 

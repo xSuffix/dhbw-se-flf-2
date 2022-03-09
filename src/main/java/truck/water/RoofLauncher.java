@@ -1,6 +1,6 @@
 package truck.water;
 
-public class RoofLauncher extends WaterLauncher {
+public class RoofLauncher extends Launcher {
 
     private int firstSegmentRotation;
     private boolean secondSegmentExtended;

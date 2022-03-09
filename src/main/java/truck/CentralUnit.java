@@ -99,12 +99,12 @@ public class CentralUnit implements ICentralUnit {
             // joystick for front launcher
             case LEFT_JOYSTICK_LEFT -> airportFireTruck.getFrontLauncher().pan();
             case LEFT_JOYSTICK_RIGHT -> airportFireTruck.getFrontLauncher().switchRatio();
-            case LEFT_JOYSTICK_BACK -> airportFireTruck.getFrontLauncher().sprayWater(frontLauncherOutput);
+            case LEFT_JOYSTICK_BACK -> airportFireTruck.getFrontLauncher().sprayExtinguisher(frontLauncherOutput);
 
             // joystick for roof launcher
             case RIGHT_JOYSTICK_LEFT -> airportFireTruck.getRoofLauncher().extend();
             case RIGHT_JOYSTICK_RIGHT -> airportFireTruck.getRoofLauncher().switchRatio();
-            case RIGHT_JOYSTICK_BACK -> airportFireTruck.getRoofLauncher().sprayWater(roofLauncherOutput);
+            case RIGHT_JOYSTICK_BACK -> airportFireTruck.getRoofLauncher().sprayExtinguisher(roofLauncherOutput);
 
             case SMART_JOYSTICK_LEFT -> {
                 if (airportFireTruck.getFrontLauncher().getState() == LauncherState.INACTIVE)

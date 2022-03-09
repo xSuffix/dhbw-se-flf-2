@@ -9,13 +9,11 @@ public class Axle {
 
     public Axle() {
         this.breakDiscsLeft = new BreakDisc[3];
-        for (int i = 0; i < breakDiscsLeft.length; i++) {
-            breakDiscsLeft[i] = new BreakDisc();
-        }
+        for (int i = 0; i < breakDiscsLeft.length; i++) breakDiscsLeft[i] = new BreakDisc();
+
         this.breakDiscsRight = new BreakDisc[3];
-        for (int i = 0; i < breakDiscsRight.length; i++) {
-            breakDiscsRight[i] = new BreakDisc();
-        }
+        for (int i = 0; i < breakDiscsRight.length; i++) breakDiscsRight[i] = new BreakDisc();
+
         this.leftWheel = new Wheel();
         this.rightWheel = new Wheel();
     }

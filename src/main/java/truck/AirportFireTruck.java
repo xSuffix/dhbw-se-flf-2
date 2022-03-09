@@ -3,6 +3,8 @@ package truck;
 import cabin.Cabin;
 import drive.*;
 import drive.battery.BatteryBox;
+import drive.battery.Receiver;
+import drive.battery.ThreePoleChargingPort;
 import lights.*;
 import truck.water.*;
 
@@ -172,26 +174,30 @@ public class AirportFireTruck implements IAirportFireTruck {
 
         public Builder(boolean smartJoySticks) {
             this.smartJoySticks = smartJoySticks;
-            this.headLightsFrontLeft = new HeadLight[3];
-            this.headLightsFrontRight = new HeadLight[3];
-            for (int i = 0; i < headLightsFrontLeft.length; i++) {
+
+            final int headLightsFront = 3;
+            this.headLightsFrontLeft = new HeadLight[headLightsFront];
+            this.headLightsFrontRight = new HeadLight[headLightsFront];
+            for (int i = 0; i < headLightsFront; i++) {
                 this.headLightsFrontLeft[i] = new HeadLight();
                 this.headLightsFrontRight[i] = new HeadLight();
             }
+
             this.headLightsRoof = new HeadLight[4];
-            for (int i = 0; i < headLightsRoof.length; i++) {
-                this.headLightsRoof[i] = new HeadLight();
-            }
-            this.sideLightsLeft = new HeadLight[5];
-            this.sideLightsRight = new HeadLight[5];
-            for (int i = 0; i < sideLightsLeft.length; i++) {
+            for (int i = 0; i < headLightsRoof.length; i++) this.headLightsRoof[i] = new HeadLight();
+
+            final int sideLights = 5;
+            this.sideLightsLeft = new HeadLight[sideLights];
+            this.sideLightsRight = new HeadLight[sideLights];
+            for (int i = 0; i < sideLights; i++) {
                 this.sideLightsLeft[i] = new HeadLight();
                 this.sideLightsRight[i] = new HeadLight();
             }
 
-            this.turnSignalLightsLeft = new TurnSignalLight[2];
-            this.turnSignalLightsRight = new TurnSignalLight[2];
-            for (int i = 0; i < turnSignalLightsLeft.length; i++) {
+            final int turnSignalLights = 2;
+            this.turnSignalLightsLeft = new TurnSignalLight[turnSignalLights];
+            this.turnSignalLightsRight = new TurnSignalLight[turnSignalLights];
+            for (int i = 0; i < turnSignalLights; i++) {
                 this.turnSignalLightsLeft[i] = new TurnSignalLight();
                 this.turnSignalLightsRight[i] = new TurnSignalLight();
             }
@@ -200,38 +206,25 @@ public class AirportFireTruck implements IAirportFireTruck {
             this.brakeLightRight = new BrakeLight();
 
             this.blueLights = new BlueLight[10];
-            // front small
-            for (int i = 0; i < 2; i++) {
-                this.blueLights[i] = new BlueLight(1);
-            }
-            // front roof big
-            for (int i = 2; i < 6; i++) {
-                this.blueLights[i] = new BlueLight(4);
-            }
-            // back roof medium
-            for (int i = 6; i < 10; i++) {
-                this.blueLights[i] = new BlueLight(2);
-            }
+            for (int i = 0; i < 2; i++) this.blueLights[i] = new BlueLight(1); // front small
+            for (int i = 2; i < 6; i++) this.blueLights[i] = new BlueLight(4); // front roof big
+            for (int i = 6; i < 10; i++) this.blueLights[i] = new BlueLight(2); // back roof medium
 
             this.warningLights = new WarningLight[2];
-            for (int i = 0; i < warningLights.length; i++) {
-                this.warningLights[i] = new WarningLight(1);
-            }
+            for (int i = 0; i < warningLights.length; i++) this.warningLights[i] = new WarningLight(1);
 
             ElectricMotor[] electricMotors = new ElectricMotor[2];
-            for (int i = 0; i < electricMotors.length; i++) {
-                electricMotors[i] = new ElectricMotor();
-            }
+            for (int i = 0; i < electricMotors.length; i++) electricMotors[i] = new ElectricMotor();
+
             BatteryBox batteryBox = new BatteryBox();
+            Receiver energyReceiver = new ThreePoleChargingPort();
+
             SteeringAxle[] frontAxles = new SteeringAxle[2];
-            for (int i = 0; i < frontAxles.length; i++) {
-                frontAxles[i] = new SteeringAxle();
-            }
+            for (int i = 0; i < frontAxles.length; i++) frontAxles[i] = new SteeringAxle();
+
             Axle[] backAxles = new Axle[2];
-            for (int i = 0; i < backAxles.length; i++) {
-                backAxles[i] = new Axle();
-            }
-            this.drive = new Drive(electricMotors, batteryBox, frontAxles, backAxles);
+            for (int i = 0; i < backAxles.length; i++) backAxles[i] = new Axle();
+            this.drive = new Drive(electricMotors, batteryBox, energyReceiver, frontAxles, backAxles);
 
             this.waterTank = new Tank(ExtinguishingType.WATER, 75, 45, 30);
             this.foamPowderTank = new Tank(ExtinguishingType.FOAM_POWDER, 75, 45, 10);
@@ -239,9 +232,9 @@ public class AirportFireTruck implements IAirportFireTruck {
             this.frontLauncher = new FrontLauncher(this.mixingUnit, this.waterTank, this.foamPowderTank);
             this.roofLauncher = new RoofLauncher(this.mixingUnit, this.waterTank, this.foamPowderTank);
             this.floorSprayingNozzles = new FloorSprayingNozzle[7];
-            for (int i = 0; i < floorSprayingNozzles.length; i++) {
+            for (int i = 0; i < floorSprayingNozzles.length; i++)
                 this.floorSprayingNozzles[i] = new FloorSprayingNozzle(this.waterTank);
-            }
+
         }
 
         public Object buildMixingUnit() {
@@ -255,7 +248,6 @@ public class AirportFireTruck implements IAirportFireTruck {
 
                 mixingUnitPort = mixingUnitClass.getDeclaredField("port").get(mixingUnitInstance);
             } catch (Exception e) {
-                System.out.println("Hi");
                 e.printStackTrace();
             }
             return mixingUnitPort;

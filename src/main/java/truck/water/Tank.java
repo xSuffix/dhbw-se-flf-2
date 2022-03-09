@@ -18,7 +18,7 @@ public class Tank implements ITank {
             for (int j = 0; j < capacity[i].length; j++) {
                 for (int k = 0; k < capacity[i][j].length; k++) {
                     if (capacity[i][j][k] == null && amount > 0) {
-                        capacity[i][j][k] = this.type;
+                        capacity[i][j][k] = type;
                         amount--;
                     }
                 }

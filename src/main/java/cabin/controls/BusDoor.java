@@ -15,10 +15,12 @@ public class BusDoor {
 
     public BusDoor(ICentralUnit centralUnit, ButtonType type) {
         this.isOpen = false;
+        this.isLocked = false;
         this.innerButton = new Button(centralUnit, type);
         this.outerButton = new Button(centralUnit, type);
-        this.isLocked = false;
-        idCardReceiver = new IDCardReceiver(centralUnit);
+        innerButton.sync(outerButton);
+        outerButton.sync(innerButton);
+        this.idCardReceiver = new IDCardReceiver(centralUnit);
     }
 
     public void toggleOpen() {
@@ -26,8 +28,7 @@ public class BusDoor {
     }
 
     public void setOpenIfUnlocked(boolean open) {
-        if (open) isOpen = false;
-        else if (!isLocked) isOpen = true;
+        if (isOpen || !isLocked) isOpen = open;
     }
 
     public void toggleLock() {
