@@ -5,6 +5,7 @@ import lights.Light;
 import staff.Driver;
 import staff.Operator;
 import truck.AirportFireTruck;
+import truck.water.ExtinguishingType;
 import truck.water.LauncherState;
 import truck.water.MixingRatio;
 
@@ -15,6 +16,18 @@ public abstract class FLFTest {
     protected AirportFireTruck airportFireTruck;
     protected Driver driver;
     protected Operator operator;
+
+    public void initialize(boolean enableSmartJoySticks) {
+        airportFireTruck = new AirportFireTruck.Builder(enableSmartJoySticks).build();
+        driver = new Driver(airportFireTruck);
+        operator = new Operator(airportFireTruck);
+        airportFireTruck.chargeTruck(airportFireTruck.getDrive().getBatteryBox().getMaxCharge());
+        airportFireTruck.getWaterTank().fill(airportFireTruck.getWaterTank().getTotalCapacity(), ExtinguishingType.WATER);
+        airportFireTruck.getFoamPowderTank().fill(airportFireTruck.getFoamPowderTank().getTotalCapacity(), ExtinguishingType.FOAM_POWDER);
+        //open doors in parking position!
+        airportFireTruck.getCabin().getRightDoor().getOuterButton().press();
+        airportFireTruck.getCabin().getLeftDoor().getOuterButton().press();
+    }
 
     public void testRoofLauncher(int iterations, int amount, MixingRatio ratio) {
         int waterLevel = airportFireTruck.getWaterTank().getCurrentCapacity();

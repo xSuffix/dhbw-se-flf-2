@@ -1,8 +1,12 @@
 import org.junit.jupiter.api.*;
-import staff.Driver;
-import staff.Operator;
-import truck.AirportFireTruck;
 import truck.water.ExtinguishingType;
+import truck.water.MixingRatio;
+
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 
@@ -10,22 +14,41 @@ public class FLF2Test extends FLFTest {
 
     @BeforeEach
     public void setup() {
-        boolean enableSmartJoySticks = false;
-        airportFireTruck = new AirportFireTruck.Builder(enableSmartJoySticks).build();
-        driver = new Driver(airportFireTruck);
-        operator = new Operator(airportFireTruck);
-        airportFireTruck.chargeTruck(airportFireTruck.getDrive().getBatteryBox().getMaxCharge());
-        airportFireTruck.getWaterTank().fill(airportFireTruck.getWaterTank().getTotalCapacity(), ExtinguishingType.WATER);
-        airportFireTruck.getFoamPowderTank().fill(airportFireTruck.getFoamPowderTank().getTotalCapacity(), ExtinguishingType.FOAM_POWDER);
-        //open doors in parking position!
-        airportFireTruck.getCabin().getRightDoor().getOuterButton().press();
-        airportFireTruck.getCabin().getLeftDoor().getOuterButton().press();
+        initialize(false);
     }
 
     @Test
     @Order(1)
     public void useMixingUnitComponent() {
-        airportFireTruck.getFrontLauncher().sprayExtinguisher(3);
+        final int waterCount = 3;
+        final int foamCount = 1;
+        ExtinguishingType[] water = new ExtinguishingType[waterCount];
+        ExtinguishingType[] foam = new ExtinguishingType[foamCount];
+        for (int i = 0; i < waterCount; i++) water[i] = ExtinguishingType.WATER;
+        for (int i = 0; i < foamCount; i++) foam[i] = ExtinguishingType.FOAM_POWDER;
+
+        Object mixingUnit = airportFireTruck.getMixingUnit();
+        List<Object> mixedAgent;
+
+        try {
+            Class<?>[] argTypes = new Class[]{List.class};
+            List<Object[]> args = new ArrayList<>();
+            args.add(water);
+            args.add(foam);
+
+            Method method = mixingUnit.getClass().getDeclaredMethod("getMixedAgent", argTypes);
+            //noinspection unchecked
+            mixedAgent = (List<Object>) method.invoke(mixingUnit, args);
+            System.out.println(mixedAgent);
+            assertEquals(mixedAgent.stream().filter(o -> o == ExtinguishingType.WATER).count(), waterCount);
+            assertEquals(mixedAgent.stream().filter(o -> o == ExtinguishingType.FOAM_POWDER).count(), foamCount);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        preDeployment();
+        armFrontLauncher();
+        testFrontLauncher(3, 3000, MixingRatio.C);
     }
 
     @Test
