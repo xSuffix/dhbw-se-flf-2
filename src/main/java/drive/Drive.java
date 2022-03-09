@@ -3,7 +3,7 @@ package drive;
 import drive.battery.BatteryBox;
 import drive.battery.BatteryManagement;
 import drive.battery.IBatteryBox;
-import drive.battery.Receiver;
+import drive.battery.charger.Receiver;
 
 public class Drive implements IDrive {
 

@@ -1,4 +1,4 @@
-package drive.battery;
+package drive.battery.cell;
 
 public class Cell extends BatteryCell{
     private boolean isCharged;

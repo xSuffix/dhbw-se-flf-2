@@ -1,4 +1,4 @@
-package drive.battery;
+package drive.battery.charger;
 
 public abstract class Receiver implements IConnector {
     private final ChargingPole[] poles;

@@ -1,4 +1,4 @@
-package drive.battery;
+package drive.battery.cell;
 
 public class MainCell extends BatteryCell{
     
@@ -6,5 +6,5 @@ public class MainCell extends BatteryCell{
         for (int i = 0; i<100;i++)
             addUnit(new SubCell(this));
     }
-    
+
 }

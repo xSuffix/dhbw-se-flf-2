@@ -1,4 +1,4 @@
-package drive.battery;
+package drive.battery.charger;
 
 public class EChargingStation implements I1PoleConnector {
     private final int chargingSpeed;

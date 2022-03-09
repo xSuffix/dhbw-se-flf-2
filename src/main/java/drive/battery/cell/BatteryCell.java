@@ -1,4 +1,4 @@
-package drive.battery;
+package drive.battery.cell;
 
 import java.util.ArrayList;
 import java.util.List;

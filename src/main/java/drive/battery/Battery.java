@@ -3,6 +3,9 @@ package drive.battery;
 import java.util.ArrayList;
 import java.util.List;
 
+import drive.battery.cell.BatteryCell;
+import drive.battery.cell.MainCell;
+
 public class Battery {
 
     private final List<MainCell> mainCells;

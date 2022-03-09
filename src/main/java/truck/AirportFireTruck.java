@@ -3,8 +3,8 @@ package truck;
 import cabin.Cabin;
 import drive.*;
 import drive.battery.BatteryBox;
-import drive.battery.Receiver;
-import drive.battery.ThreePoleChargingPort;
+import drive.battery.charger.Receiver;
+import drive.battery.charger.ThreePoleChargingPort;
 import lights.*;
 import truck.water.*;
 

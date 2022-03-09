@@ -1,4 +1,6 @@
-package drive.battery;
+package drive.battery.charger;
+
+import drive.battery.BatteryManagement;
 
 public class ThreePoleChargingPort extends Receiver implements I3PoleConnector {
     BatteryManagement batteryManagement;

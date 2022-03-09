@@ -1,4 +1,4 @@
-package drive.battery;
+package drive.battery.charger;
 
 import java.util.Arrays;
 

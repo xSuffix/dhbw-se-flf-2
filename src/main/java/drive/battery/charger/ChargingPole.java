@@ -1,4 +1,4 @@
-package drive.battery;
+package drive.battery.charger;
 
 public class ChargingPole {
     private IConnector target;

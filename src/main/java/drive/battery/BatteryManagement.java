@@ -1,5 +1,7 @@
 package drive.battery;
 
+import drive.battery.charger.Receiver;
+
 public enum BatteryManagement {
     INSTANCE;
 
