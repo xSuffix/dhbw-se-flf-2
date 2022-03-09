@@ -75,9 +75,9 @@ public class FLF2Test extends FLFTest {
         EChargingStation chargingStation;
         OneToThreePoleAdapter adapter;
         ThreePoleChargingPort chargingPort;
-
+        System.out.println(airportFireTruck.getDrive().getBatteryCharge());
         batteryManagement.discharge();
-        assertEquals(batteryManagement.getCharge(), 0);
+        assertEquals(0,batteryManagement.getCharge());
 
         int chargingSpeed = 1000;
         int[] weights = new int[]{3, 3, 4};

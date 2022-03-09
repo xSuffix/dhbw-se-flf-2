@@ -23,11 +23,13 @@ public abstract class FLFTest {
     protected Driver driver;
     protected Operator operator;
 
+    private float chargeFactor = 0.1f;
+
     public void initialize(boolean enableSmartJoySticks) {
         airportFireTruck = new AirportFireTruck.Builder(enableSmartJoySticks).build();
         driver = new Driver(airportFireTruck);
         operator = new Operator(airportFireTruck);
-        airportFireTruck.chargeTruck(airportFireTruck.getDrive().getBatteryBox().getMaxCharge());
+        airportFireTruck.chargeTruck((int) (airportFireTruck.getDrive().getBatteryBox().getMaxCharge()*chargeFactor));
         airportFireTruck.getWaterTank().fill(airportFireTruck.getWaterTank().getTotalCapacity(), ExtinguishingType.WATER);
         airportFireTruck.getFoamPowderTank().fill(airportFireTruck.getFoamPowderTank().getTotalCapacity(), ExtinguishingType.FOAM_POWDER);
         //open doors in parking position!

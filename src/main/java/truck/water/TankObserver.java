@@ -26,7 +26,7 @@ public class TankObserver {
             listener.subFifty();
         } else if (fillPercentage <= 0.25 && fillPercentage > 0.1){
             listener.subTwentyfive();
-        } else (fillPercentage <= 0.1){
+        } else if (fillPercentage <= 0.1){
             listener.subTen();
         }
     }
