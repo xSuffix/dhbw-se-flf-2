@@ -55,6 +55,9 @@ public class AirportFireTruck implements IAirportFireTruck {
         this.frontLauncher = builder.frontLauncher;
         this.roofLauncher = builder.roofLauncher;
         this.floorSprayingNozzles = builder.floorSprayingNozzles;
+
+        this.waterTank.getObserver().addListener(this.cabin.getControlPanel().getWaterIndicationLight());
+        this.foamPowderTank.getObserver().addListener(this.cabin.getControlPanel().getFoamIndicationLight());
     }
 
     public void chargeTruck(int amount) {

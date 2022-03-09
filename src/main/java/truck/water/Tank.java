@@ -6,10 +6,12 @@ public class Tank implements ITank {
 
     private final ExtinguishingType type;
     private final ExtinguishingType[][][] capacity;
+    private final TankObserver observer;
 
     public Tank(ExtinguishingType type, int l, int h, int b) {
         this.type = type;
         this.capacity = new ExtinguishingType[l][h][b];
+        this.observer = new TankObserver(this);
     }
 
     public void fill(int amount, ExtinguishingType type) {
@@ -68,6 +70,10 @@ public class Tank implements ITank {
 
     public ExtinguishingType getType() {
         return this.type;
+    }
+
+    public TankObserver getObserver(){
+        return this.observer;
     }
 
 }

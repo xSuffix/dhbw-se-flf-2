@@ -2,6 +2,7 @@ package cabin.controls;
 
 import cabin.controls.button.Button;
 import cabin.controls.button.ButtonType;
+import lights.IndicationLight;
 import truck.ICentralUnit;
 
 public class ControlPanel {
@@ -13,6 +14,9 @@ public class ControlPanel {
     private final Button roofHeadLightSwitch;
     private final Button sideLightsSwitch;
     private final Button selfProtection;
+    private final IndicationLight waterIndicationLight;
+    private final IndicationLight foamIndicationLight;
+
 
     public ControlPanel(ICentralUnit centralUnit) {
         this.motorSwitch = new Button(centralUnit, ButtonType.ELECTRIC_MOTOR);
@@ -22,6 +26,16 @@ public class ControlPanel {
         this.roofHeadLightSwitch = new Button(centralUnit, ButtonType.ROOF_LIGHT);
         this.sideLightsSwitch = new Button(centralUnit, ButtonType.SIDE_LIGHT);
         this.selfProtection = new Button(centralUnit, ButtonType.FIRE_SELF_PROTECTION);
+        this.waterIndicationLight = new IndicationLight();
+        this.foamIndicationLight = new IndicationLight();
+    }
+
+    public IndicationLight getWaterIndicationLight(){
+        return waterIndicationLight;
+    }
+
+    public IndicationLight getFoamIndicationLight(){
+        return foamIndicationLight;
     }
 
     public Button getSelfProtectionButton() {

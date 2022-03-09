@@ -13,4 +13,6 @@ public interface ITank {
 
     ExtinguishingType getType();
 
+    TankObserver getObserver();
+
 }
