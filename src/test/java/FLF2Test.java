@@ -6,11 +6,7 @@ import truck.water.ExtinguishingType;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 
-public class TestFLF2 {
-
-    private AirportFireTruck airportFireTruck;
-    private Driver driver;
-    private Operator operator;
+public class FLF2Test extends FLFTest {
 
     @BeforeEach
     public void setup() {
