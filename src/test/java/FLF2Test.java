@@ -1,3 +1,6 @@
+import cabin.controls.button.Button;
+import cabin.controls.button.ButtonStateOff;
+import cabin.controls.button.ButtonStateOn;
 import org.junit.jupiter.api.*;
 import truck.water.ExtinguishingType;
 import truck.water.MixingRatio;
@@ -6,7 +9,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 
@@ -54,7 +57,28 @@ public class FLF2Test extends FLFTest {
     @Test
     @Order(5)
     public void useChargingAdapter() {
+        // Light button
+        Button blueLightButton = airportFireTruck.getCabin().getControlPanel().getBlueLightSwitch();
+        assertEquals(blueLightButton.getState().getClass(), ButtonStateOff.class);
+        checkLights(airportFireTruck.getBlueLights(), false);
 
+        blueLightButton.press();
+        checkLights(airportFireTruck.getBlueLights(), true);
+        assertEquals(blueLightButton.getState().getClass(), ButtonStateOn.class);
+
+        blueLightButton.press();
+        assertEquals(blueLightButton.getState().getClass(), ButtonStateOff.class);
+        checkLights(airportFireTruck.getBlueLights(), false);
+
+        // Synced buttons
+        Button outerButton = airportFireTruck.getCabin().getLeftDoor().getOuterButton();
+        Button innerButton = airportFireTruck.getCabin().getLeftDoor().getInnerButton();
+
+        assertTrue(airportFireTruck.getCabin().getLeftDoor().isOpen());
+        outerButton.press();
+        assertFalse(airportFireTruck.getCabin().getLeftDoor().isOpen());
+        innerButton.press();
+        assertTrue(airportFireTruck.getCabin().getLeftDoor().isOpen());
     }
 
     @Test

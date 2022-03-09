@@ -36,6 +36,10 @@ public class Button {
         synced.add(button);
     }
 
+    public IButtonState getState() {
+        return state;
+    }
+
     public void setState(IButtonState state) {
         this.state = state;
     }
