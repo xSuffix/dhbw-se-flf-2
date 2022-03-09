@@ -1,7 +1,11 @@
 import cabin.controls.button.Button;
 import cabin.controls.button.ButtonStateOff;
 import cabin.controls.button.ButtonStateOn;
+import drive.battery.Battery;
 import drive.battery.BatteryManagement;
+import drive.battery.cell.BatteryCell;
+import drive.battery.cell.Cell;
+import drive.battery.cell.MainCell;
 import drive.battery.charger.EChargingStation;
 import drive.battery.charger.OneToThreePoleAdapter;
 import drive.battery.charger.ThreePoleChargingPort;
@@ -22,16 +26,6 @@ public class FLF2Test extends FLFTest {
     @BeforeEach
     public void setup() {
         initialize(false);
-    }
-
-    @Test
-    public void testBattery() {
-        System.out.println(airportFireTruck.getDrive().getBatteryCharge());
-        airportFireTruck.getDrive().drive(150);
-        System.out.println(airportFireTruck.getDrive().getBatteryCharge());
-        airportFireTruck.chargeTruck(10000);
-        System.out.println(airportFireTruck.getDrive().getBatteryCharge());
-        airportFireTruck.getDrive().drive(100);
     }
 
     @Test
@@ -66,6 +60,25 @@ public class FLF2Test extends FLFTest {
         preDeployment();
         armFrontLauncher();
         testFrontLauncher(3, 3000, MixingRatio.C);
+    }
+
+    @Test
+    @Order(3)
+    public void testBattery() {
+        for (Battery[] row : airportFireTruck.getDrive().getBatteryBox().getBatteries()){
+            for (Battery battery : row){
+                for (MainCell mainCell : battery.getMainCells()){
+                    assertTrue(mainCell.isComposite());
+                    for (BatteryCell subCell : mainCell.getUnitList()){
+                        assertTrue(subCell.isComposite());
+                        for (BatteryCell cell : subCell.getUnitList()){
+                            assertFalse(cell.isComposite());
+                        }
+                    }
+                }
+            }
+        }
+        checkDriving(8, 5, 8, 0);
     }
 
     @Test

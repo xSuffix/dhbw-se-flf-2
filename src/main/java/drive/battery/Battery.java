@@ -64,4 +64,8 @@ public class Battery {
         return energy;
     }
 
+    public List<MainCell> getMainCells(){
+        return this.mainCells;
+    }
+
 }
