@@ -1,6 +1,10 @@
 import cabin.controls.button.Button;
 import cabin.controls.button.ButtonStateOff;
 import cabin.controls.button.ButtonStateOn;
+import drive.battery.BatteryManagement;
+import drive.battery.charger.EChargingStation;
+import drive.battery.charger.OneToThreePoleAdapter;
+import drive.battery.charger.ThreePoleChargingPort;
 import org.junit.jupiter.api.*;
 import truck.water.ExtinguishingType;
 import truck.water.MixingRatio;
@@ -21,7 +25,7 @@ public class FLF2Test extends FLFTest {
     }
 
     @Test
-    public void testBattery(){
+    public void testBattery() {
         System.out.println(airportFireTruck.getDrive().getBatteryCharge());
         airportFireTruck.getDrive().drive(150);
         System.out.println(airportFireTruck.getDrive().getBatteryCharge());
@@ -67,6 +71,35 @@ public class FLF2Test extends FLFTest {
     @Test
     @Order(5)
     public void useChargingAdapter() {
+        BatteryManagement batteryManagement = airportFireTruck.getDrive().getBatteryManagement();
+        EChargingStation chargingStation;
+        OneToThreePoleAdapter adapter;
+        ThreePoleChargingPort chargingPort;
+
+        batteryManagement.discharge();
+        assertEquals(batteryManagement.getCharge(), 0);
+
+        int chargingSpeed = 1000;
+        int[] weights = new int[]{3, 3, 4};
+        chargingStation = new EChargingStation(chargingSpeed);
+        adapter = new OneToThreePoleAdapter(weights);
+        chargingPort = (ThreePoleChargingPort) batteryManagement.getReceiver();
+        System.out.printf("Energy after charge: %d%n", checkCharge(chargingStation, adapter, chargingPort, batteryManagement));
+
+        batteryManagement.discharge();
+        assertEquals(batteryManagement.getCharge(), 0);
+
+        chargingSpeed = 16;
+        weights = new int[]{2, 4, 8};
+        chargingStation = new EChargingStation(chargingSpeed);
+        adapter = new OneToThreePoleAdapter(weights);
+        chargingPort = (ThreePoleChargingPort) batteryManagement.getReceiver();
+        System.out.printf("Energy after charge: %d%n", checkCharge(chargingStation, adapter, chargingPort, batteryManagement));
+    }
+
+    @Test
+    @Order(6)
+    public void useButtonStates() {
         // Light button
         Button blueLightButton = airportFireTruck.getCabin().getControlPanel().getBlueLightSwitch();
         assertEquals(blueLightButton.getState().getClass(), ButtonStateOff.class);
@@ -89,11 +122,5 @@ public class FLF2Test extends FLFTest {
         assertFalse(airportFireTruck.getCabin().getLeftDoor().isOpen());
         innerButton.press();
         assertTrue(airportFireTruck.getCabin().getLeftDoor().isOpen());
-    }
-
-    @Test
-    @Order(6)
-    public void useButtonStates() {
-
     }
 }

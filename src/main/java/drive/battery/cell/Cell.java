@@ -1,15 +1,15 @@
 package drive.battery.cell;
 
-public class Cell extends BatteryCell{
+public class Cell extends BatteryCell {
     private boolean isCharged;
 
-    public Cell(BatteryCell parent){
+    public Cell(BatteryCell parent) {
         super(parent);
         isCharged = false;
     }
 
     @Override
-    public int getCurrentCharge(){
+    public int getCurrentCharge() {
         if (isCharged)
             return 1;
         else
@@ -17,25 +17,25 @@ public class Cell extends BatteryCell{
     }
 
     @Override
-    public boolean addCharge(){
+    public boolean addCharge() {
         if (isCharged)
             return false;
-        
+
         isCharged = true;
         return true;
     }
 
     @Override
-    public boolean takeEnergy(){
+    public boolean takeEnergy() {
         if (!isCharged)
             return false;
-        
+
         isCharged = false;
         return true;
     }
 
     @Override
-    public int getTotalCapacity(){
+    public int getTotalCapacity() {
         return 1;
     }
 }
