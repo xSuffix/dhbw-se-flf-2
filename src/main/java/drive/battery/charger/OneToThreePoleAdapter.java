@@ -7,8 +7,17 @@ public class OneToThreePoleAdapter implements I1PoleConnector, I3PoleConnector {
     private I1PoleConnector sender;
     private I3PoleConnector receiver;
 
+    public OneToThreePoleAdapter(int[] weights) {
+        if (weights.length != 3) throw new IllegalArgumentException();
+        this.weights = weights;
+    }
+
     public OneToThreePoleAdapter(int weightA, int weightB, int weightC) {
         weights = new int[]{weightA, weightB, weightC};
+    }
+
+    public int[] getWeights() {
+        return weights;
     }
 
     @Override

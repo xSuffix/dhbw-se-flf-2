@@ -44,7 +44,7 @@ public class Drive implements IDrive {
                 currentVelocity = vel;
             }
             int receivedEnergy = batteryManagement.takeEnergy(vel * 4);
-            System.out.printf("[Drive] using %d units of energy%n", receivedEnergy);
+            System.out.printf("[Drive] driving %d km/h%n", vel);
             if (receivedEnergy < vel * 4) throw new RuntimeException("Battery empty, shutting down :)");
         }
     }

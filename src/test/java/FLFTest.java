@@ -1,6 +1,10 @@
 import cabin.controls.FrontLauncherOutput;
 import cabin.controls.RoofLauncherOutput;
 import drive.ElectricMotor;
+import drive.battery.BatteryManagement;
+import drive.battery.charger.EChargingStation;
+import drive.battery.charger.OneToThreePoleAdapter;
+import drive.battery.charger.ThreePoleChargingPort;
 import lights.Light;
 import staff.Driver;
 import staff.Operator;
@@ -8,6 +12,8 @@ import truck.AirportFireTruck;
 import truck.water.ExtinguishingType;
 import truck.water.LauncherState;
 import truck.water.MixingRatio;
+
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -148,6 +154,23 @@ public abstract class FLFTest {
         }
         assertEquals(startingEnergy - expectedEnergyUsage, airportFireTruck.getDrive().getBatteryCharge());
         assertEquals(direction, airportFireTruck.getDrive().getAxleRotation());
+    }
+
+    public int checkCharge(EChargingStation station, OneToThreePoleAdapter adapter, ThreePoleChargingPort port, BatteryManagement management) {
+        int[] weights = adapter.getWeights();
+        int expectedCharge = 0;
+        int totalWeight = Arrays.stream(weights).sum();
+
+        station.plugIn(adapter);
+        adapter.plugIn(port);
+
+        for (int i = 0; i < 20; i++) {
+            station.pushEnergy();
+            expectedCharge += Arrays.stream(weights).map(weight -> weight * station.getChargingSpeed() / totalWeight).sum();
+        }
+
+        assertEquals(expectedCharge, management.getCharge());
+        return expectedCharge;
     }
 
     public void checkLights(Light[] lights, boolean state) {

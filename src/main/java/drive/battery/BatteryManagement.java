@@ -16,12 +16,20 @@ public enum BatteryManagement {
         this.batteryBox = batteryBox;
     }
 
+    public Receiver getReceiver() {
+        return receiver;
+    }
+
     public void setReceiver(Receiver receiver) {
         this.receiver = receiver;
     }
 
     public void charge(int charge) {
         batteryBox.charge(charge);
+    }
+
+    public void discharge() {
+        batteryBox.takeEnergy(batteryBox.getCurrentCharge());
     }
 
     public int takeEnergy(int amount) {

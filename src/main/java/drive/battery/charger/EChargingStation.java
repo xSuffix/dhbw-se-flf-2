@@ -10,6 +10,10 @@ public class EChargingStation implements I1PoleConnector {
         chargingPole = new ChargingPole();
     }
 
+    public int getChargingSpeed() {
+        return chargingSpeed;
+    }
+
     @Override
     public void plugIn(I1PoleConnector onePoleConnector) {
         if (connector == null) {
@@ -27,5 +31,9 @@ public class EChargingStation implements I1PoleConnector {
     @Override
     public void pushEnergy(int amount) {
         chargingPole.pushCharge(Math.min(chargingSpeed, amount));
+    }
+
+    public void pushEnergy() {
+        chargingPole.pushCharge(chargingSpeed);
     }
 }
