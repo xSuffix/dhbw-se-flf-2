@@ -21,6 +21,16 @@ public class FLF2Test extends FLFTest {
     }
 
     @Test
+    public void testBattery(){
+        System.out.println(airportFireTruck.getDrive().getBatteryCharge());
+        airportFireTruck.getDrive().drive(150);
+        System.out.println(airportFireTruck.getDrive().getBatteryCharge());
+        airportFireTruck.chargeTruck(10000);
+        System.out.println(airportFireTruck.getDrive().getBatteryCharge());
+        airportFireTruck.getDrive().drive(100);
+    }
+
+    @Test
     @Order(1)
     public void useMixingUnitComponent() {
         final int waterCount = 3;
