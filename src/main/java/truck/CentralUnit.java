@@ -78,37 +78,15 @@ public class CentralUnit implements ICentralUnit {
     @Override
     public void buttonPress(ButtonType type, boolean state) {
         switch (type) {
-            case ELECTRIC_MOTOR -> {
-                // airportFireTruck.getDrive().setMotorStarted(state);
-                eventBus.post(new EngineEvent(eventId++, state));
-            }
-            case BLUE_LIGHT -> {
-                // for (Light light : airportFireTruck.getBlueLights()) light.setOn(state);
-                eventBus.post(new BlueLightEvent(eventId++,state));
-            }
-            case WARNING_LIGHT -> {
-                // for (Light light : airportFireTruck.getWarningLights()) light.setOn(state);
-                eventBus.post(new WarningLightEvent(eventId++,state));
-            }
-            case ROOF_LIGHT -> {
-                // for (Light light : airportFireTruck.getHeadLightsRoof()) light.setOn(state);
-                eventBus.post(new RoofLightEvent(eventId++, state));
-            }
-            case HEAD_LIGHT -> {
-                // for (Light light : airportFireTruck.getHeadLightsFrontLeft()) light.setOn(state);
-                // for (Light light : airportFireTruck.getHeadLightsFrontRight()) light.setOn(state);
-                eventBus.post(new FrontLightEvent(eventId++, state));
 
-            }
-            case SIDE_LIGHT -> {
-                // for (Light light : airportFireTruck.getSideLightsLeft()) light.setOn(state);
-                // for (Light light : airportFireTruck.getSideLightsRight()) light.setOn(state);
-                eventBus.post(new SideLightEvent(eventId++, state));
-            }
-            case FIRE_SELF_PROTECTION -> {
-                // airportFireTruck.useFloorNozzles(100);
-                eventBus.post(new SelfProtectionEvent(eventId++, 100));
-            }
+            case BLUE_LIGHT -> eventBus.post(new BlueLightEvent(eventId++,state));
+            case WARNING_LIGHT -> eventBus.post(new WarningLightEvent(eventId++,state));
+            case ROOF_LIGHT -> eventBus.post(new RoofLightEvent(eventId++, state));
+            case HEAD_LIGHT -> eventBus.post(new FrontLightEvent(eventId++, state));
+            case SIDE_LIGHT -> eventBus.post(new SideLightEvent(eventId++, state));
+
+            case ELECTRIC_MOTOR -> eventBus.post(new EngineEvent(eventId++, state));
+            case FIRE_SELF_PROTECTION -> eventBus.post(new SelfProtectionEvent(eventId++, 100));
 
             case LEFT_DOOR -> airportFireTruck.getCabin().getLeftDoor().setOpenIfUnlocked(state);
             case RIGHT_DOOR -> airportFireTruck.getCabin().getRightDoor().setOpenIfUnlocked(state);

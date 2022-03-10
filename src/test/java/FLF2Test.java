@@ -10,7 +10,6 @@ import drive.battery.charger.OneToThreePoleAdapter;
 import drive.battery.charger.ThreePoleChargingPort;
 import id_card.IDCard;
 import id_card.IDCardEncoder;
-import lights.Light;
 import org.junit.jupiter.api.*;
 import truck.water.ExtinguishingType;
 import truck.water.MixingRatio;
