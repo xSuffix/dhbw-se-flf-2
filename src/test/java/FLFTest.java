@@ -25,7 +25,7 @@ public abstract class FLFTest {
     protected Operator operator;
 
     public void initialize() {
-        airportFireTruck = new AirportFireTruck.Builder("DUS | FLF-5", "6072").build();
+        airportFireTruck = new AirportFireTruck.Builder("DUS | FLF-5", "6072").enableSmartJoySticks(false).build();
         driver = new Driver(airportFireTruck, "Red Adair");
         operator = new Operator(airportFireTruck, "Sam");
         airportFireTruck.chargeTruck((int) (airportFireTruck.getDrive().getBatteryBox().getMaxCharge() * chargeFactor));

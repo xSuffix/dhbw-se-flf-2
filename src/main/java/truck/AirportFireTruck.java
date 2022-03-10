@@ -290,8 +290,9 @@ public class AirportFireTruck extends Subscriber implements IAirportFireTruck {
             return mixingUnitPort;
         }
 
-        public void enableSmartJoySticks(boolean enable) {
+        public Builder enableSmartJoySticks(boolean enable) {
             this.smartJoySticks = enable;
+            return this;
         }
 
         public AirportFireTruck build() {
