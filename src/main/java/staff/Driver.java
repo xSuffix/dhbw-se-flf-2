@@ -3,10 +3,15 @@ package staff;
 import id_card.IDCard;
 import truck.IAirportFireTruck;
 
-public class Driver {
+public class Driver extends Person {
     private final IAirportFireTruck airportFireTruck;
 
     public Driver(IAirportFireTruck aft) {
+        this(aft, "Mr. Thaddäus");
+    }
+
+    public Driver(IAirportFireTruck aft, String name) {
+        super(name);
         airportFireTruck = aft;
     }
 

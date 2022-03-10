@@ -13,7 +13,7 @@ public class FLF1Test extends FLFTest {
 
     @BeforeEach
     public void setup() {
-        initialize(false);
+        initialize();
     }
 
     @Test
@@ -123,7 +123,7 @@ public class FLF1Test extends FLFTest {
         checkLights(airportFireTruck.getWarningLights(), false);
         checkLights(airportFireTruck.getSideLightsLeft(), false);
         checkLights(airportFireTruck.getSideLightsRight(), false);
-        assertEquals(100, airportFireTruck.getDrive().getBatteryPercentage());
+        assertEquals(100 * chargeFactor, airportFireTruck.getDrive().getBatteryPercentage());
         assertEquals(100, airportFireTruck.getWaterTank().getCurrentFillPercentage());
         assertEquals(100, airportFireTruck.getFoamPowderTank().getCurrentFillPercentage());
         assertEquals(FrontLauncherOutput.A, airportFireTruck.getCabin().getFrontLauncherKnob().getState());
@@ -221,8 +221,8 @@ public class FLF1Test extends FLFTest {
     @Test
     @Order(9)
     public void keyCardParking() {
-        IDCard idCard = new IDCard();
-        new IDCardEncoder().encode(airportFireTruck.getCentralUnit(), idCard, "Red Adair");
+        IDCard driverCard = new IDCard();
+        new IDCardEncoder().encode(airportFireTruck.getCentralUnit(), driverCard, driver);
         driver.takeSeat();
         operator.takeSeat();
         driver.pressInnerDoorButton();
@@ -238,7 +238,7 @@ public class FLF1Test extends FLFTest {
         checkIfDoorsOpen(true);
         assertTrue(seatsUnoccupied());
 
-        driver.useIDCard(idCard);
+        driver.useIDCard(driverCard);
         assertFalse(airportFireTruck.getCabin().getLeftDoor().isOpen());
         assertFalse(airportFireTruck.getCabin().getRightDoor().isOpen());
         assertTrue(airportFireTruck.getCabin().getLeftDoor().isLocked());
@@ -251,8 +251,8 @@ public class FLF1Test extends FLFTest {
     @Test
     @Order(10)
     public void keyCardInspectionAndEmergency() {
-        IDCard idCard = new IDCard();
-        new IDCardEncoder().encode(airportFireTruck.getCentralUnit(), idCard, "Red Adair");
+        IDCard driverCard = new IDCard();
+        new IDCardEncoder().encode(airportFireTruck.getCentralUnit(), driverCard, driver);
         airportFireTruck.getCabin().getLeftDoor().toggleLock();
         airportFireTruck.getCabin().getRightDoor().toggleLock();
         checkIfDoorsOpen(false);
@@ -260,7 +260,7 @@ public class FLF1Test extends FLFTest {
         assertTrue(airportFireTruck.getCabin().getRightDoor().isLocked());
 
         // Start scenario
-        driver.useIDCard(idCard);
+        driver.useIDCard(driverCard);
         checkIfDoorsOpen(true);
         operator.takeSeat();
         operator.pressInnerDoorButton();

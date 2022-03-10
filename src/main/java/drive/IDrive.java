@@ -2,7 +2,6 @@ package drive;
 
 import drive.battery.BatteryManagement;
 import drive.battery.IBatteryBox;
-import truck.events.Subscriber;
 
 public interface IDrive {
     void setMotorStarted(boolean start);

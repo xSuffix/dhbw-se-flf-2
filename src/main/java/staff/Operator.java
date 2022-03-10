@@ -3,11 +3,16 @@ package staff;
 import id_card.IDCard;
 import truck.IAirportFireTruck;
 
-public class Operator {
+public class Operator extends Person {
 
     private final IAirportFireTruck airportFireTruck;
 
     public Operator(IAirportFireTruck aft) {
+        this(aft, "Mr. Thaddäus");
+    }
+
+    public Operator(IAirportFireTruck aft, String name) {
+        super(name);
         airportFireTruck = aft;
     }
 

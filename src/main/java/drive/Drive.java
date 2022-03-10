@@ -26,7 +26,7 @@ public class Drive extends Subscriber implements IDrive {
     }
 
     @Subscribe
-    public void receive(EngineEvent event){
+    public void receive(EngineEvent event) {
         setMotorStarted(event.getState());
     }
 

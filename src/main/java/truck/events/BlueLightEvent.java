@@ -4,7 +4,7 @@ public class BlueLightEvent {
     private final int id;
     private final boolean state;
 
-    public BlueLightEvent(int id,boolean state){
+    public BlueLightEvent(int id, boolean state) {
         this.id = id;
         this.state = state;
     }

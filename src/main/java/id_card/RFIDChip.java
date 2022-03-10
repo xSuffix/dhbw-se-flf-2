@@ -1,5 +1,7 @@
 package id_card;
 
+import staff.Person;
+
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import java.security.PrivateKey;
@@ -9,6 +11,7 @@ public class RFIDChip {
     private SecretKey secretKey;
     private IvParameterSpec iv;
     private PrivateKey privateKey;
+    private Person owner;
 
     public String getCipher() {
         return cipher;
@@ -40,5 +43,13 @@ public class RFIDChip {
 
     public void setIv(IvParameterSpec iv) {
         this.iv = iv;
+    }
+
+    public Person getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Person owner) {
+        this.owner = owner;
     }
 }

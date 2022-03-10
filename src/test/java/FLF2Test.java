@@ -26,7 +26,7 @@ public class FLF2Test extends FLFTest {
 
     @BeforeEach
     public void setup() {
-        initialize(false);
+        initialize();
     }
 
     @Test
@@ -65,7 +65,7 @@ public class FLF2Test extends FLFTest {
 
     @Test
     @Order(2)
-    public void testEventBus(){
+    public void testEventBus() {
 
         driver.pressMotorSwitch();
         checkMotors(true);
@@ -113,8 +113,8 @@ public class FLF2Test extends FLFTest {
         IDCard driverCard = new IDCard();
         IDCard operatorCard = new IDCard();
 
-        cardEncoder.encode(airportFireTruck.getCentralUnit(), driverCard, "Red Adair");
-        cardEncoder.encode(airportFireTruck.getCentralUnit(), operatorCard, "Sam");
+        cardEncoder.encode(airportFireTruck.getCentralUnit(), driverCard, driver);
+        cardEncoder.encode(airportFireTruck.getCentralUnit(), operatorCard, operator);
 
         driver.useIDCard(driverCard);
         checkIfDoorsOpen(true);
@@ -122,6 +122,8 @@ public class FLF2Test extends FLFTest {
         operator.useIDCard(driverCard);
         driver.pressInnerDoorButton();
         checkIfDoorsOpen(false);
+        cardEncoder.erase(airportFireTruck.getCentralUnit(), driverCard);
+        cardEncoder.erase(airportFireTruck.getCentralUnit(), operatorCard);
     }
 
     @Test

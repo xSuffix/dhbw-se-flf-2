@@ -37,7 +37,7 @@ public class AirportFireTruck extends Subscriber implements IAirportFireTruck {
     private final RoofLauncher roofLauncher;
     private final FloorSprayingNozzle[] floorSprayingNozzles;
 
-    private AirportFireTruck(Builder builder, boolean smartJoySticks) {
+    private AirportFireTruck(Builder builder) {
         this.headLightsFrontLeft = builder.headLightsFrontLeft;
         this.headLightsFrontRight = builder.headLightsFrontRight;
         this.headLightsRoof = builder.headLightsRoof;
@@ -50,8 +50,8 @@ public class AirportFireTruck extends Subscriber implements IAirportFireTruck {
         this.blueLights = builder.blueLights;
         this.warningLights = builder.warningLights;
         this.drive = builder.drive;
-        this.centralUnit = new CentralUnit(this);
-        this.cabin = new Cabin(this.centralUnit, smartJoySticks);
+        this.centralUnit = new CentralUnit(this, builder.name, builder.code);
+        this.cabin = new Cabin(centralUnit, builder.smartJoySticks);
         this.waterTank = builder.waterTank;
         this.foamPowderTank = builder.foamPowderTank;
         this.mixingUnit = builder.mixingUnit;
@@ -85,8 +85,6 @@ public class AirportFireTruck extends Subscriber implements IAirportFireTruck {
 
         this.centralUnit.addSubscriber((Subscriber) this.drive);
         this.centralUnit.addSubscriber(this);
-
-
     }
 
     public void chargeTruck(int amount) {
@@ -189,6 +187,8 @@ public class AirportFireTruck extends Subscriber implements IAirportFireTruck {
     public static class Builder {
         private final Configuration config = Configuration.INSTANCE;
 
+        private final String name;
+        private final String code;
         private final FrontLight[] headLightsFrontLeft;
         private final FrontLight[] headLightsFrontRight;
         private final RoofLight[] headLightsRoof;
@@ -207,10 +207,11 @@ public class AirportFireTruck extends Subscriber implements IAirportFireTruck {
         private final FrontLauncher frontLauncher;
         private final RoofLauncher roofLauncher;
         private final FloorSprayingNozzle[] floorSprayingNozzles;
-        private final boolean smartJoySticks;
+        private boolean smartJoySticks;
 
-        public Builder(boolean smartJoySticks) {
-            this.smartJoySticks = smartJoySticks;
+        public Builder(String name, String accessCode) {
+            this.name = name;
+            this.code = accessCode;
 
             final int headLightsFront = 3;
             this.headLightsFrontLeft = new FrontLight[headLightsFront];
@@ -271,7 +272,6 @@ public class AirportFireTruck extends Subscriber implements IAirportFireTruck {
             this.floorSprayingNozzles = new FloorSprayingNozzle[7];
             for (int i = 0; i < floorSprayingNozzles.length; i++)
                 this.floorSprayingNozzles[i] = new FloorSprayingNozzle(this.waterTank);
-
         }
 
         public Object buildMixingUnit() {
@@ -290,8 +290,12 @@ public class AirportFireTruck extends Subscriber implements IAirportFireTruck {
             return mixingUnitPort;
         }
 
+        public void enableSmartJoySticks(boolean enable) {
+            this.smartJoySticks = enable;
+        }
+
         public AirportFireTruck build() {
-            return new AirportFireTruck(this, smartJoySticks);
+            return new AirportFireTruck(this);
         }
 
     }

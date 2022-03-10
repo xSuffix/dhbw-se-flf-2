@@ -10,7 +10,7 @@ public class BlueLight extends LEDLight {
     }
 
     @Subscribe
-    public void receive(BlueLightEvent event){
+    public void receive(BlueLightEvent event) {
         setOn(event.getState());
     }
 

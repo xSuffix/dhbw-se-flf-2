@@ -1,7 +1,6 @@
 package lights;
 
 import com.google.common.eventbus.Subscribe;
-import truck.events.BlueLightEvent;
 import truck.events.WarningLightEvent;
 
 public class WarningLight extends LEDLight {
@@ -11,7 +10,7 @@ public class WarningLight extends LEDLight {
     }
 
     @Subscribe
-    public void receive(WarningLightEvent event){
+    public void receive(WarningLightEvent event) {
         setOn(event.getState());
     }
 }

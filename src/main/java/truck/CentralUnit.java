@@ -5,40 +5,35 @@ import cabin.controls.PedalType;
 import cabin.controls.RoofLauncherOutput;
 import cabin.controls.TurningKnobType;
 import cabin.controls.button.ButtonType;
+import com.google.common.eventbus.EventBus;
 import id_card.IDCardDecoder;
 import id_card.RFIDChip;
 import lights.Light;
+import staff.Person;
 import truck.events.*;
 import truck.water.LauncherState;
 import truck.water.MixingRatio;
 
-import com.google.common.eventbus.EventBus;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class CentralUnit implements ICentralUnit {
 
     private final IAirportFireTruck airportFireTruck;
     private final String name;
     private final String code;
-    private final List<String> authorizedPersons;
-    private final IDCardDecoder idCardDecoder;
+    private final Set<Person> authorizedPersons = new HashSet<>();
+    private final IDCardDecoder idCardDecoder = new IDCardDecoder();
     private final EventBus eventBus;
-    private int eventId;
-    private int frontLauncherOutput;
-    private int roofLauncherOutput;
+    private int eventId = 0;
+    private int frontLauncherOutput = 500;
+    private int roofLauncherOutput = 500;
 
-    public CentralUnit(IAirportFireTruck airportFireTruck) {
+    public CentralUnit(IAirportFireTruck airportFireTruck, String name, String code) {
         this.airportFireTruck = airportFireTruck;
-        this.frontLauncherOutput = 500;
-        this.roofLauncherOutput = 500;
-        this.name = "DUS | FLF-5";
-        this.code = "6072";
-        this.authorizedPersons = new ArrayList<>();
-        this.idCardDecoder = new IDCardDecoder();
-        this.eventBus = new EventBus(this.name);
-        eventId = 0;
+        this.name = name;
+        this.code = code;
+        this.eventBus = new EventBus(name);
     }
 
     @Override
@@ -52,8 +47,13 @@ public class CentralUnit implements ICentralUnit {
     }
 
     @Override
-    public void authorizePerson(String name) {
-        authorizedPersons.add(name);
+    public void addAuthorization(Person person) {
+        authorizedPersons.add(person);
+    }
+
+    @Override
+    public void removeAuthorization(Person person) {
+        authorizedPersons.remove(person);
     }
 
     @Override
@@ -61,7 +61,7 @@ public class CentralUnit implements ICentralUnit {
         String id = getID();
         String token = idCardDecoder.decode(chip);
         String name = token.substring(id.length() + 1, token.length() - code.length() - 1);
-        if (token.equals(String.format("%s-%s-%s", id, name, code)) && authorizedPersons.contains(name)) {
+        if (token.equals(String.format("%s-%s-%s", id, name, code)) && authorizedPersons.contains(chip.getOwner()) && name.equals(chip.getOwner().getName())) {
             airportFireTruck.getCabin().getLeftDoor().toggleLock();
             airportFireTruck.getCabin().getRightDoor().toggleLock();
         }
@@ -78,7 +78,6 @@ public class CentralUnit implements ICentralUnit {
     @Override
     public void buttonPress(ButtonType type, boolean state) {
         switch (type) {
-
             case BLUE_LIGHT -> eventBus.post(new BlueLightEvent(eventId++,state));
             case WARNING_LIGHT -> eventBus.post(new WarningLightEvent(eventId++,state));
             case ROOF_LIGHT -> eventBus.post(new RoofLightEvent(eventId++, state));
@@ -121,7 +120,7 @@ public class CentralUnit implements ICentralUnit {
         }
     }
 
-    public void addSubscriber(Subscriber subscriber){
+    public void addSubscriber(Subscriber subscriber) {
         eventBus.register(subscriber);
     }
 

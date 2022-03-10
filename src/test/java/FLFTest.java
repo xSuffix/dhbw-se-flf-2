@@ -19,16 +19,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public abstract class FLFTest {
+    protected final float chargeFactor = 0.1f;
     protected AirportFireTruck airportFireTruck;
     protected Driver driver;
     protected Operator operator;
 
-    private final float chargeFactor = 0.1f;
-
-    public void initialize(boolean enableSmartJoySticks) {
-        airportFireTruck = new AirportFireTruck.Builder(enableSmartJoySticks).build();
-        driver = new Driver(airportFireTruck);
-        operator = new Operator(airportFireTruck);
+    public void initialize() {
+        airportFireTruck = new AirportFireTruck.Builder("DUS | FLF-5", "6072").build();
+        driver = new Driver(airportFireTruck, "Red Adair");
+        operator = new Operator(airportFireTruck, "Sam");
         airportFireTruck.chargeTruck((int) (airportFireTruck.getDrive().getBatteryBox().getMaxCharge() * chargeFactor));
 
         //check charging

@@ -4,6 +4,7 @@ import cabin.controls.PedalType;
 import cabin.controls.TurningKnobType;
 import cabin.controls.button.ButtonType;
 import id_card.RFIDChip;
+import staff.Person;
 import truck.events.Subscriber;
 
 public interface ICentralUnit {
@@ -19,7 +20,9 @@ public interface ICentralUnit {
 
     String getCode();
 
-    void authorizePerson(String name);
+    void addAuthorization(Person person);
+
+    void removeAuthorization(Person person);
 
     void checkAuthentication(RFIDChip chipData);
 

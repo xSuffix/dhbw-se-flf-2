@@ -5,7 +5,7 @@ public class FrontLightEvent {
     private final int id;
     private final boolean state;
 
-    public FrontLightEvent(int id, boolean state){
+    public FrontLightEvent(int id, boolean state) {
         this.id = id;
         this.state = state;
     }
