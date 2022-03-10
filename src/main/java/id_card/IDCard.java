@@ -1,5 +1,9 @@
 package id_card;
 
-public record IDCard(RFIDChip rfidChip) {
+public class IDCard {
+    RFIDChip chip = new RFIDChip();
 
+    public RFIDChip getChip() {
+        return chip;
+    }
 }

@@ -9,7 +9,10 @@ import drive.battery.cell.MainCell;
 import drive.battery.charger.EChargingStation;
 import drive.battery.charger.OneToThreePoleAdapter;
 import drive.battery.charger.ThreePoleChargingPort;
+import id_card.IDCard;
+import id_card.IDCardEncoder;
 import org.junit.jupiter.api.*;
+import truck.Configuration;
 import truck.water.ExtinguishingType;
 import truck.water.MixingRatio;
 
@@ -80,6 +83,30 @@ public class FLF2Test extends FLFTest {
         }
         checkDriving(8, 5, 8, 0);
     }
+    
+    @Order(4)
+    public void useIDCardStrategy() {
+        airportFireTruck.getCabin().getLeftDoor().toggleLock();
+        airportFireTruck.getCabin().getRightDoor().toggleLock();
+        checkIfDoorsOpen(false);
+        assertTrue(airportFireTruck.getCabin().getLeftDoor().isLocked());
+        assertTrue(airportFireTruck.getCabin().getRightDoor().isLocked());
+
+        IDCardEncoder cardEncoder = new IDCardEncoder();
+        IDCard driverCard = new IDCard();
+        IDCard operatorCard = new IDCard();
+
+        cardEncoder.encode(airportFireTruck.getCentralUnit(), driverCard, "Red Adair");
+        cardEncoder.encode(airportFireTruck.getCentralUnit(), operatorCard, "Sam");
+
+        driver.useIDCard(driverCard);
+        checkIfDoorsOpen(true);
+        driver.takeSeat();
+        operator.useIDCard(driverCard);
+        driver.pressInnerDoorButton();
+        checkIfDoorsOpen(false);
+
+    }
 
     @Test
     @Order(5)
@@ -90,7 +117,7 @@ public class FLF2Test extends FLFTest {
         ThreePoleChargingPort chargingPort;
         System.out.println(airportFireTruck.getDrive().getBatteryCharge());
         batteryManagement.discharge();
-        assertEquals(0,batteryManagement.getCharge());
+        assertEquals(0, batteryManagement.getCharge());
 
         int chargingSpeed = 1000;
         int[] weights = new int[]{3, 3, 4};

@@ -6,6 +6,7 @@ import cabin.controls.RoofLauncherOutput;
 import cabin.controls.TurningKnobType;
 import cabin.controls.button.ButtonType;
 import id_card.IDCardDecoder;
+import id_card.RFIDChip;
 import lights.Light;
 import truck.water.LauncherState;
 import truck.water.MixingRatio;
@@ -49,16 +50,13 @@ public class CentralUnit implements ICentralUnit {
     }
 
     @Override
-    public void checkAuthentication(byte[] encryptedToken) {
-        String token = idCardDecoder.decrypt(encryptedToken);
-        if (token != null) {
-            String id = getID();
-            String name = token.substring(id.length() + 1, token.length() - code.length() - 1);
-            boolean validToken = token.equals(id + "-" + name + "-" + code) && authorizedPersons.contains(name);
-            if (validToken) {
-                airportFireTruck.getCabin().getLeftDoor().toggleLock();
-                airportFireTruck.getCabin().getRightDoor().toggleLock();
-            }
+    public void checkAuthentication(RFIDChip chip) {
+        String id = getID();
+        String token = idCardDecoder.decode(chip);
+        String name = token.substring(id.length() + 1, token.length() - code.length() - 1);
+        if (token.equals(String.format("%s-%s-%s", id, name, code)) && authorizedPersons.contains(name)) {
+            airportFireTruck.getCabin().getLeftDoor().toggleLock();
+            airportFireTruck.getCabin().getRightDoor().toggleLock();
         }
     }
 

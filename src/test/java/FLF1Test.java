@@ -222,8 +222,8 @@ public class FLF1Test extends FLFTest {
     @Test
     @Order(9)
     public void keyCardParking() {
-        IDCard idCard = new IDCard(new RFIDChip());
-        new IDCardEncoder().encode(airportFireTruck.getCentralUnit(), idCard, "Red Adair", "password");
+        IDCard idCard = new IDCard();
+        new IDCardEncoder().encode(airportFireTruck.getCentralUnit(), idCard, "Red Adair");
         driver.takeSeat();
         operator.takeSeat();
         driver.pressInnerDoorButton();
@@ -252,8 +252,8 @@ public class FLF1Test extends FLFTest {
     @Test
     @Order(10)
     public void keyCardInspectionAndEmergency() {
-        IDCard idCard = new IDCard(new RFIDChip());
-        new IDCardEncoder().encode(airportFireTruck.getCentralUnit(), idCard, "Red Adair", "password");
+        IDCard idCard = new IDCard();
+        new IDCardEncoder().encode(airportFireTruck.getCentralUnit(), idCard, "Red Adair");
         airportFireTruck.getCabin().getLeftDoor().toggleLock();
         airportFireTruck.getCabin().getRightDoor().toggleLock();
         checkIfDoorsOpen(false);

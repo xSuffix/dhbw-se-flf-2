@@ -1,28 +1,17 @@
 package id_card;
 
-import javax.crypto.Cipher;
-import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
-import java.nio.charset.StandardCharsets;
+import id_card.encryption.IEncoder;
+import truck.Configuration;
 
 public class IDCardDecoder {
+    IEncoder algorithm = Configuration.INSTANCE.encryptionAlgorithm;
 
-    private final SecretKey key;
-
-    public IDCardDecoder() {
-        this.key = new SecretKeySpec("password".getBytes(StandardCharsets.UTF_8), "DES");
-    }
-
-    public String decrypt(byte[] token) {
+    public String decode(RFIDChip chip) {
         try {
-            Cipher cipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
-            cipher.init(Cipher.DECRYPT_MODE, key);
-            byte[] deciphered = cipher.doFinal(token);
-            return new String(deciphered);
-
+            return algorithm.decode(chip);
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            return "";
         }
     }
 

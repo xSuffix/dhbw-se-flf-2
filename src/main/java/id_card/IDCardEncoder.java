@@ -1,36 +1,20 @@
 package id_card;
 
+import id_card.encryption.IEncoder;
+import truck.Configuration;
 import truck.ICentralUnit;
 
-import javax.crypto.*;
-import javax.crypto.spec.SecretKeySpec;
-import java.nio.charset.StandardCharsets;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-
 public class IDCardEncoder {
+    IEncoder algorithm = Configuration.INSTANCE.encryptionAlgorithm;
 
-    public void encode(ICentralUnit centralUnit, IDCard idCard, String name, String password) {
-        String id = centralUnit.getID();
-        String code = centralUnit.getCode();
-
-        String token = id + "-" + name + "-" + code;
-        byte[] encryptedToken;
+    public void encode(ICentralUnit centralUnit, IDCard idCard, String name) {
+        String token = String.format("%s-%s-%s", centralUnit.getID(), name, centralUnit.getCode());
         try {
-            SecretKey key = new SecretKeySpec(password.getBytes(StandardCharsets.UTF_8), "DES");
-            encryptedToken = encrypt(token, key);
+            algorithm.encode(idCard.getChip(), token);
+            centralUnit.authorizePerson(name);
+            System.out.printf("[Security] Authorizing access for %s to %s using ID card encrypted with %s%n", name, centralUnit.getID(), algorithm.getClass().getSimpleName());
         } catch (Exception e) {
             e.printStackTrace();
-            return;
         }
-        idCard.rfidChip().setToken(encryptedToken);
-        centralUnit.authorizePerson(name);
     }
-
-    private byte[] encrypt(String input, SecretKey key) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
-        Cipher cipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
-        cipher.init(Cipher.ENCRYPT_MODE, key);
-        return cipher.doFinal(input.getBytes());
-    }
-
 }
