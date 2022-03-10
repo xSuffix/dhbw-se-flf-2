@@ -101,6 +101,7 @@ public class FLF2Test extends FLFTest {
         checkDriving(8, 5, 8, 0);
     }
 
+    @Test
     @Order(4)
     public void useIDCardStrategy() {
         airportFireTruck.getCabin().getLeftDoor().toggleLock();
@@ -122,7 +123,6 @@ public class FLF2Test extends FLFTest {
         operator.useIDCard(driverCard);
         driver.pressInnerDoorButton();
         checkIfDoorsOpen(false);
-
     }
 
     @Test
