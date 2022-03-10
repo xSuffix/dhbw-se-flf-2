@@ -1,11 +1,14 @@
 package drive;
 
+import com.google.common.eventbus.Subscribe;
 import drive.battery.BatteryBox;
 import drive.battery.BatteryManagement;
 import drive.battery.IBatteryBox;
 import drive.battery.charger.Receiver;
+import truck.events.EngineEvent;
+import truck.events.Subscriber;
 
-public class Drive implements IDrive {
+public class Drive extends Subscriber implements IDrive {
 
     private final BatteryManagement batteryManagement = BatteryManagement.INSTANCE;
     private final ElectricMotor[] electricMotors;
@@ -20,6 +23,11 @@ public class Drive implements IDrive {
         this.currentVelocity = 0;
         batteryManagement.setBatteryBox(batteryBox);
         batteryManagement.setReceiver(energyReceiver);
+    }
+
+    @Subscribe
+    public void receive(EngineEvent event){
+        setMotorStarted(event.getState());
     }
 
     public void setMotorStarted(boolean start) {

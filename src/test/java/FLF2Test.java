@@ -10,6 +10,7 @@ import drive.battery.charger.OneToThreePoleAdapter;
 import drive.battery.charger.ThreePoleChargingPort;
 import id_card.IDCard;
 import id_card.IDCardEncoder;
+import lights.Light;
 import org.junit.jupiter.api.*;
 import truck.water.ExtinguishingType;
 import truck.water.MixingRatio;
@@ -61,6 +62,24 @@ public class FLF2Test extends FLFTest {
         preDeployment();
         armFrontLauncher();
         testFrontLauncher(3, 3000, MixingRatio.C);
+    }
+
+    @Test
+    @Order(2)
+    public void testEventBus(){
+
+        driver.pressMotorSwitch();
+        checkMotors(true);
+        driver.pressMotorSwitch();
+        checkMotors(false);
+
+        int waterLevel = airportFireTruck.getWaterTank().getCurrentCapacity();
+        driver.toggleProtection();
+        assertEquals(waterLevel - 700, airportFireTruck.getWaterTank().getCurrentCapacity());
+
+        turnAllLightsOn();
+        turnAllLightsOff();
+
     }
 
     @Test

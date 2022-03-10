@@ -1,6 +1,8 @@
 package lights;
 
-public abstract class Light {
+import truck.events.Subscriber;
+
+public abstract class Light extends Subscriber {
 
     protected LightColor color;
     private boolean on;

@@ -8,8 +8,11 @@ import cabin.controls.button.ButtonType;
 import id_card.IDCardDecoder;
 import id_card.RFIDChip;
 import lights.Light;
+import truck.events.*;
 import truck.water.LauncherState;
 import truck.water.MixingRatio;
+
+import com.google.common.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +24,8 @@ public class CentralUnit implements ICentralUnit {
     private final String code;
     private final List<String> authorizedPersons;
     private final IDCardDecoder idCardDecoder;
+    private final EventBus eventBus;
+    private int eventId;
     private int frontLauncherOutput;
     private int roofLauncherOutput;
 
@@ -32,6 +37,8 @@ public class CentralUnit implements ICentralUnit {
         this.code = "6072";
         this.authorizedPersons = new ArrayList<>();
         this.idCardDecoder = new IDCardDecoder();
+        this.eventBus = new EventBus(this.name);
+        eventId = 0;
     }
 
     @Override
@@ -71,25 +78,37 @@ public class CentralUnit implements ICentralUnit {
     @Override
     public void buttonPress(ButtonType type, boolean state) {
         switch (type) {
-            case ELECTRIC_MOTOR -> airportFireTruck.getDrive().setMotorStarted(state);
+            case ELECTRIC_MOTOR -> {
+                // airportFireTruck.getDrive().setMotorStarted(state);
+                eventBus.post(new EngineEvent(eventId++, state));
+            }
             case BLUE_LIGHT -> {
-                for (Light light : airportFireTruck.getBlueLights()) light.setOn(state);
+                // for (Light light : airportFireTruck.getBlueLights()) light.setOn(state);
+                eventBus.post(new BlueLightEvent(eventId++,state));
             }
             case WARNING_LIGHT -> {
-                for (Light light : airportFireTruck.getWarningLights()) light.setOn(state);
+                // for (Light light : airportFireTruck.getWarningLights()) light.setOn(state);
+                eventBus.post(new WarningLightEvent(eventId++,state));
             }
             case ROOF_LIGHT -> {
-                for (Light light : airportFireTruck.getHeadLightsRoof()) light.setOn(state);
+                // for (Light light : airportFireTruck.getHeadLightsRoof()) light.setOn(state);
+                eventBus.post(new RoofLightEvent(eventId++, state));
             }
             case HEAD_LIGHT -> {
-                for (Light light : airportFireTruck.getHeadLightsFrontLeft()) light.setOn(state);
-                for (Light light : airportFireTruck.getHeadLightsFrontRight()) light.setOn(state);
+                // for (Light light : airportFireTruck.getHeadLightsFrontLeft()) light.setOn(state);
+                // for (Light light : airportFireTruck.getHeadLightsFrontRight()) light.setOn(state);
+                eventBus.post(new FrontLightEvent(eventId++, state));
+
             }
             case SIDE_LIGHT -> {
-                for (Light light : airportFireTruck.getSideLightsLeft()) light.setOn(state);
-                for (Light light : airportFireTruck.getSideLightsRight()) light.setOn(state);
+                // for (Light light : airportFireTruck.getSideLightsLeft()) light.setOn(state);
+                // for (Light light : airportFireTruck.getSideLightsRight()) light.setOn(state);
+                eventBus.post(new SideLightEvent(eventId++, state));
             }
-            case FIRE_SELF_PROTECTION -> airportFireTruck.useFloorNozzles(100);
+            case FIRE_SELF_PROTECTION -> {
+                // airportFireTruck.useFloorNozzles(100);
+                eventBus.post(new SelfProtectionEvent(eventId++, 100));
+            }
 
             case LEFT_DOOR -> airportFireTruck.getCabin().getLeftDoor().setOpenIfUnlocked(state);
             case RIGHT_DOOR -> airportFireTruck.getCabin().getRightDoor().setOpenIfUnlocked(state);
@@ -122,6 +141,10 @@ public class CentralUnit implements ICentralUnit {
                     airportFireTruck.getRoofLauncher().switchRatio();
             }
         }
+    }
+
+    public void addSubscriber(Subscriber subscriber){
+        eventBus.register(subscriber);
     }
 
     @Override

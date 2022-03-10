@@ -1,18 +1,21 @@
 package truck;
 
 import cabin.Cabin;
+import com.google.common.eventbus.Subscribe;
 import drive.*;
 import drive.battery.BatteryBox;
 import drive.battery.charger.Receiver;
 import drive.battery.charger.ThreePoleChargingPort;
 import lights.*;
+import truck.events.SelfProtectionEvent;
+import truck.events.Subscriber;
 import truck.water.*;
 
 import java.io.File;
 import java.net.URL;
 import java.net.URLClassLoader;
 
-public class AirportFireTruck implements IAirportFireTruck {
+public class AirportFireTruck extends Subscriber implements IAirportFireTruck {
     private final Light[] headLightsFrontLeft;
     private final Light[] headLightsFrontRight;
     private final Light[] headLightsRoof;
@@ -58,6 +61,32 @@ public class AirportFireTruck implements IAirportFireTruck {
 
         this.waterTank.getObserver().addListener(this.cabin.getControlPanel().getWaterIndicationLight());
         this.foamPowderTank.getObserver().addListener(this.cabin.getControlPanel().getFoamIndicationLight());
+
+        for (Light light : this.blueLights)
+            this.centralUnit.addSubscriber(light);
+
+        for (Light light : this.warningLights)
+            this.centralUnit.addSubscriber(light);
+
+        for (Light light : this.headLightsFrontLeft)
+            this.centralUnit.addSubscriber(light);
+
+        for (Light light : this.headLightsFrontRight)
+            this.centralUnit.addSubscriber(light);
+
+        for (Light light : this.headLightsRoof)
+            this.centralUnit.addSubscriber(light);
+
+        for (Light light : this.sideLightsLeft)
+            this.centralUnit.addSubscriber(light);
+
+        for (Light light : this.sideLightsRight)
+            this.centralUnit.addSubscriber(light);
+
+        this.centralUnit.addSubscriber((Subscriber) this.drive);
+        this.centralUnit.addSubscriber(this);
+
+
     }
 
     public void chargeTruck(int amount) {
@@ -65,7 +94,12 @@ public class AirportFireTruck implements IAirportFireTruck {
         this.getCabin().getBatteryDisplay().setValue(String.valueOf(this.getDrive().getBatteryPercentage()));
     }
 
-    public void useFloorNozzles(int amount) {
+    @Subscribe
+    public void receive(SelfProtectionEvent event) {
+        useFloorNozzles(event.getAmount());
+    }
+
+    private void useFloorNozzles(int amount) {
         for (FloorSprayingNozzle nozzle : floorSprayingNozzles) {
             nozzle.sprayWater(amount);
         }
@@ -155,11 +189,11 @@ public class AirportFireTruck implements IAirportFireTruck {
     public static class Builder {
         private final Configuration config = Configuration.INSTANCE;
 
-        private final HeadLight[] headLightsFrontLeft;
-        private final HeadLight[] headLightsFrontRight;
-        private final HeadLight[] headLightsRoof;
-        private final HeadLight[] sideLightsLeft;
-        private final HeadLight[] sideLightsRight;
+        private final FrontLight[] headLightsFrontLeft;
+        private final FrontLight[] headLightsFrontRight;
+        private final RoofLight[] headLightsRoof;
+        private final SideLight[] sideLightsLeft;
+        private final SideLight[] sideLightsRight;
         private final TurnSignalLight[] turnSignalLightsLeft;
         private final TurnSignalLight[] turnSignalLightsRight;
         private final BrakeLight brakeLightLeft;
@@ -179,22 +213,22 @@ public class AirportFireTruck implements IAirportFireTruck {
             this.smartJoySticks = smartJoySticks;
 
             final int headLightsFront = 3;
-            this.headLightsFrontLeft = new HeadLight[headLightsFront];
-            this.headLightsFrontRight = new HeadLight[headLightsFront];
+            this.headLightsFrontLeft = new FrontLight[headLightsFront];
+            this.headLightsFrontRight = new FrontLight[headLightsFront];
             for (int i = 0; i < headLightsFront; i++) {
-                this.headLightsFrontLeft[i] = new HeadLight();
-                this.headLightsFrontRight[i] = new HeadLight();
+                this.headLightsFrontLeft[i] = new FrontLight();
+                this.headLightsFrontRight[i] = new FrontLight();
             }
 
-            this.headLightsRoof = new HeadLight[4];
-            for (int i = 0; i < headLightsRoof.length; i++) this.headLightsRoof[i] = new HeadLight();
+            this.headLightsRoof = new RoofLight[4];
+            for (int i = 0; i < headLightsRoof.length; i++) this.headLightsRoof[i] = new RoofLight();
 
             final int sideLights = 5;
-            this.sideLightsLeft = new HeadLight[sideLights];
-            this.sideLightsRight = new HeadLight[sideLights];
+            this.sideLightsLeft = new SideLight[sideLights];
+            this.sideLightsRight = new SideLight[sideLights];
             for (int i = 0; i < sideLights; i++) {
-                this.sideLightsLeft[i] = new HeadLight();
-                this.sideLightsRight[i] = new HeadLight();
+                this.sideLightsLeft[i] = new SideLight();
+                this.sideLightsRight[i] = new SideLight();
             }
 
             final int turnSignalLights = 2;

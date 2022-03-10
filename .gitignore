@@ -11,6 +11,7 @@
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
+.vscode/
 
 # AWS User-specific
 .idea/**/aws.xml
@@ -158,4 +159,3 @@ gradle-app.setting
 .classpath
 
 # End of https://www.toptal.com/developers/gitignore/api/java,gradle,intellij
-gradle/wrapper/gradle-wrapper.properties

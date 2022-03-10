@@ -12,7 +12,7 @@ public interface IAirportFireTruck {
 
     void chargeTruck(int amount);
 
-    void useFloorNozzles(int amount);
+    // void useFloorNozzles(int amount);
 
     Light[] getHeadLightsFrontLeft();
 

@@ -23,7 +23,7 @@ public abstract class FLFTest {
     protected Driver driver;
     protected Operator operator;
 
-    private float chargeFactor = 0.2f;
+    private final float chargeFactor = 0.1f;
 
     public void initialize(boolean enableSmartJoySticks) {
         airportFireTruck = new AirportFireTruck.Builder(enableSmartJoySticks).build();
@@ -124,6 +124,22 @@ public abstract class FLFTest {
         checkLights(airportFireTruck.getWarningLights(), true);
         checkLights(airportFireTruck.getSideLightsLeft(), true);
         checkLights(airportFireTruck.getSideLightsRight(), true);
+    }
+
+    public void turnAllLightsOff() {
+        driver.toggleBlueLights();
+        driver.toggleWarningLights();
+        driver.toggleFrontHeadLights();
+        driver.toggleRoofHeadLights();
+        driver.toggleSideLights();
+
+        checkLights(airportFireTruck.getHeadLightsRoof(), false);
+        checkLights(airportFireTruck.getHeadLightsFrontLeft(), false);
+        checkLights(airportFireTruck.getHeadLightsFrontRight(), false);
+        checkLights(airportFireTruck.getBlueLights(), false);
+        checkLights(airportFireTruck.getWarningLights(), false);
+        checkLights(airportFireTruck.getSideLightsLeft(), false);
+        checkLights(airportFireTruck.getSideLightsRight(), false);
     }
 
     public void preDeployment() {

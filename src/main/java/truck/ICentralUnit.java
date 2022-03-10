@@ -4,6 +4,7 @@ import cabin.controls.PedalType;
 import cabin.controls.TurningKnobType;
 import cabin.controls.button.ButtonType;
 import id_card.RFIDChip;
+import truck.events.Subscriber;
 
 public interface ICentralUnit {
     void turnSteeringWheel(int rotation);
@@ -21,5 +22,7 @@ public interface ICentralUnit {
     void authorizePerson(String name);
 
     void checkAuthentication(RFIDChip chipData);
+
+    void addSubscriber(Subscriber subscriber);
 
 }
