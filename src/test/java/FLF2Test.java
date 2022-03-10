@@ -4,7 +4,6 @@ import cabin.controls.button.ButtonStateOn;
 import drive.battery.Battery;
 import drive.battery.BatteryManagement;
 import drive.battery.cell.BatteryCell;
-import drive.battery.cell.Cell;
 import drive.battery.cell.MainCell;
 import drive.battery.charger.EChargingStation;
 import drive.battery.charger.OneToThreePoleAdapter;
@@ -12,7 +11,6 @@ import drive.battery.charger.ThreePoleChargingPort;
 import id_card.IDCard;
 import id_card.IDCardEncoder;
 import org.junit.jupiter.api.*;
-import truck.Configuration;
 import truck.water.ExtinguishingType;
 import truck.water.MixingRatio;
 
@@ -68,13 +66,13 @@ public class FLF2Test extends FLFTest {
     @Test
     @Order(3)
     public void testBattery() {
-        for (Battery[] row : airportFireTruck.getDrive().getBatteryBox().getBatteries()){
-            for (Battery battery : row){
-                for (MainCell mainCell : battery.getMainCells()){
+        for (Battery[] row : airportFireTruck.getDrive().getBatteryBox().getBatteries()) {
+            for (Battery battery : row) {
+                for (MainCell mainCell : battery.getMainCells()) {
                     assertTrue(mainCell.isComposite());
-                    for (BatteryCell subCell : mainCell.getUnitList()){
+                    for (BatteryCell subCell : mainCell.getUnitList()) {
                         assertTrue(subCell.isComposite());
-                        for (BatteryCell cell : subCell.getUnitList()){
+                        for (BatteryCell cell : subCell.getUnitList()) {
                             assertFalse(cell.isComposite());
                         }
                     }
@@ -83,7 +81,7 @@ public class FLF2Test extends FLFTest {
         }
         checkDriving(8, 5, 8, 0);
     }
-    
+
     @Order(4)
     public void useIDCardStrategy() {
         airportFireTruck.getCabin().getLeftDoor().toggleLock();

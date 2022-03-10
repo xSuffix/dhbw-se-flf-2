@@ -2,7 +2,6 @@ import cabin.controls.FrontLauncherOutput;
 import cabin.controls.RoofLauncherOutput;
 import id_card.IDCard;
 import id_card.IDCardEncoder;
-import id_card.RFIDChip;
 import org.junit.jupiter.api.*;
 import truck.water.LauncherState;
 import truck.water.MixingRatio;

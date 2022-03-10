@@ -70,7 +70,7 @@ public class BatteryBox implements IBatteryBox {
         return energy;
     }
 
-    public Battery[][] getBatteries(){
+    public Battery[][] getBatteries() {
         return this.batteries;
     }
 

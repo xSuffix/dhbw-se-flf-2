@@ -72,7 +72,7 @@ public class Tank implements ITank {
         return this.type;
     }
 
-    public TankObserver getObserver(){
+    public TankObserver getObserver() {
         return this.observer;
     }
 

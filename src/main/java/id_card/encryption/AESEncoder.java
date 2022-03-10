@@ -4,7 +4,10 @@ import id_card.RFIDChip;
 
 import javax.crypto.*;
 import javax.crypto.spec.IvParameterSpec;
-import java.security.*;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.Base64;
 
 public class AESEncoder implements IEncoder {

@@ -30,11 +30,11 @@ public class ControlPanel {
         this.foamIndicationLight = new IndicationLight();
     }
 
-    public IndicationLight getWaterIndicationLight(){
+    public IndicationLight getWaterIndicationLight() {
         return waterIndicationLight;
     }
 
-    public IndicationLight getFoamIndicationLight(){
+    public IndicationLight getFoamIndicationLight() {
         return foamIndicationLight;
     }
 

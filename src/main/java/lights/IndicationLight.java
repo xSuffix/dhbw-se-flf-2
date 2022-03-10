@@ -2,9 +2,9 @@ package lights;
 
 import truck.water.ITankObserverListener;
 
-public class IndicationLight extends LEDLight implements ITankObserverListener{
-    
-    public IndicationLight(){
+public class IndicationLight extends LEDLight implements ITankObserverListener {
+
+    public IndicationLight() {
         super(1, LightColor.WHITE);
     }
 
@@ -26,7 +26,7 @@ public class IndicationLight extends LEDLight implements ITankObserverListener{
     public void subTen() {
         color = LightColor.RED;
         if (!isOn())
-            toggle();        
+            toggle();
     }
 
     @Override

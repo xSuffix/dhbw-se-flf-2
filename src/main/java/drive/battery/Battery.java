@@ -54,7 +54,7 @@ public class Battery {
 
         for (int i = 0; i < amount; i++) {
             for (BatteryCell mainCell : mainCells) {
-                if (mainCell.takeEnergy()){
+                if (mainCell.takeEnergy()) {
                     energy++;
                     break;
                 }
@@ -64,7 +64,7 @@ public class Battery {
         return energy;
     }
 
-    public List<MainCell> getMainCells(){
+    public List<MainCell> getMainCells() {
         return this.mainCells;
     }
 
