@@ -7,7 +7,7 @@ public class ButtonStateOn implements IButtonState {
     public void press(Button button) {
         //button.getCentralUnit().buttonPress(button.getType(), false);
         button.getCentralUnit().setCommand(new ButtonCommand(button.getCentralUnit(), button.getType(), false));
-        button.getCentralUnit().getButtonCommand().execute();
+        button.getCentralUnit().getCommand().execute();
         for (Button syncedButton : button.getSynced()) syncedButton.setState(new ButtonStateOff());
     }
 }

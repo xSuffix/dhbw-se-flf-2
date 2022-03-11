@@ -29,7 +29,7 @@ public class CentralUnit implements ICentralUnit {
     private final Set<Person> authorizedPersons = new HashSet<>();
     private final IDCardDecoder idCardDecoder = new IDCardDecoder();
     private final EventBus eventBus;
-    private ICommand buttonCommand;
+    private ICommand command;
     private int eventId = 0;
     private int frontLauncherOutput = 500;
     private int roofLauncherOutput = 500;
@@ -162,10 +162,10 @@ public class CentralUnit implements ICentralUnit {
     }
 
     public void setCommand(ICommand command) {
-        this.buttonCommand = command;
+        this.command = command;
     }
 
-    public ICommand getButtonCommand() {
-        return buttonCommand;
+    public ICommand getCommand() {
+        return command;
     }
 }
