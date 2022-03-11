@@ -10,6 +10,7 @@ import id_card.IDCardDecoder;
 import id_card.RFIDChip;
 import lights.Light;
 import staff.Person;
+import truck.command.ICommand;
 import truck.events.*;
 import truck.visitor.SelfCheckVisitor;
 import truck.water.ExtinguishingType;
@@ -28,6 +29,7 @@ public class CentralUnit implements ICentralUnit {
     private final Set<Person> authorizedPersons = new HashSet<>();
     private final IDCardDecoder idCardDecoder = new IDCardDecoder();
     private final EventBus eventBus;
+    private ICommand buttonCommand;
     private int eventId = 0;
     private int frontLauncherOutput = 500;
     private int roofLauncherOutput = 500;
@@ -79,7 +81,7 @@ public class CentralUnit implements ICentralUnit {
     }
 
     @Override
-    public void buttonPress(ButtonType type, boolean state) {
+    public void execute(ButtonType type, boolean state) {
         switch (type) {
             case BLUE_LIGHT -> eventBus.post(new BlueLightEvent(eventId++,state));
             case WARNING_LIGHT -> eventBus.post(new WarningLightEvent(eventId++,state));
@@ -159,4 +161,11 @@ public class CentralUnit implements ICentralUnit {
         }
     }
 
+    public void setCommand(ICommand command) {
+        this.buttonCommand = command;
+    }
+
+    public ICommand getButtonCommand() {
+        return buttonCommand;
+    }
 }

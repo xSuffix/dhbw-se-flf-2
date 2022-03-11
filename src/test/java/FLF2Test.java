@@ -183,10 +183,11 @@ public class FLF2Test extends FLFTest {
         assertTrue(airportFireTruck.getCabin().getLeftDoor().isOpen());
     }
 
+    @Disabled
     @Test
     @Order(7)
     public void testCommand(){
-
+        //every other test will fail if buttons don't work...
     }
 
     @Test

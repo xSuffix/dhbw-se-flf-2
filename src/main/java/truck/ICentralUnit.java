@@ -5,12 +5,17 @@ import cabin.controls.TurningKnobType;
 import cabin.controls.button.ButtonType;
 import id_card.RFIDChip;
 import staff.Person;
+import truck.command.ICommand;
 import truck.events.Subscriber;
 
 public interface ICentralUnit {
     void turnSteeringWheel(int rotation);
 
-    void buttonPress(ButtonType type, boolean state);
+    void execute(ButtonType type, boolean state);
+
+    void setCommand(ICommand command);
+
+    ICommand getButtonCommand();
 
     void pedalPress(PedalType type);
 
