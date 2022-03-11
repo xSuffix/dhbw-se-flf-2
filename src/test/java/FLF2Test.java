@@ -10,6 +10,7 @@ import drive.battery.charger.OneToThreePoleAdapter;
 import drive.battery.charger.ThreePoleChargingPort;
 import id_card.IDCard;
 import id_card.IDCardEncoder;
+import lights.LightColor;
 import org.junit.jupiter.api.*;
 import truck.water.ExtinguishingType;
 import truck.water.MixingRatio;
@@ -72,9 +73,9 @@ public class FLF2Test extends FLFTest {
         driver.pressMotorSwitch();
         checkMotors(false);
 
-        int waterLevel = airportFireTruck.getWaterTank().getCurrentCapacity();
+        int waterLevel = airportFireTruck.getWaterTank().getCurrentCapacity() - 700;
         driver.toggleProtection();
-        assertEquals(waterLevel - 700, airportFireTruck.getWaterTank().getCurrentCapacity());
+        assertEquals(waterLevel , airportFireTruck.getWaterTank().getCurrentCapacity());
 
         turnAllLightsOn();
         turnAllLightsOff();
@@ -180,5 +181,76 @@ public class FLF2Test extends FLFTest {
         assertFalse(airportFireTruck.getCabin().getLeftDoor().isOpen());
         innerButton.press();
         assertTrue(airportFireTruck.getCabin().getLeftDoor().isOpen());
+    }
+
+    @Test
+    @Order(7)
+    public void testCommand(){
+
+    }
+
+    @Test
+    @Order(8)
+    public void testObserver(){
+
+        // 100 %
+        triggerObserversManual();
+        assertFalse(airportFireTruck.getCabin().getControlPanel().getFoamIndicationLight().isOn());
+        assertFalse(airportFireTruck.getCabin().getControlPanel().getWaterIndicationLight().isOn());
+
+        // < 50%
+        airportFireTruck.getWaterTank().getAgent(55000);
+        airportFireTruck.getFoamPowderTank().getAgent(18000);
+
+        triggerObserversManual();
+        assertTrue(airportFireTruck.getCabin().getControlPanel().getFoamIndicationLight().isOn());
+        assertEquals(LightColor.YELLOW, airportFireTruck.getCabin().getControlPanel().getFoamIndicationLight().getColor());
+        assertTrue(airportFireTruck.getCabin().getControlPanel().getWaterIndicationLight().isOn());
+        assertEquals(LightColor.YELLOW, airportFireTruck.getCabin().getControlPanel().getWaterIndicationLight().getColor());
+
+        // < 25 %
+        airportFireTruck.getWaterTank().getAgent(27000);
+        airportFireTruck.getFoamPowderTank().getAgent(9000);
+
+        triggerObserversManual();
+        assertTrue(airportFireTruck.getCabin().getControlPanel().getFoamIndicationLight().isOn());
+        assertEquals(LightColor.ORANGE, airportFireTruck.getCabin().getControlPanel().getFoamIndicationLight().getColor());
+        assertTrue(airportFireTruck.getCabin().getControlPanel().getWaterIndicationLight().isOn());
+        assertEquals(LightColor.ORANGE, airportFireTruck.getCabin().getControlPanel().getWaterIndicationLight().getColor());
+
+        // < 10 %
+        airportFireTruck.getWaterTank().getAgent(12000);
+        airportFireTruck.getFoamPowderTank().getAgent(5000);
+
+        triggerObserversManual();
+        assertTrue(airportFireTruck.getCabin().getControlPanel().getFoamIndicationLight().isOn());
+        assertEquals(LightColor.RED, airportFireTruck.getCabin().getControlPanel().getFoamIndicationLight().getColor());
+        assertTrue(airportFireTruck.getCabin().getControlPanel().getWaterIndicationLight().isOn());
+        assertEquals(LightColor.RED, airportFireTruck.getCabin().getControlPanel().getWaterIndicationLight().getColor());
+
+        // > 50 %
+        airportFireTruck.getWaterTank().fill(55000, ExtinguishingType.WATER);
+        airportFireTruck.getFoamPowderTank().fill(18000, ExtinguishingType.FOAM_POWDER);
+
+        triggerObserversManual();
+        assertFalse(airportFireTruck.getCabin().getControlPanel().getFoamIndicationLight().isOn());
+        assertFalse(airportFireTruck.getCabin().getControlPanel().getWaterIndicationLight().isOn());
+    }
+
+    @Test
+    @Order(9)
+    public void checkVisitor(){
+        // if self check fails, RunTimeException gets thrown
+        try {
+            driver.pressMotorSwitch();
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            fail();
+        }
+    }
+
+    private void triggerObserversManual(){
+        airportFireTruck.getWaterTank().getObserver().checkTankCapacity();
+        airportFireTruck.getFoamPowderTank().getObserver().checkTankCapacity();
     }
 }

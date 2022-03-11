@@ -1,4 +1,7 @@
-package truck.water;
+package truck.water.observer;
+
+import truck.water.ITank;
+import truck.water.observer.ITankObserverListener;
 
 public class TankObserver {
 
@@ -19,13 +22,14 @@ public class TankObserver {
 
     public void checkTankCapacity() {
         float fillPercentage = tank.getCurrentFillPercentage();
-        if (fillPercentage <= 1 && fillPercentage > 0.5) {
+
+        if (Float.compare(50f, fillPercentage) < 1) {
             listener.noWarning();
-        } else if (fillPercentage <= 0.5 && fillPercentage > 0.25) {
+        } else if (Float.compare(25f, fillPercentage) < 1) {
             listener.subFifty();
-        } else if (fillPercentage <= 0.25 && fillPercentage > 0.1) {
+        } else if (Float.compare(10f, fillPercentage) < 1) {
             listener.subTwentyfive();
-        } else if (fillPercentage <= 0.1) {
+        } else {
             listener.subTen();
         }
     }

@@ -11,6 +11,9 @@ import id_card.RFIDChip;
 import lights.Light;
 import staff.Person;
 import truck.events.*;
+import truck.visitor.SelfCheckVisitor;
+import truck.water.ExtinguishingType;
+import truck.water.FloorSprayingNozzle;
 import truck.water.LauncherState;
 import truck.water.MixingRatio;
 
@@ -84,7 +87,20 @@ public class CentralUnit implements ICentralUnit {
             case HEAD_LIGHT -> eventBus.post(new FrontLightEvent(eventId++, state));
             case SIDE_LIGHT -> eventBus.post(new SideLightEvent(eventId++, state));
 
-            case ELECTRIC_MOTOR -> eventBus.post(new EngineEvent(eventId++, state));
+            case ELECTRIC_MOTOR -> {
+                eventBus.post(new EngineEvent(eventId++, state));
+                if (state) {
+                    for (FloorSprayingNozzle floorSprayingNozzle : airportFireTruck.getFloorSprayingNozzles())
+                        if (!floorSprayingNozzle.accept(new SelfCheckVisitor()))
+                            throw new RuntimeException("self-check failed: Floor Spraying Nozzle");
+                    if (!airportFireTruck.getFrontLauncher().accept(new SelfCheckVisitor()))
+                        throw new RuntimeException("self-check failed: Front Launcher");
+                    if (!airportFireTruck.getRoofLauncher().accept(new SelfCheckVisitor()))
+                        throw new RuntimeException("self-check failed: Roof Launcher");
+                    // refill tanks after test
+                    airportFireTruck.getWaterTank().fill(90, ExtinguishingType.WATER);
+                }
+            }
             case FIRE_SELF_PROTECTION -> eventBus.post(new SelfProtectionEvent(eventId++, 100));
 
             case LEFT_DOOR -> airportFireTruck.getCabin().getLeftDoor().setOpenIfUnlocked(state);

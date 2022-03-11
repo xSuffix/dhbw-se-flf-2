@@ -23,4 +23,8 @@ public abstract class Light extends Subscriber {
         this.on = !this.on;
     }
 
+    public LightColor getColor(){
+        return this.color;
+    }
+
 }

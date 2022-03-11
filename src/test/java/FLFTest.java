@@ -142,6 +142,12 @@ public abstract class FLFTest {
     }
 
     public void preDeployment() {
+
+        assertEquals(100, airportFireTruck.getWaterTank().getCurrentFillPercentage());
+        assertEquals(100, airportFireTruck.getFoamPowderTank().getCurrentFillPercentage());
+        assertEquals(FrontLauncherOutput.A, airportFireTruck.getCabin().getFrontLauncherKnob().getState());
+        assertEquals(RoofLauncherOutput.A, airportFireTruck.getCabin().getRoofLauncherKnob().getState());
+
         driver.takeSeat();
         operator.takeSeat();
         driver.pressMotorSwitch();
@@ -151,10 +157,6 @@ public abstract class FLFTest {
         driver.pressInnerDoorButton();
         operator.pressInnerDoorButton();
         checkIfDoorsOpen(false);
-        assertEquals(100, airportFireTruck.getWaterTank().getCurrentFillPercentage());
-        assertEquals(100, airportFireTruck.getFoamPowderTank().getCurrentFillPercentage());
-        assertEquals(FrontLauncherOutput.A, airportFireTruck.getCabin().getFrontLauncherKnob().getState());
-        assertEquals(RoofLauncherOutput.A, airportFireTruck.getCabin().getRoofLauncherKnob().getState());
     }
 
     public void checkDriving(int iterationsAccelerating, int iterationsCruising, int iterationsBreaking, int direction) {

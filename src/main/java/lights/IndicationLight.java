@@ -1,6 +1,6 @@
 package lights;
 
-import truck.water.ITankObserverListener;
+import truck.water.observer.ITankObserverListener;
 
 public class IndicationLight extends LEDLight implements ITankObserverListener {
 

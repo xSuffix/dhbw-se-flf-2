@@ -1,15 +1,24 @@
 package truck.water;
 
-public class FloorSprayingNozzle {
+import truck.visitor.ISelfCheckVisitor;
+import truck.visitor.ISelfTestElement;
+
+public class FloorSprayingNozzle implements ISelfTestElement {
     private final ITank waterTank;
 
     public FloorSprayingNozzle(ITank water) {
         this.waterTank = water;
     }
 
-    public void sprayWater(int amount) {
+    public int sprayWater(int amount) {
         if (amount > 100) amount = 100;
-        System.out.println("[FloorSprayingNozzle] Spraying " + waterTank.getAgent(amount).length + " units of water");
+        int output = waterTank.getAgent(amount).length;
+        System.out.println("[FloorSprayingNozzle] Spraying " + output + " units of water");
+        return output;
     }
 
+    @Override
+    public boolean accept(ISelfCheckVisitor visitor) {
+        return visitor.visit(this);
+    }
 }

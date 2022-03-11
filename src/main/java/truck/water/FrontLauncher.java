@@ -1,5 +1,7 @@
 package truck.water;
 
+import truck.visitor.ISelfCheckVisitor;
+
 public class FrontLauncher extends Launcher {
 
     private int rotation;
@@ -7,6 +9,11 @@ public class FrontLauncher extends Launcher {
     public FrontLauncher(Object mixingUnit, ITank waterTank, ITank foamTank) {
         super(mixingUnit, waterTank, foamTank);
         this.rotation = 0;
+    }
+
+    @Override
+    public boolean accept(ISelfCheckVisitor visitor) {
+        return visitor.visit(this);
     }
 
     public void pan() {

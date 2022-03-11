@@ -1,10 +1,13 @@
 package truck.water;
 
+import truck.visitor.ISelfCheckVisitor;
+import truck.visitor.ISelfTestElement;
+
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Launcher {
+public abstract class Launcher implements ISelfTestElement {
 
     private final Object mixingUnit;
     private final ITank waterTank;
@@ -20,8 +23,11 @@ public abstract class Launcher {
         this.foamTank = foamTank;
     }
 
+    @Override
+    public abstract boolean accept(ISelfCheckVisitor visitor);
+
     @SuppressWarnings("unchecked")
-    public void sprayExtinguisher(int amount) {
+    public int sprayExtinguisher(int amount) {
         ExtinguishingType[] water = waterTank.getAgent(amount - ((amount * ratio.getValue()) / 100));
         ExtinguishingType[] foam = foamTank.getAgent((amount * ratio.getValue()) / 100);
         List<Object> mixedAgent = new ArrayList<>();
@@ -39,7 +45,8 @@ public abstract class Launcher {
         }
 
         final int size = mixedAgent.size();
-        System.out.printf("[Launcher] Spraying %d units of extinguisher (%.2f%% Water, %.2f%% Foam)%n", size, (float) mixedAgent.stream().filter(type -> type == ExtinguishingType.WATER).count() / size, (float) mixedAgent.stream().filter(type -> type == ExtinguishingType.FOAM_POWDER).count() / size);
+        System.out.printf("[Launcher] Spraying %d units of extinguisher (%.2f%% Water, %.2f%% Foam)%n", size, ((float) mixedAgent.stream().filter(type -> type == ExtinguishingType.WATER).count() / size)* 100f, ((float) mixedAgent.stream().filter(type -> type == ExtinguishingType.FOAM_POWDER).count() / size)* 100f) ;
+        return size;
     }
 
     public LauncherState getState() {

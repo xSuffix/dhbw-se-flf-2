@@ -1,5 +1,7 @@
 package truck.water;
 
+import truck.water.observer.TankObserver;
+
 import java.util.Arrays;
 
 public class Tank implements ITank {

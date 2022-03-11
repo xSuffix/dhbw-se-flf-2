@@ -1,5 +1,7 @@
 package truck.water;
 
+import truck.visitor.ISelfCheckVisitor;
+
 public class RoofLauncher extends Launcher {
 
     private int firstSegmentRotation;
@@ -9,6 +11,11 @@ public class RoofLauncher extends Launcher {
         super(mixingUnit, waterTank, foamTank);
         firstSegmentRotation = 0;
         secondSegmentExtended = false;
+    }
+
+    @Override
+    public boolean accept(ISelfCheckVisitor visitor) {
+        return visitor.visit(this);
     }
 
     public void extend() {
