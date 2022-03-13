@@ -20,6 +20,8 @@ public class TankObserver {
     }
 
     public void checkTankCapacity() {
+        if (listener == null)
+            return;
         float fillPercentage = tank.getCurrentFillPercentage();
 
         if (Float.compare(50f, fillPercentage) < 1) {

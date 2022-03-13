@@ -1,6 +1,7 @@
 import cabin.controls.button.Button;
 import cabin.controls.button.ButtonStateOff;
 import cabin.controls.button.ButtonStateOn;
+import cabin.controls.button.ButtonType;
 import drive.battery.Battery;
 import drive.battery.BatteryManagement;
 import drive.battery.cell.BatteryCell;
@@ -12,6 +13,7 @@ import id_card.IDCard;
 import id_card.IDCardEncoder;
 import lights.LightColor;
 import org.junit.jupiter.api.*;
+import truck.command.ButtonCommand;
 import truck.water.ExtinguishingType;
 import truck.water.MixingRatio;
 
@@ -67,7 +69,6 @@ public class FLF2Test extends FLFTest {
     @Test
     @Order(2)
     public void testEventBus() {
-
         driver.pressMotorSwitch();
         checkMotors(true);
         driver.pressMotorSwitch();
@@ -79,7 +80,6 @@ public class FLF2Test extends FLFTest {
 
         turnAllLightsOn();
         turnAllLightsOff();
-
     }
 
     @Test
@@ -183,11 +183,15 @@ public class FLF2Test extends FLFTest {
         assertTrue(airportFireTruck.getCabin().getLeftDoor().isOpen());
     }
 
-    @Disabled
     @Test
     @Order(7)
     public void testCommand() {
         //every other test will fail if buttons don't work...
+        checkLights(airportFireTruck.getBlueLights(), false);
+        airportFireTruck.getCentralUnit().setCommand(new ButtonCommand(airportFireTruck.getCentralUnit(), ButtonType.BLUE_LIGHT, true));
+        airportFireTruck.getCentralUnit().getCommand().execute();
+        checkLights(airportFireTruck.getBlueLights(), true);
+
     }
 
     @Test

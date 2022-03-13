@@ -19,7 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public abstract class FLFTest {
-    protected final float chargeFactor = 0.1f;
+    //info: charging battery to 100% takes some time
+    protected final float chargeFactor = 0.2f;
     protected AirportFireTruck airportFireTruck;
     protected Driver driver;
     protected Operator operator;
