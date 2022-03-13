@@ -53,12 +53,12 @@ public class CentralUnit implements ICentralUnit {
 
     @Override
     public void addAuthorization(Person person) {
-        authorizedPersons.add(person);
+        if (person != null) authorizedPersons.add(person);
     }
 
     @Override
     public void removeAuthorization(Person person) {
-        authorizedPersons.remove(person);
+        if (person != null) authorizedPersons.remove(person);
     }
 
     @Override
@@ -138,6 +138,7 @@ public class CentralUnit implements ICentralUnit {
         }
     }
 
+    @Override
     public void addSubscriber(Subscriber subscriber) {
         eventBus.register(subscriber);
     }
@@ -161,10 +162,12 @@ public class CentralUnit implements ICentralUnit {
         }
     }
 
+    @Override
     public ICommand getCommand() {
         return command;
     }
 
+    @Override
     public void setCommand(ICommand command) {
         this.command = command;
     }
