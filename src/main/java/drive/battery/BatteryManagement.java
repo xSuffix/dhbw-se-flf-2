@@ -24,8 +24,8 @@ public enum BatteryManagement {
         this.receiver = receiver;
     }
 
-    public void charge(int charge) {
-        batteryBox.charge(charge);
+    public void charge(int amount) {
+        batteryBox.charge(amount);
     }
 
     public void discharge() {

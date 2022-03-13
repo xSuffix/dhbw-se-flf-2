@@ -45,7 +45,7 @@ public abstract class Launcher implements ISelfTestElement {
         }
 
         final int size = mixedAgent.size();
-        System.out.printf("[Launcher] Spraying %d units of extinguisher (%.2f%% Water, %.2f%% Foam)%n", size, ((float) mixedAgent.stream().filter(type -> type == ExtinguishingType.WATER).count() / size)* 100f, ((float) mixedAgent.stream().filter(type -> type == ExtinguishingType.FOAM_POWDER).count() / size)* 100f) ;
+        System.out.printf("[Launcher] Spraying %d units of extinguisher (%.2f%% Water, %.2f%% Foam)%n", size, ((float) mixedAgent.stream().filter(type -> type == ExtinguishingType.WATER).count() / size) * 100f, ((float) mixedAgent.stream().filter(type -> type == ExtinguishingType.FOAM_POWDER).count() / size) * 100f);
         return size;
     }
 

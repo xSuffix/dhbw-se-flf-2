@@ -13,9 +13,9 @@ public interface ICentralUnit {
 
     void execute(ButtonType type, boolean state);
 
-    void setCommand(ICommand command);
-
     ICommand getCommand();
+
+    void setCommand(ICommand command);
 
     void pedalPress(PedalType type);
 

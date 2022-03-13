@@ -75,7 +75,7 @@ public class FLF2Test extends FLFTest {
 
         int waterLevel = airportFireTruck.getWaterTank().getCurrentCapacity() - 700;
         driver.toggleProtection();
-        assertEquals(waterLevel , airportFireTruck.getWaterTank().getCurrentCapacity());
+        assertEquals(waterLevel, airportFireTruck.getWaterTank().getCurrentCapacity());
 
         turnAllLightsOn();
         turnAllLightsOff();
@@ -186,13 +186,13 @@ public class FLF2Test extends FLFTest {
     @Disabled
     @Test
     @Order(7)
-    public void testCommand(){
+    public void testCommand() {
         //every other test will fail if buttons don't work...
     }
 
     @Test
     @Order(8)
-    public void testObserver(){
+    public void testObserver() {
 
         // 100 %
         triggerObserversManual();
@@ -240,7 +240,7 @@ public class FLF2Test extends FLFTest {
 
     @Test
     @Order(9)
-    public void checkVisitor(){
+    public void checkVisitor() {
         // if self check fails, RunTimeException gets thrown
         try {
             driver.pressMotorSwitch();
@@ -250,7 +250,7 @@ public class FLF2Test extends FLFTest {
         }
     }
 
-    private void triggerObserversManual(){
+    private void triggerObserversManual() {
         airportFireTruck.getWaterTank().getObserver().checkTankCapacity();
         airportFireTruck.getFoamPowderTank().getObserver().checkTankCapacity();
     }

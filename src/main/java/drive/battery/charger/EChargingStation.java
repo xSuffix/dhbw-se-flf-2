@@ -1,9 +1,9 @@
 package drive.battery.charger;
 
-public class EChargingStation implements I1PoleConnector {
+public class EChargingStation implements IOnePoleConnector {
     private final int chargingSpeed;
     private final ChargingPole chargingPole;
-    private I1PoleConnector connector;
+    private IOnePoleConnector connector;
 
     public EChargingStation(int chargingSpeed) {
         this.chargingSpeed = chargingSpeed;
@@ -15,7 +15,7 @@ public class EChargingStation implements I1PoleConnector {
     }
 
     @Override
-    public void plugIn(I1PoleConnector onePoleConnector) {
+    public void plugIn(IOnePoleConnector onePoleConnector) {
         if (connector == null) {
             connector = onePoleConnector;
             chargingPole.connect(connector);

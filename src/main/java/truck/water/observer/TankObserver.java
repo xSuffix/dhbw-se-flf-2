@@ -1,7 +1,6 @@
 package truck.water.observer;
 
 import truck.water.ITank;
-import truck.water.observer.ITankObserverListener;
 
 public class TankObserver {
 

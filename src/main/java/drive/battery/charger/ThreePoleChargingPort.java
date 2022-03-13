@@ -2,26 +2,27 @@ package drive.battery.charger;
 
 import drive.battery.BatteryManagement;
 
-public class ThreePoleChargingPort extends Receiver implements I3PoleConnector {
-    BatteryManagement batteryManagement;
-    private I3PoleConnector charger;
+public class ThreePoleChargingPort extends Receiver implements IThreePoleConnector {
+    private final BatteryManagement batteryManagement = BatteryManagement.INSTANCE;
+    private IThreePoleConnector charger;
 
     public ThreePoleChargingPort() {
         super(3);
-        batteryManagement = BatteryManagement.INSTANCE;
     }
 
-    public I3PoleConnector getCharger() {
+    public IThreePoleConnector getCharger() {
         return charger;
     }
 
-    public void plugIn(I3PoleConnector connector) {
+    @Override
+    public void plugIn(IThreePoleConnector connector) {
         if (charger == null) {
             charger = connector;
             charger.plugIn(this);
         }
     }
 
+    @Override
     public void plugOut() {
         charger.plugOut();
         charger = null;

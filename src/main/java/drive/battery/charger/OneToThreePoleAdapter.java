@@ -2,18 +2,14 @@ package drive.battery.charger;
 
 import java.util.Arrays;
 
-public class OneToThreePoleAdapter implements I1PoleConnector, I3PoleConnector {
+public class OneToThreePoleAdapter implements IOnePoleConnector, IThreePoleConnector {
     private final int[] weights;
-    private I1PoleConnector sender;
-    private I3PoleConnector receiver;
+    private IOnePoleConnector sender;
+    private IThreePoleConnector receiver;
 
     public OneToThreePoleAdapter(int[] weights) {
         if (weights.length != 3) throw new IllegalArgumentException();
         this.weights = weights;
-    }
-
-    public OneToThreePoleAdapter(int weightA, int weightB, int weightC) {
-        weights = new int[]{weightA, weightB, weightC};
     }
 
     public int[] getWeights() {
@@ -21,7 +17,7 @@ public class OneToThreePoleAdapter implements I1PoleConnector, I3PoleConnector {
     }
 
     @Override
-    public void plugIn(I1PoleConnector connector) {
+    public void plugIn(IOnePoleConnector connector) {
         if (sender == null) {
             sender = connector;
             sender.plugIn(this);
@@ -29,7 +25,7 @@ public class OneToThreePoleAdapter implements I1PoleConnector, I3PoleConnector {
     }
 
     @Override
-    public void plugIn(I3PoleConnector connector) {
+    public void plugIn(IThreePoleConnector connector) {
         if (receiver == null) {
             receiver = connector;
         }

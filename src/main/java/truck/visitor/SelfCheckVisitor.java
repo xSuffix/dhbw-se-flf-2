@@ -4,7 +4,7 @@ import truck.water.FloorSprayingNozzle;
 import truck.water.FrontLauncher;
 import truck.water.RoofLauncher;
 
-public class SelfCheckVisitor implements ISelfCheckVisitor{
+public class SelfCheckVisitor implements ISelfCheckVisitor {
 
     @Override
     public boolean visit(FloorSprayingNozzle floorSprayingNozzle) {
@@ -34,7 +34,7 @@ public class SelfCheckVisitor implements ISelfCheckVisitor{
             return false;
 
         roofLauncher.extend();
-        if (roofLauncher.isSecondSegmentExtended() ||roofLauncher.getFirstSegmentRotation() != 0)
+        if (roofLauncher.isSecondSegmentExtended() || roofLauncher.getFirstSegmentRotation() != 0)
             return false;
 
 

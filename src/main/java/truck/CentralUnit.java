@@ -83,8 +83,8 @@ public class CentralUnit implements ICentralUnit {
     @Override
     public void execute(ButtonType type, boolean state) {
         switch (type) {
-            case BLUE_LIGHT -> eventBus.post(new BlueLightEvent(eventId++,state));
-            case WARNING_LIGHT -> eventBus.post(new WarningLightEvent(eventId++,state));
+            case BLUE_LIGHT -> eventBus.post(new BlueLightEvent(eventId++, state));
+            case WARNING_LIGHT -> eventBus.post(new WarningLightEvent(eventId++, state));
             case ROOF_LIGHT -> eventBus.post(new RoofLightEvent(eventId++, state));
             case HEAD_LIGHT -> eventBus.post(new FrontLightEvent(eventId++, state));
             case SIDE_LIGHT -> eventBus.post(new SideLightEvent(eventId++, state));
@@ -161,11 +161,11 @@ public class CentralUnit implements ICentralUnit {
         }
     }
 
-    public void setCommand(ICommand command) {
-        this.command = command;
-    }
-
     public ICommand getCommand() {
         return command;
+    }
+
+    public void setCommand(ICommand command) {
+        this.command = command;
     }
 }
